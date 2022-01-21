@@ -2,6 +2,6 @@
 
 This is the repository for group project - Group 8 
 
-Group 8 members:
+Members of Group 8:
 Akanksha Singh,
 Jay Nimeshkumar Patel
