@@ -8,3 +8,4 @@ This is the repository for group project - Group 8
 - Jay Bhagvanbhai Sonani  
 - Arjun Naravula Loganathan
 - Venkata Saikiran Kattekola
+- Viraj Jigar Shah
