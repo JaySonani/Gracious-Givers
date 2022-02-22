@@ -2,8 +2,11 @@
 
 This is the repository for group project - Group 8
 
-### Members of Group 8:
+Members of Group 8:
 
-Akanksha Singh  
-Jay Nimeshkumar Patel  
+Akanksha Singh
+Jay Nimeshkumar Patel
 Jay Bhagvanbhai Sonani
+Arjun Naravula Loganathan
+Venkata Saikiran Kattekola
+Viraj Jigar Shah
