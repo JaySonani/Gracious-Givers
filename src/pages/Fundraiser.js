@@ -1,10 +1,10 @@
-import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
+import Header from "../components/Header";
 
 const FundRaiser = () => {
     return (
         <div>
-            <NavBar />
+            <Header />
             This is a fundraiser page
             <Footer />
         </div>

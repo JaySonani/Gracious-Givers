@@ -1,12 +1,13 @@
-import './css/footer.css';
+import './Footer.css';
 
-export default function Footer() {
+const Footer = () => {
     return (
-        <footer className='footer footerDiv'>
-           <div style={{paddingTop:'10px'}}>
+        <footer className='footerDiv'>
+            <div style={{ paddingTop: '10px' }}>
                 <span>&copy; {new Date().getFullYear()} Gracious Givers. All Rights Reserved.</span>
             </div>
         </footer>
-      );
+    );
 }
 
+export default Footer;

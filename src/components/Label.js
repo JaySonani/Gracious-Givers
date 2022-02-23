@@ -1,19 +1,18 @@
 import { useNavigate } from 'react-router-dom';
+import { Nav } from 'react-bootstrap';
+
 import './Label.css';
 
 const Label = (props) => {
 
     let navigate = useNavigate();
 
-    const changeRoute = () => {
-        navigate(props.path);
-    }
-
+    const changeRoute = () => navigate(props.path);
 
     return (
-        <div className="Label" onClick={changeRoute}>
+        <Nav.Link onClick={changeRoute} >
             {props.title}
-        </div>
+        </Nav.Link>
     );
 }
 
