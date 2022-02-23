@@ -3,7 +3,7 @@ import { Container, Navbar, Nav, Button } from 'react-bootstrap';
 import BrandLogo from './../assets/GraciousGivers.png';
 import Label from './Label';
 
-import './Header.css';
+import './styles/Header.css';
 
 const Header = () => {
 

@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { Nav } from 'react-bootstrap';
 
-import './Label.css';
+import './styles/Label.css';
 
 const Label = (props) => {
 
