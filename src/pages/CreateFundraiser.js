@@ -3,7 +3,7 @@ import { Row, Col, Form, Button, Container } from "react-bootstrap";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 
-export default class CreateFundraiser extends Component {
+export default class CreateAndUpdateFundraiser extends Component {
 
     constructor(props) {
         super(props);
@@ -20,7 +20,7 @@ export default class CreateFundraiser extends Component {
                 goalAmount: '',
                 image: ''
             },
-            validated: false
+            // validated: false
         }
     }
 
@@ -42,7 +42,7 @@ export default class CreateFundraiser extends Component {
         } 
     }
 
-    findFormErrors = () => {
+    validateForm = () => {
         console.log("Validating the form");
         const form = this.state.formField;
         let errors = { ...this.state.formErrors };
@@ -73,13 +73,14 @@ export default class CreateFundraiser extends Component {
     handleSubmit = (event) => {
         // console.log("Inside submit function");
         event.preventDefault();
+        this.validateForm();
         const numberOfErrors = Object.values(this.state.formErrors)
                                     .filter(value => value != null || value !== '').length;
         if (numberOfErrors > 0 ) {
             // window.alert("Rectify form errors")
         }
         else {
-            // window.alert("Make a POST API request");
+            window.alert("Make a POST API request");
         }
     }
 
@@ -194,7 +195,7 @@ export default class CreateFundraiser extends Component {
 
                                 <Row>
                                     <Form.Group className="position-relative mb-3">
-                                        <Form.Label>File</Form.Label>
+                                        <Form.Label>Upload an image that relates to this fundraiser</Form.Label>
                                         <Form.Control
                                             type="file"
                                             required
@@ -202,7 +203,9 @@ export default class CreateFundraiser extends Component {
                                             onChange={this.handleValueChange}
                                             isInvalid={ !!formError.image }
                                             />
-                                        <Form.Control.Feedback type="invalid" tooltip>
+                                        <Form.Control.Feedback type="invalid" 
+                                            // tooltip
+                                            >
                                             {formError.image}
                                         </Form.Control.Feedback>
                                     </Form.Group>
