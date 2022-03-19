@@ -9,7 +9,8 @@ export default function NGOFundraiserCard(props) {
 
     const fundraiser = props.details;
     const period = props.period;
-    const [show, setShow] = useState(false);
+    const [showDeactivate, setShowDeactivate] = useState(false);
+    const [showDelete, setShowDelete] = useState(false);
     
     const formatDate = (dateString) => {
         const targetDate = new Date(dateString);
@@ -31,23 +32,27 @@ export default function NGOFundraiserCard(props) {
     const handleFundraiserAction = (event) => {
         const action = event.target.name;
         console.log("This is the selection:" + action);
-        if (action === 'delete' || action === 'deactivate' ) {
-            console.log('inside delete/deactivate');
-            setShow(true);
+        if (action === 'deactivate' ) {
+            setShowDeactivate(true);
+        }
+        else if (action === 'delete') {
+            setShowDelete(true);
         }
     }
 
     const handleDelete = (fundrasier) => {
-        setShow(false);
+        setShowDelete(false);
         console.log("Deleting fundraiser with ID :" + fundrasier.eventId);
     }
 
     const handleDeactivate = (fundrasier) => {
-        setShow(false);
+        setShowDeactivate(false);
         console.log("Deactivating fundraiser with ID :" + fundrasier.eventId);
     }
 
-    const handleClose = () => setShow(false);
+    const handleCloseDeactivate = () => setShowDeactivate(false);
+
+    const handleCloseDelete = () => setShowDelete(false);
 
     return (
         <Card id="ngo-fundraiser-card">
@@ -122,14 +127,14 @@ export default function NGOFundraiserCard(props) {
                                         }                
                                     </Dropdown.Menu>
                                 </Dropdown>
-                                {show && <FundrasierDeleteConfirmation fundraiser={fundraiser} 
+                                {showDelete && <FundrasierDeleteConfirmation fundraiser={fundraiser} 
                                                                        show={true}
                                                                        onDelete={handleDelete}
-                                                                       onHide={handleClose}/>}
-                                {show && <FundrasierDeactivateConfirmation fundraiser={fundraiser} 
+                                                                       onHide={handleCloseDelete}/>}
+                                {showDeactivate && <FundrasierDeactivateConfirmation fundraiser={fundraiser} 
                                                                        show={true}
                                                                        onDeactivate={handleDeactivate}
-                                                                       onHide={handleClose}/>}
+                                                                       onHide={handleCloseDeactivate}/>}
                             </Col>
                         </Row>
                     </Col>
