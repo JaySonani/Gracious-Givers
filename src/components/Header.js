@@ -1,4 +1,4 @@
-import { Container, Navbar, Nav, Button } from 'react-bootstrap';
+import { Container, Navbar, Nav, Button, NavDropdown } from 'react-bootstrap';
 
 import BrandLogo from './../assets/GraciousGivers.png';
 import Label from './Label';
@@ -8,7 +8,12 @@ import './styles/Header.css';
 function Header() {
   
   return (
-      <Navbar expand='lg' className='headerNav' collapseOnSelect bg="light" variant="light">
+      <Navbar expand='lg' 
+              className='headerNav' 
+              collapseOnSelect 
+              bg="light" 
+              variant="light"
+              id='header-nav-bar'>
         <Container>
           <Navbar.Brand href='/home'>
             <img src={BrandLogo}
@@ -22,10 +27,14 @@ function Header() {
               <Label title="Home" path="/" />
               <Label title="Fundraiser" path="/fundraiser" />
               <Label title="About Us" path="/about_us" />
+              <NavDropdown title="Fundrasier (Logged-in NGO)" id="basic-nav-dropdown">
+                <NavDropdown.Item href="/ngo/fundraiser/create">Create</NavDropdown.Item>
+                <NavDropdown.Item href="/ngo/fundraiser">All Fundrasiers</NavDropdown.Item>
+              </NavDropdown>
             </Nav>
             <Nav>
               <Button variant="primary" className="custom-btn-header">
-                  Login
+                  NGO Login
               </Button>
             </Nav>
           </Navbar.Collapse>
