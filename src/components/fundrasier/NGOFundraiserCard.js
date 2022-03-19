@@ -24,7 +24,7 @@ export default function NGOFundraiserCard(props) {
     }
 
     const actionsUrl = {
-        "update":`/fundrasier/update/${fundraiser.eventId}`,
+        "update":`/ngo/fundraiser/update/${fundraiser.eventId}`,
         "donations":`/fundrasier/donations/${fundraiser.eventId}`,
     }
     

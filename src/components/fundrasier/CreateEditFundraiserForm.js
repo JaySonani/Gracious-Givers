@@ -1,9 +1,7 @@
 import { React, Component } from "react";
 import { Row, Col, Form, Button, Container } from "react-bootstrap";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
 
-export default class CreateAndUpdateFundraiser extends Component {
+export default class CreateEditFundraiserForm extends Component {
 
     constructor(props) {
         super(props);
@@ -71,15 +69,11 @@ export default class CreateAndUpdateFundraiser extends Component {
     }
 
     handleSubmit = (event) => {
-        // console.log("Inside submit function");
         event.preventDefault();
         this.validateForm();
         const numberOfErrors = Object.values(this.state.formErrors)
                                     .filter(value => value != null || value !== '').length;
-        if (numberOfErrors > 0 ) {
-            // window.alert("Rectify form errors")
-        }
-        else {
+        if (numberOfErrors = 0 ) {
             window.alert("Make a POST API request");
         }
     }
@@ -96,9 +90,10 @@ export default class CreateAndUpdateFundraiser extends Component {
             fontSize: '0.875em',
             color: '#dc3545'
         }
+        console.log("The action from class form component is " + this.props.action);
+
         return (
             <>
-                <Header />
                 <Container className='mb-5' id="create-update-form">
                     <Row>
                         <Col xs={0} md={3}></Col>
@@ -203,9 +198,7 @@ export default class CreateAndUpdateFundraiser extends Component {
                                             onChange={this.handleValueChange}
                                             isInvalid={ !!formError.image }
                                             />
-                                        <Form.Control.Feedback type="invalid" 
-                                            // tooltip
-                                            >
+                                        <Form.Control.Feedback type="invalid">
                                             {formError.image}
                                         </Form.Control.Feedback>
                                     </Form.Group>
@@ -224,7 +217,6 @@ export default class CreateAndUpdateFundraiser extends Component {
                         <Col xs={0} md={3}></Col>
                     </Row>
                 </Container>
-                <Footer />
             </>
 
 
