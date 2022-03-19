@@ -1,5 +1,6 @@
 import { React, Component } from "react";
 import { Row, Col, Form, Button, Container } from "react-bootstrap";
+import Axios from "axios";
 
 export default class CreateEditFundraiserForm extends Component {
 
@@ -18,8 +19,47 @@ export default class CreateEditFundraiserForm extends Component {
                 goalAmount: '',
                 image: ''
             },
-            // validated: false
         }
+    }
+
+    componentDidMount() {
+       
+        const action = this.props.action;
+        const fundraiserId = this.props.fundraiserId;
+        console.log("This is from component did mount, action is :" + action);
+
+        if ( action === 'update' ) {
+
+            const getFundraiserDetailsURI = `https://tutorial4-api.herokuapp.com/api/fundraiser/${fundraiserId}`;
+            // Axios.get(getFundraiserDetailsURI)
+            // .then((response) => {
+            //     if (response.status === 200 && response.data.status === true) {
+                    // const fundraiser = response.data.data;
+                    const fundraiser = {
+                        eventId: 1001,
+                        title: 'Donation drive for ABC School children',
+                        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eu non diam phasellus vestibulum lorem sed risus ultricies tristique. Amet est placerat in egestas erat imperdiet sed euismod nisi. \nQuisque id diam vel quam elementum pulvinar. Elementum nisi quis eleifend quam adipiscing vitae proin sagittis. Pulvinar pellentesque habitant morbi tristique. Habitant morbi tristique senectus et netus et malesuada fames. Odio ut sem nulla pharetra diam sit amet. Vestibulum sed arcu non odio euismod lacinia at. Nec ullamcorper sit amet risus nullam eget. Non curabitur gravida arcu ac tortor dignissim convallis. Mauris vitae ultricies leo integer malesuada nunc vel. Egestas maecenas pharetra convallis posuere morbi. Tristique senectus et netus et malesuada fames ac. Risus commodo viverra maecenas accumsan lacus vel facilisis volutpat. Quisque id diam vel quam elementum.',
+                        createdBy: 'Smile Foundation',
+                        daysRemaining: 20,
+                        image: '',
+                        goalAmount: 10000,
+                        amountRaised: '2510',
+                        currency: 'CAD',
+                        donors: '36',
+                    }
+                    this.setState({formField: {
+                        title: fundraiser.title,
+                        description: fundraiser.description,
+                        goalAmount: fundraiser.goalAmount,
+                        image: fundraiser.image,
+                    }});
+            //     }
+            // })
+            // .catch((error) => {
+            //     console.log('Error in getting details of the fundraiser :' + error);           
+            // });
+        }
+        
     }
 
     handleValueChange = (event) => {
@@ -57,7 +97,7 @@ export default class CreateEditFundraiserForm extends Component {
             errors['goalAmount'] = 'Please set the amount to raise for this fundraiser';
         }
 
-        if ( form.image === null) {
+        if ( !form.image || form.image === '' ) {
             errors['image'] = 'Please upload an image for this fundraiser';
         }
 
@@ -73,7 +113,8 @@ export default class CreateEditFundraiserForm extends Component {
         this.validateForm();
         const numberOfErrors = Object.values(this.state.formErrors)
                                     .filter(value => value != null || value !== '').length;
-        if (numberOfErrors = 0 ) {
+        if (numberOfErrors == 0 ) {
+            console.log("The form is valid")
             window.alert("Make a POST API request");
         }
     }
@@ -82,15 +123,17 @@ export default class CreateEditFundraiserForm extends Component {
         const defaultCurrency = 'CAD';
         const maxGoalAmount = 1000000;
         const maxDescriptionLength = 1000;
-        const formField = this.state.formField;
-        const formError = this.state.formErrors;
+        // const formField = this.state.formField;
+        // const formError = this.state.formErrors;
+        const action = this.props.action;
+        
         const errorLabelStyle = {
             width: '100%',
             marginTop: '0.25rem',
             fontSize: '0.875em',
             color: '#dc3545'
         }
-        console.log("The action from class form component is " + this.props.action);
+        // console.log("The action from class form component is " + this.props.action);
 
         return (
             <>
@@ -101,13 +144,13 @@ export default class CreateEditFundraiserForm extends Component {
                             <Row className='mb-3'>
                                 <Col>
                                     <h4 id='create-update-form-label'>
-                                        Create Fundraiser
+                                        {action === 'create' && "Create Fundraiser"}
+                                        {action === 'update' && "Update Fundraiser"}
                                     </h4>
                                 </Col>
                             </Row>
                             <Form noValidate
-                            // validated={this.state.validated}
-                            onSubmit={this.handleSubmit}>
+                                onSubmit={this.handleSubmit}>
                                 <Row className='mb-3'>
                                     <Form.Group as={Col} xs="12" md="12" controlId="validationCustom01">
                                         <Form.Label>Title</Form.Label>
@@ -116,12 +159,12 @@ export default class CreateEditFundraiserForm extends Component {
                                             name="title"
                                             type="text"
                                             placeholder="Title for the fundraiser"
-                                            value={formField.title}
+                                            value={this.state.formField.title}
                                             onChange={this.handleValueChange}
-                                            isInvalid={ !!formError.title }
+                                            isInvalid={ !!this.state.formErrors.title }
                                         />
                                         <Form.Control.Feedback type="invalid">
-                                            {formError.title}
+                                            {this.state.formErrors.title}
                                         </Form.Control.Feedback>
                                     </Form.Group>
                                 </Row>
@@ -137,9 +180,9 @@ export default class CreateEditFundraiserForm extends Component {
                                             name="description"
                                             placeholder="Describe the purpose, beneficiaries, and other information about the fundraiser"
                                             rows="7"
-                                            value={formField.description}
+                                            value={this.state.formField.description}
                                             onChange={this.handleValueChange}
-                                            isInvalid={ !!formError.description }
+                                            isInvalid={ !!this.state.formErrors.description }
                                         />
                                         
                                         <Form.Label>
@@ -147,42 +190,48 @@ export default class CreateEditFundraiserForm extends Component {
                                         </Form.Label>
                                         
                                         <Form.Control.Feedback type="invalid">
-                                            {formError.description}
+                                            {this.state.formErrors.description}
                                         </Form.Control.Feedback>
                                     </Form.Group>
                                 </Row>
 
                                 <Row className='mb-3'>
                                     <Form.Group as={Col} xs="12" md="12" controlId="validationCustom03">
-                                        <Form.Label>Amount to raise: {defaultCurrency} {this.state.formField.goalAmount}</Form.Label>
+                                        <Form.Label>
+                                            Amount to raise: {defaultCurrency} {this.state.formField.goalAmount}
+                                        </Form.Label>
                                         
-                                        <input
-                                            required
-                                            type="range"
-                                            name="goalAmount"
-                                            max={maxGoalAmount}
-                                            step="1000"
-                                            value={formField.goalAmount}
-                                            onChange={this.handleValueChange}
-                                            style={{width:'100%'}}
-                                        />
-                                           
-                                        <Row>
-                                            <Col>
-                                                <Form.Label>
-                                                    0 {defaultCurrency}
-                                                </Form.Label>  
-                                            </Col>
-                                            <Col style={{textAlign:'right'}}>
-                                                <Form.Label>
-                                                    {maxGoalAmount} {defaultCurrency}
-                                                </Form.Label>
-                                            </Col>
-                                        </Row>
+                                        {action === 'create' &&
+                                            <>
+                                                <input
+                                                    required
+                                                    type="range"
+                                                    name="goalAmount"
+                                                    max={maxGoalAmount}
+                                                    step="1000"
+                                                    value={this.state.formField.goalAmount}
+                                                    onChange={this.handleValueChange}
+                                                    
+                                                    style={{width:'100%'}}
+                                                />
+                                                <Row>
+                                                    <Col>
+                                                        <Form.Label>
+                                                            0 {defaultCurrency}
+                                                        </Form.Label>  
+                                                    </Col>
+                                                    <Col style={{textAlign:'right'}}>
+                                                        <Form.Label>
+                                                            {maxGoalAmount} {defaultCurrency}
+                                                        </Form.Label>
+                                                    </Col>
+                                                </Row>
+                                            </>
+                                        }  
 
-                                        {formError.goalAmount && 
+                                        {this.state.formErrors.goalAmount && 
                                             <div style={errorLabelStyle}>
-                                                {formError.goalAmount}
+                                                {this.state.formErrors.goalAmount}
                                             </div>
                                         }
                                     </Form.Group>
@@ -196,20 +245,23 @@ export default class CreateEditFundraiserForm extends Component {
                                             required
                                             name="image"
                                             onChange={this.handleValueChange}
-                                            isInvalid={ !!formError.image }
+                                            isInvalid={ !!this.state.formErrors.image }
                                             />
                                         <Form.Control.Feedback type="invalid">
-                                            {formError.image}
+                                            {this.state.formErrors.image}
                                         </Form.Control.Feedback>
                                     </Form.Group>
                                 </Row>
 
                                 <Row className='mb-3 text-center'>
                                     <Col as={Col} md="6" xs="6">
-                                        <Button type="submit">Create</Button>
+                                        <Button type="submit">
+                                            {action === 'create' && "Create"}
+                                            {action === 'update' && "Update"}
+                                        </Button>
                                     </Col>
                                     <Col as={Col} md="6" xs="6">
-                                        <Button type="button">Cancel</Button>
+                                        <Button type="button" href="/ngo/fundraiser">Cancel</Button>
                                     </Col>
                                 </Row>
                             </Form>
