@@ -11,7 +11,8 @@ export default class CreateEditFundraiserForm extends Component {
                 title: '',
                 description: '',
                 goalAmount: 0,
-                image: null
+                image: null,
+                status: 'New'
             },
             formErrors: {
                 title: '',
@@ -46,12 +47,14 @@ export default class CreateEditFundraiserForm extends Component {
                         amountRaised: '2510',
                         currency: 'CAD',
                         donors: '36',
+                        status: 'Active'
                     }
                     this.setState({formField: {
                         title: fundraiser.title,
                         description: fundraiser.description,
                         goalAmount: fundraiser.goalAmount,
                         image: fundraiser.image,
+                        status: fundraiser.status,
                     }});
             //     }
             // })
@@ -97,7 +100,7 @@ export default class CreateEditFundraiserForm extends Component {
             errors['goalAmount'] = 'Please set the amount to raise for this fundraiser';
         }
 
-        if ( !form.image || form.image === '' ) {
+        if ( !form.image || form.image === '') {
             errors['image'] = 'Please upload an image for this fundraiser';
         }
 
@@ -113,7 +116,7 @@ export default class CreateEditFundraiserForm extends Component {
         this.validateForm();
         const numberOfErrors = Object.values(this.state.formErrors)
                                     .filter(value => value != null || value !== '').length;
-        if (numberOfErrors == 0 ) {
+        if (numberOfErrors === 0 ) {
             console.log("The form is valid")
             window.alert("Make a POST API request");
         }
@@ -143,7 +146,7 @@ export default class CreateEditFundraiserForm extends Component {
                         <Col xs={12} md={6}>
                             <Row className='mb-3'>
                                 <Col>
-                                    <h4 id='create-update-form-label'>
+                                    <h4 id='create-update-form-label' style={{marginTop:'1rem'}}>
                                         {action === 'create' && "Create Fundraiser"}
                                         {action === 'update' && "Update Fundraiser"}
                                     </h4>
@@ -153,7 +156,7 @@ export default class CreateEditFundraiserForm extends Component {
                                 onSubmit={this.handleSubmit}>
                                 <Row className='mb-3'>
                                     <Form.Group as={Col} xs="12" md="12" controlId="validationCustom01">
-                                        <Form.Label>Title</Form.Label>
+                                        <Form.Label><strong>Title</strong></Form.Label>
                                         <Form.Control
                                             required
                                             name="title"
@@ -172,7 +175,8 @@ export default class CreateEditFundraiserForm extends Component {
                                 <Row className='mb-3'>
                                     <Form.Group as={Col} xs="12" md="12" controlId="validationCustom02">
                                         <Form.Label>
-                                            Description (Describe the purpose, beneficiaries, and other information about the fundraiser)
+                                            <strong>Description</strong>&nbsp; 
+                                            <small>(Describe the purpose, beneficiaries, and other information about the fundraiser)</small>
                                         </Form.Label>
                                         <Form.Control
                                             required
@@ -185,9 +189,16 @@ export default class CreateEditFundraiserForm extends Component {
                                             isInvalid={ !!this.state.formErrors.description }
                                         />
                                         
-                                        <Form.Label>
-                                                {maxDescriptionLength - this.state.formField.description.length} characters remaining
-                                        </Form.Label>
+                                        <div style={{textAlign:'right'}}>
+                                            <span>
+                                                <small>
+                                                    <strong>
+                                                        {maxDescriptionLength - this.state.formField.description.length} 
+                                                    </strong>
+                                                    &nbsp;characters remaining
+                                                </small>
+                                            </span>
+                                        </div>
                                         
                                         <Form.Control.Feedback type="invalid">
                                             {this.state.formErrors.description}
@@ -198,10 +209,11 @@ export default class CreateEditFundraiserForm extends Component {
                                 <Row className='mb-3'>
                                     <Form.Group as={Col} xs="12" md="12" controlId="validationCustom03">
                                         <Form.Label>
-                                            Amount to raise: {defaultCurrency} {this.state.formField.goalAmount}
+                                            <strong>Amount to raise:</strong> {defaultCurrency} {this.state.formField.goalAmount}
                                         </Form.Label>
                                         
-                                        {action === 'create' &&
+                                        {(action === 'create' 
+                                            || (action === 'update' && this.state.formField.status === 'Pending Admin Approval')) &&
                                             <>
                                                 <input
                                                     required
@@ -239,7 +251,9 @@ export default class CreateEditFundraiserForm extends Component {
 
                                 <Row>
                                     <Form.Group className="position-relative mb-3">
-                                        <Form.Label>Upload an image that relates to this fundraiser</Form.Label>
+                                        <Form.Label>
+                                            <strong>Upload an image that relates to this fundraiser</strong>
+                                        </Form.Label>
                                         <Form.Control
                                             type="file"
                                             required
