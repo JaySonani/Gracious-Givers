@@ -5,20 +5,20 @@ import FundraiserDonation from '../components/fundrasier/FundraiserDonation.js';
 import TopDonors from '../components/fundrasier/TopDonors.js';
 import { Button } from 'react-bootstrap';
 import { BiDonateHeart } from "react-icons/bi";
-import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import Axios from "axios";
+// import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+// import Axios from "axios";
 import './styles/fundraisers.css';
 
 export default function FundRaisers() {
 
-    let eventParam = useParams();
-    const eventId = eventParam.id;
-    const navigate = useNavigate();  
-    const [event1, setEvent] = useState({});
-    const [topDonors1, setTopDonors] = useState({});
-    const getFundraiserDetailsURI = `https://tutorial4-api.herokuapp.com/api/fundraiser/${eventId}`;
-    const getTopDonorsURI = `https://tutorial4-api.herokuapp.com/api/donors/${eventId}`;
+    // let eventParam = useParams();
+    // const eventId = eventParam.id;
+    const navigate = useNavigate();
+    // const [event1, setEvent] = useState({});
+    // const [topDonors1, setTopDonors] = useState({});
+    // const getFundraiserDetailsURI = `https://tutorial4-api.herokuapp.com/api/fundraiser/${eventId}`;
+    // const getTopDonorsURI = `https://tutorial4-api.herokuapp.com/api/donors/${eventId}`;
 
     // useEffect(() => {
     //     Axios.get(getFundraiserDetailsURI)
@@ -60,48 +60,48 @@ export default function FundRaisers() {
         name: 'Alan',
         amount: 145,
         currency: 'CAD',
-    }, 
+    },
     {
         name: 'Monica',
         amount: 100,
         currency: 'CAD',
-    }, 
+    },
     {
         name: 'Marsie',
         amount: 160,
         currency: 'CAD',
     }
     ];
-    
-    return(
+
+    return (
         <>
-            <Header/>
-                <div className='container mb-5'>
-                    <div className='row'>
-                        <div className='col-md-8' style={{margin:'10px 0px'}}>
-                            <FundraiserDetails event={event} />
-                        </div>
-                        <div className='col-md-4'>
-                            <div className='row' style={{margin:'50px 0px'}}>
-                                <div className='col-12'>                            
-                                    <div className='support-now'>
-                                        <Button variant="primary" className="custom-btn">
-                                            Donate Now 
-                                            <BiDonateHeart style={{marginLeft:'10px', marginBottom:'7px'}} />
-                                        </Button>
-                                    </div>
-                                    <FundraiserDonation event={event} />                            
+            <Header />
+            <div className='container mb-5'>
+                <div className='row'>
+                    <div className='col-md-8' style={{ margin: '10px 0px' }}>
+                        <FundraiserDetails event={event} />
+                    </div>
+                    <div className='col-md-4'>
+                        <div className='row' style={{ margin: '50px 0px' }}>
+                            <div className='col-12'>
+                                <div className='support-now'>
+                                    <Button variant="primary" className="custom-btn" onClick={() => navigate("/donation", { state: { id: event.eventId } })}>
+                                        Donate Now
+                                        <BiDonateHeart style={{ marginLeft: '10px', marginBottom: '7px' }} />
+                                    </Button>
                                 </div>
+                                <FundraiserDonation event={event} />
                             </div>
-                            <div className='row' style={{margin:'50px 0'}}>
-                                <div className='col-12'>                            
-                                    <TopDonors donors={topDonors} />                            
-                                </div>
+                        </div>
+                        <div className='row' style={{ margin: '50px 0' }}>
+                            <div className='col-12'>
+                                <TopDonors donors={topDonors} />
                             </div>
                         </div>
                     </div>
-                </div>  
-            <Footer/>
+                </div>
+            </div>
+            <Footer />
         </>
     );
 }
