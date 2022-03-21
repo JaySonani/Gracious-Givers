@@ -59,19 +59,16 @@ const DonationForm = () => {
         if (fname === "") {
             setFnameError(true);
             setFnameErrorText("First name is required.");
-
             validForm = false;
         }
         if (lname === "") {
             setLnameError(true);
             setLnameErrorText("Last name is required.")
-
             validForm = false;
         }
         if (email === "") {
             setEmailError(true);
             setEmailErrorText("Email is required.");
-
             validForm = false;
         } else {
             validateEmail(email);
@@ -79,7 +76,6 @@ const DonationForm = () => {
         if (amount === "") {
             setAmountError(true);
             setAmountErrorText("Amount is required.")
-
             validForm = false;
         }
         if (amount === "0") {
@@ -89,11 +85,12 @@ const DonationForm = () => {
         }
 
         if (validForm) {
-            // navigate("/payment", { state: { amount } });
+            navigate("/payment", { state: { fname, lname, email, amount } });
             console.log("Form validated");
         } else {
             if (errorText.length > 0) {
                 alert(errorText);
+                errorText = "";
             }
             console.log("Invalid form");
         }
@@ -123,22 +120,22 @@ const DonationForm = () => {
 
                 <div className="rowForm">
                     <div className="labels">Donor's first name:</div>
-                    <Form.Control required className={fnameError && "redError"} placeholder={fnameError ? "*First name is required" : "Enter your first name"} value={fname} type="text" onChange={e => setFname(e.target.value)} />
+                    <Form.Control required className={fnameError && "redError"} placeholder={fnameError ? fnameErrorText : "Enter your first name"} value={fname} type="text" onChange={e => setFname(e.target.value)} />
                 </div>
 
                 <div className="rowForm">
                     <div className="labels">Donor's last name:</div>
-                    <Form.Control required className={lnameError && "redError"} placeholder={lnameError ? "*Last name is required" : "Enter your last name"} value={lname} type="text" onChange={e => setLname(e.target.value)} />
+                    <Form.Control required className={lnameError && "redError"} placeholder={lnameError ? lnameErrorText : "Enter your last name"} value={lname} type="text" onChange={e => setLname(e.target.value)} />
                 </div>
 
                 <div className="rowForm">
                     <div className="labels">Donor's email:</div>
-                    <Form.Control required className={emailError && "redError"} placeholder={emailError ? "*Email is required" : "Enter your email address"} value={email} type="text" onChange={e => setEmail(e.target.value)} />
+                    <Form.Control required className={emailError && "redError"} placeholder={emailError ? emailErrorText : "Enter your email address"} value={email} type="text" onChange={e => setEmail(e.target.value)} />
                 </div>
 
                 <div className="rowForm">
                     <div className="labels">Donation amount:</div>
-                    <Form.Control required className={amountError && "redError"} placeholder={amountError ? "*Amounut is required" : "Enter the amount"} value={amount} type="text" onChange={e => setAmount(e.target.value)} />
+                    <Form.Control required className={amountError && "redError"} placeholder={amountError ? amountErrorText : "Enter the amount"} value={amount} type="text" onChange={e => setAmount(e.target.value)} />
                 </div>
 
                 <div className="rowForm">
