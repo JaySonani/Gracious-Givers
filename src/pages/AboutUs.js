@@ -1,10 +1,12 @@
-import NavBar from "../components/NavBar";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
 
 const AboutUs = () => {
     return (
         <div>
-            <NavBar />
+            <Header />
             This is an about us page
+            <Footer />
         </div>
     );
 }
