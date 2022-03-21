@@ -37,6 +37,22 @@
   /* text-align: left; */
 }
 
+.title {
+  font-size: 20px;
+}
+
+.redError::placeholder {
+  color: red !important;
+}
+
+.errorText {
+  color: red;
+  padding: 0px !important;
+  margin: 0px !important;
+  /* background-color: #057abe; */
+  text-align: right;
+}
+
 .btn {
   width: 100%;
   background-color: #057abe;
@@ -44,7 +60,7 @@
 }
 
 @media only screen and (max-width: 800px) {
-  .row {
+  .rowForm {
     flex-direction: column;
     display: flex;
     margin-bottom: 10px;
