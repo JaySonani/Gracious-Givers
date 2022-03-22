@@ -1,6 +1,7 @@
 import { React, Component } from "react";
 import { Row, Col, Form, Button, Container } from "react-bootstrap";
 import Axios from "axios";
+import FundraiserStatus from "./FundraiserStatus";
 
 export default class CreateEditFundraiserForm extends Component {
 
@@ -12,13 +13,15 @@ export default class CreateEditFundraiserForm extends Component {
                 description: '',
                 goalAmount: 0,
                 image: null,
-                status: 'New'
+                status: 'Draft', 
+                activeDays: 0
             },
             formErrors: {
                 title: '',
                 description: '',
                 goalAmount: '',
-                image: ''
+                image: '',
+                activeDays: 0
             },
         }
     }
@@ -104,6 +107,13 @@ export default class CreateEditFundraiserForm extends Component {
             errors['image'] = 'Please upload an image for this fundraiser';
         }
 
+        if ( form.activeDays <= 0) {
+            errors['activeDays'] = 'Please set the number of days for which this fundraiser should be active';
+        } 
+        else if ( form.activeDays > 180) {
+            errors['activeDays'] = 'Fundraiser can be created for a maximum period of 180 days';
+        }
+
         this.setState({
             formErrors : errors,
         });
@@ -145,11 +155,16 @@ export default class CreateEditFundraiserForm extends Component {
                         <Col xs={0} md={3}></Col>
                         <Col xs={12} md={6}>
                             <Row className='mb-3'>
-                                <Col>
-                                    <h4 id='create-update-form-label' style={{marginTop:'1rem'}}>
-                                        {action === 'create' && "Create Fundraiser"}
-                                        {action === 'update' && "Update Fundraiser"}
+                                <Col style={{marginTop:'1rem'}}>
+                                    <h4 id='create-update-form-label' >
+                                        <strong>
+                                            {action === 'create' && "Create Fundraiser"}
+                                            {action === 'update' && "Update Fundraiser"}
+                                        </strong>
                                     </h4>
+                                </Col>
+                                <Col style={{textAlign:"right", marginTop:'1rem', fontStyle: 'italic'}}>
+                                    <FundraiserStatus statusValue={this.state.formField.status} />
                                 </Col>
                             </Row>
                             <Form noValidate
@@ -246,6 +261,37 @@ export default class CreateEditFundraiserForm extends Component {
                                                 {this.state.formErrors.goalAmount}
                                             </div>
                                         }
+                                    </Form.Group>
+                                </Row>
+
+                                <Row>
+                                    <Form.Group className="position-relative mb-3">
+                                        <Form.Label>
+                                            {(action === 'create' 
+                                            || (action === 'update' && this.state.formField.status === 'Pending Admin Approval')) &&
+                                            <strong>For how many days do you want this fundraiser to be active?</strong>}
+                                            
+                                            {(action === 'update' && this.state.formField.status === 'Pending Admin Approval') &&
+                                            <strong>Duration of the fundraiser</strong>}
+                                            
+                                            {(action === 'update' && this.state.formField.status === 'Active') &&
+                                            <strong>End Date</strong>}
+                                        </Form.Label>
+                                        {console.log(this.state.formField.status === 'Active')}
+                                        <Form.Control
+                                            type="number"
+                                            required
+                                            name="activeDays"
+                                            step="1" 
+                                            min="0" 
+                                            max="180"
+                                            readOnly={this.state.formField.status === 'Active'}
+                                            onChange={this.handleValueChange}
+                                            isInvalid={ !!this.state.formErrors.activeDays }
+                                            />
+                                        <Form.Control.Feedback type="invalid">
+                                            {this.state.formErrors.activeDays}
+                                        </Form.Control.Feedback>
                                     </Form.Group>
                                 </Row>
 

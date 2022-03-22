@@ -80,13 +80,6 @@ export default function NGOFundraiserCard(props) {
                                 <Col xs={7} md={9}>{fundraiser.donors}</Col>
                             </Row>
                         }
-                        {/* {
-                            (period === 'future') &&
-                            <Row>
-                                <Col xs={5} md={3}>Start Date</Col>
-                                <Col xs={7} md={9}>{formatDate(fundraiser.startDate)}</Col>
-                            </Row>
-                        } */}
                         <Row>
                             <Col xs={5} md={3}>End Date</Col>
                             <Col xs={7} md={9}>{formatDate(fundraiser.endDate)}</Col>
