@@ -16,7 +16,7 @@ export default class FundraiserDetails extends React.Component {
                 </div>
                 <div className='row'>
                     <div className='col-12' style={{margin:'10px 0px'}}>
-                        <img src={EventImage} 
+                        <img src="/images/1647992149712+WhatsApp Image 2022-03-14 at 5.56.35 PM.jpeg"
                             className="img-fluid fundraiser-image" 
                             alt={event.title} />
                     </div>

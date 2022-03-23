@@ -25,8 +25,8 @@ export default function NGOFundraiserCard(props) {
     }
 
     const actionsUrl = {
-        "update":`/ngo/fundraiser/update/${fundraiser.eventId}`,
-        "donations":`/fundrasier/donations/${fundraiser.eventId}`,
+        "update":`/ngo/fundraiser/update/${fundraiser._id}`,
+        "donations":`/fundrasier/donations/${fundraiser._id}`,
     }
     
     const handleFundraiserAction = (event) => {
@@ -42,12 +42,12 @@ export default function NGOFundraiserCard(props) {
 
     const handleDelete = (fundrasier) => {
         setShowDelete(false);
-        console.log("Deleting fundraiser with ID :" + fundrasier.eventId);
+        console.log("Deleting fundraiser with ID :" + fundrasier._id);
     }
 
     const handleDeactivate = (fundrasier) => {
         setShowDeactivate(false);
-        console.log("Deactivating fundraiser with ID :" + fundrasier.eventId);
+        console.log("Deactivating fundraiser with ID :" + fundrasier._id);
     }
 
     const handleCloseDeactivate = () => setShowDeactivate(false);
@@ -62,6 +62,10 @@ export default function NGOFundraiserCard(props) {
 
                 <Row>
                     <Col xs={12} md={8}>
+                        <Row>
+                            <Col xs={5} md={3}>Cause</Col>
+                            <Col xs={7} md={9}>{fundraiser.cause}</Col>
+                        </Row>
                         <Row>
                             <Col xs={5} md={3}>Goal Amount</Col>
                             <Col xs={7} md={9}>{fundraiser.currency}&nbsp;{fundraiser.goalAmount}</Col>
@@ -80,10 +84,21 @@ export default function NGOFundraiserCard(props) {
                                 <Col xs={7} md={9}>{fundraiser.donors}</Col>
                             </Row>
                         }
-                        <Row>
-                            <Col xs={5} md={3}>End Date</Col>
-                            <Col xs={7} md={9}>{formatDate(fundraiser.endDate)}</Col>
-                        </Row>
+                        {
+                            (period === 'ongoing' || period === 'past') &&
+                            <Row>
+                                <Col xs={5} md={3}>End Date</Col>
+                                <Col xs={7} md={9}>{formatDate(fundraiser.endDate)}</Col>
+                            </Row>
+                        }
+                        {
+                            period === 'future' &&
+                            <Row>
+                                <Col xs={5} md={3}>Created for</Col>
+                                <Col xs={7} md={9}>{fundraiser.activeDays}&nbsp;days</Col>
+                            </Row>
+                        }
+                        
                     </Col>
                     <Col xs={12} md={4} style={{ textAlign: 'center' }}>
                         <Row style={{ margin: '0.1rem 0' }}>

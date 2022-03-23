@@ -14,15 +14,18 @@ export default class CreateEditFundraiserForm extends Component {
                 goalAmount: 0,
                 image: null,
                 status: 'Draft', 
-                activeDays: 0
+                activeDays: 0,
+                cause: '',
             },
             formErrors: {
                 title: '',
                 description: '',
                 goalAmount: '',
                 image: '',
-                activeDays: 0
+                activeDays: '',
+                cause: '',
             },
+            defaultCurrency: 'CAD'
         }
     }
 
@@ -30,45 +33,32 @@ export default class CreateEditFundraiserForm extends Component {
        
         const action = this.props.action;
         const fundraiserId = this.props.fundraiserId;
-        console.log("This is from component did mount, action is :" + action);
 
         if ( action === 'update' ) {
 
-            const getFundraiserDetailsURI = `https://tutorial4-api.herokuapp.com/api/fundraiser/${fundraiserId}`;
-            // Axios.get(getFundraiserDetailsURI)
-            // .then((response) => {
-            //     if (response.status === 200 && response.data.status === true) {
-                    // const fundraiser = response.data.data;
-                    const fundraiser = {
-                        eventId: 1001,
-                        title: 'Donation drive for ABC School children',
-                        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eu non diam phasellus vestibulum lorem sed risus ultricies tristique. Amet est placerat in egestas erat imperdiet sed euismod nisi. \nQuisque id diam vel quam elementum pulvinar. Elementum nisi quis eleifend quam adipiscing vitae proin sagittis. Pulvinar pellentesque habitant morbi tristique. Habitant morbi tristique senectus et netus et malesuada fames. Odio ut sem nulla pharetra diam sit amet. Vestibulum sed arcu non odio euismod lacinia at. Nec ullamcorper sit amet risus nullam eget. Non curabitur gravida arcu ac tortor dignissim convallis. Mauris vitae ultricies leo integer malesuada nunc vel. Egestas maecenas pharetra convallis posuere morbi. Tristique senectus et netus et malesuada fames ac. Risus commodo viverra maecenas accumsan lacus vel facilisis volutpat. Quisque id diam vel quam elementum.',
-                        createdBy: 'Smile Foundation',
-                        daysRemaining: 20,
-                        image: '',
-                        goalAmount: 10000,
-                        amountRaised: '2510',
-                        currency: 'CAD',
-                        donors: '36',
-                        status: 'Active'
-                    }
-                    this.setState({formField: {
-                        title: fundraiser.title,
-                        description: fundraiser.description,
-                        goalAmount: fundraiser.goalAmount,
-                        image: fundraiser.image,
-                        status: fundraiser.status,
-                    }});
-            //     }
-            // })
-            // .catch((error) => {
-            //     console.log('Error in getting details of the fundraiser :' + error);           
-            // });
+            const getFundraiserDetailsURI = `http://localhost:5000/fundraiser/${fundraiserId}`;
+            console.log("The getFundraiserDetailsURI is " + getFundraiserDetailsURI);
+            Axios.get(getFundraiserDetailsURI)
+            .then((response) => {
+                // if (response.status === 200 && response.data.status === true) {
+                if (response.status === 200) {
+                    const fundraiser = response.data;
+                    console.log("The fetched fundraiser is :" + fundraiser);
+                    console.log(fundraiser.activeDays)
+                    console.log(fundraiser.cause)
+                    console.log(fundraiser.image)
+                    this.setState({formField: fundraiser});
+                }
+            })
+            .catch((error) => {
+                console.log('Error in getting details of the fundraiser :' + error);           
+            });
         }
         
     }
 
     handleValueChange = (event) => {
+        console.log("The event is :" + event);
         const field = event.target.name;
         const value = event.target.value;
         const fields = { ...this.state.formField };
@@ -80,10 +70,22 @@ export default class CreateEditFundraiserForm extends Component {
             this.setState({
                 formErrors : {
                     ...this.state.formErrors,
-                    [field]: null
+                    [field]: ""
                 }
             })
         } 
+    }
+
+    handleFileUpload = (event) => {
+        const uploadedImage = event.target.files[0];
+        this.setState({ formField: { ...this.state.formField, image: uploadedImage } });
+
+        this.setState({
+            formErrors: {
+                ...this.state.formErrors,
+                image: ""
+            }
+        })
     }
 
     validateForm = () => {
@@ -106,6 +108,9 @@ export default class CreateEditFundraiserForm extends Component {
         if ( !form.image || form.image === '') {
             errors['image'] = 'Please upload an image for this fundraiser';
         }
+        else if ( form.image.size > 5000000 ) {
+            errors['image'] = 'Fundraiser image size should be of maximum 5 MB';
+        }
 
         if ( form.activeDays <= 0) {
             errors['activeDays'] = 'Please set the number of days for which this fundraiser should be active';
@@ -113,22 +118,55 @@ export default class CreateEditFundraiserForm extends Component {
         else if ( form.activeDays > 180) {
             errors['activeDays'] = 'Fundraiser can be created for a maximum period of 180 days';
         }
+        if ( !form.cause || form.cause === '' ) {
+            errors['cause'] = 'Please select a cause for this fundraiser';
+        }
 
         this.setState({
             formErrors : errors,
         });
-
         return errors;
     }
 
     handleSubmit = (event) => {
+        const createFundraiserUrl = "http://localhost:5000/fundraiser/create";
         event.preventDefault();
-        this.validateForm();
-        const numberOfErrors = Object.values(this.state.formErrors)
-                                    .filter(value => value != null || value !== '').length;
-        if (numberOfErrors === 0 ) {
-            console.log("The form is valid")
-            window.alert("Make a POST API request");
+        const errors = this.validateForm();
+        const numberOfErrors = Object.values(errors)
+                                    .filter(value => value.length > 0)
+                                    .length;
+        
+        if (numberOfErrors === 0 && this.props.action === 'update') {
+            const formField = this.state.formField;
+            console.log("The form is valid, submitting request to backend");
+            
+            const formData = new FormData();
+            formData.append("title", formField.title);
+            formData.append("description", formField.description); 
+            formData.append("goalAmount", formField.goalAmount);
+            formData.append("currency", this.state.defaultCurrency);
+            formData.append("image", formField.image);
+            formData.append("status", formField.status);
+            formData.append("cause", formField.cause);
+            formData.append("activeDays", formField.activeDays);
+            // This created by should be the NGO id and should come from local storage
+            formData.append("ngoId", "1001");
+            // formData.append("createdBy", "1001");
+
+            Axios
+                .post(createFundraiserUrl, formData)
+                .then((response) => { 
+                    if (response.status === 201) {
+                        const fundraiser = response.data.data;
+                        console.log("The created fundraiser is :", fundraiser);
+                        this.props.onCreateSuccess(fundraiser);
+                    }
+                })
+                .catch((error) => alert("Error in creating fundraiser"));
+        }
+        else 
+        {
+            console.log("Errors are present in the form")
         }
     }
 
@@ -146,8 +184,7 @@ export default class CreateEditFundraiserForm extends Component {
             fontSize: '0.875em',
             color: '#dc3545'
         }
-        // console.log("The action from class form component is " + this.props.action);
-
+          
         return (
             <>
                 <Container className='mb-5' id="create-update-form">
@@ -271,7 +308,7 @@ export default class CreateEditFundraiserForm extends Component {
                                             || (action === 'update' && this.state.formField.status === 'Pending Admin Approval')) &&
                                             <strong>For how many days do you want this fundraiser to be active?</strong>}
                                             
-                                            {(action === 'update' && this.state.formField.status === 'Pending Admin Approval') &&
+                                            {(action === 'update' && this.state.formField.status !== 'Pending Admin Approval') &&
                                             <strong>Duration of the fundraiser</strong>}
                                             
                                             {(action === 'update' && this.state.formField.status === 'Active') &&
@@ -285,6 +322,7 @@ export default class CreateEditFundraiserForm extends Component {
                                             step="1" 
                                             min="0" 
                                             max="180"
+                                            value={this.state.formField.activeDays}
                                             readOnly={this.state.formField.status === 'Active'}
                                             onChange={this.handleValueChange}
                                             isInvalid={ !!this.state.formErrors.activeDays }
@@ -292,6 +330,40 @@ export default class CreateEditFundraiserForm extends Component {
                                         <Form.Control.Feedback type="invalid">
                                             {this.state.formErrors.activeDays}
                                         </Form.Control.Feedback>
+                                    </Form.Group>
+                                </Row>
+
+                                <Row className='mb-3'>
+                                    <Form.Group as={Col} xs="12" md="12" controlId="validationCustom03">
+                                        { this.state.formField.status !== 'Active' && 
+                                            <>
+                                                <Form.Label>
+                                                    <strong>Cause:</strong> 
+                                                </Form.Label> 
+                                                <Form.Select
+                                                    name="cause"
+                                                    isInvalid={ !!this.state.formErrors.cause }
+                                                    onChange={this.handleValueChange}
+                                                    value={this.state.formField.cause}
+                                                >
+                                                    <option value="">Please select a cause</option>
+                                                    <option value="Education">Education</option>
+                                                    <option value="Animal Welfare">Animal Welfare</option>
+                                                    <option value="Environment">Environment</option>
+                                                </Form.Select>
+                                            </>
+                                        }
+
+                                        { 
+                                            this.state.formField.status === 'Active' && 
+                                            <Form.Label>
+                                                <strong>Cause:</strong> <span>{this.state.formField.cause }</span> 
+                                            </Form.Label> 
+                                        }
+
+                                        <Form.Control.Feedback type="invalid">
+                                            {this.state.formErrors.cause}
+                                        </Form.Control.Feedback>     
                                     </Form.Group>
                                 </Row>
 
@@ -304,7 +376,8 @@ export default class CreateEditFundraiserForm extends Component {
                                             type="file"
                                             required
                                             name="image"
-                                            onChange={this.handleValueChange}
+                                            id="image"
+                                            onChange={this.handleFileUpload}
                                             isInvalid={ !!this.state.formErrors.image }
                                             />
                                         <Form.Control.Feedback type="invalid">
@@ -330,9 +403,6 @@ export default class CreateEditFundraiserForm extends Component {
                     </Row>
                 </Container>
             </>
-
-
-// https://react-bootstrap.netlify.app/forms/validation/#tooltips
         );
     }
 }
