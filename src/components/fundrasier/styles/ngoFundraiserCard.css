@@ -1,0 +1,26 @@
+#ngo-fundraiser-card .actions-drop-down {
+    background-color: #057abe !important;
+    color: white !important;
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
+}
+
+#ngo-fundraiser-card button:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#ngo-fundraiser-card {
+    border-radius: 10px !important;
+
+}
+
+#ngo-fundraiser-card:hover {
+    box-shadow: 0 0 10px 5px grey;
+}
+
+#ngo-fundraiser-card .card-body-color .card-body {
+    border-top-right-radius: 10px 10px !important;
+    border-top-left-radius: 10px 10px !important;
+    background-color: rgb(244, 246, 248) !important;
+}
+
