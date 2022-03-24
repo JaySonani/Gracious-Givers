@@ -26,7 +26,6 @@ export default class CreateEditFundraiserForm extends Component {
                 activeDays: '',
                 cause: '',
             },
-            defaultCurrency: FundraiserConstants.defaultCurrency,
             currentImage: null
         }
     }
@@ -36,7 +35,7 @@ export default class CreateEditFundraiserForm extends Component {
         const fundraiserId = this.props.fundraiserId;
 
         if ( action === 'update' ) {
-            const getFundraiserDetailsURI = `http://localhost:5000/fundraiser/${fundraiserId}`;
+            const getFundraiserDetailsURI = FundraiserConstants.apiBaseUrl + `/${fundraiserId}`;
             console.log("The getFundraiserDetailsURI is " + getFundraiserDetailsURI);
             Axios.get(getFundraiserDetailsURI)
             .then((response) => {
@@ -61,7 +60,6 @@ export default class CreateEditFundraiserForm extends Component {
         const fields = { ...this.state.formField };
         fields[field] = value;
         this.setState({ formField: fields })
-
         // Remove error on the field
         if ( !!this.state.formErrors[field] ) {
             this.setState({
@@ -76,13 +74,24 @@ export default class CreateEditFundraiserForm extends Component {
     handleFileUpload = (event) => {
         const uploadedImage = event.target.files[0];
         this.setState({ formField: { ...this.state.formField, image: uploadedImage } });
-
         this.setState({
             formErrors: {
                 ...this.state.formErrors,
                 image: ""
             }
         })
+        const { target } = event;
+        const { files } = target;
+        if (files && files[0] ) {
+            var reader = new FileReader();
+            reader.onload = (event) => {
+                // Store this value in the database
+                console.log(event.target.result);
+            }
+            reader.readAsDataURL(files[0])
+        }
+
+        console.log(URL.createObjectURL(uploadedImage))
     }
 
     validateForm = () => {
@@ -160,7 +169,6 @@ export default class CreateEditFundraiserForm extends Component {
                 }
             })
             .then(() => {
-                console.log("The image is being updated");
                 if (formField.image !== this.state.currentImage) {
                     const updateFundraiserImageUrl = `http://localhost:5000/fundraiser/${formField._id}/image`
                     const formData = new FormData();
@@ -174,12 +182,8 @@ export default class CreateEditFundraiserForm extends Component {
                         })
                         .catch((error) => alert("Error in updating the image for fundraiser"));
                 }
-                else
-                {
-                    console.log("Nothing to update");
-                }
             })
-            .then(() => this.props.onCreateSuccess(formField))
+            .then(() => this.props.onUpdateSuccess(formField))
             .catch((error) => alert("Error in update fundraiser"));
     }
 
@@ -190,7 +194,7 @@ export default class CreateEditFundraiserForm extends Component {
         formData.append("title", formField.title);
         formData.append("description", formField.description); 
         formData.append("goalAmount", formField.goalAmount);
-        formData.append("currency", this.state.defaultCurrency);
+        formData.append("currency", FundraiserConstants.defaultCurrency);
         formData.append("image", formField.image);
         formData.append("status", formField.status);
         formData.append("cause", formField.cause);
@@ -212,7 +216,6 @@ export default class CreateEditFundraiserForm extends Component {
     }
 
     render() {
-        const defaultCurrency = 'CAD';
         const maxGoalAmount = 1000000;
         const maxDescriptionLength = 1000;
         // const formField = this.state.formField;
@@ -302,7 +305,7 @@ export default class CreateEditFundraiserForm extends Component {
                                 <Row className='mb-3'>
                                     <Form.Group as={Col} xs="12" md="12" controlId="validationCustom03">
                                         <Form.Label>
-                                            <strong>Amount to raise:</strong> {defaultCurrency} {this.state.formField.goalAmount}
+                                            <strong>Amount to raise:</strong> {FundraiserConstants.defaultCurrency} {this.state.formField.goalAmount}
                                         </Form.Label>
                                         
                                         {(action === 'create' 
@@ -322,12 +325,12 @@ export default class CreateEditFundraiserForm extends Component {
                                                 <Row>
                                                     <Col>
                                                         <Form.Label>
-                                                            0 {defaultCurrency}
+                                                            0 {FundraiserConstants.defaultCurrency}
                                                         </Form.Label>  
                                                     </Col>
                                                     <Col style={{textAlign:'right'}}>
                                                         <Form.Label>
-                                                            {maxGoalAmount} {defaultCurrency}
+                                                            {maxGoalAmount} {FundraiserConstants.defaultCurrency}
                                                         </Form.Label>
                                                     </Col>
                                                 </Row>
@@ -421,7 +424,8 @@ export default class CreateEditFundraiserForm extends Component {
                                                     <strong>Update the image added for this fundraiser</strong>
                                                     <br/>
                                                     <strong>Current image:&nbsp;</strong>
-                                                    <a href="http://localhost:5000/images/1648069783290_Students_raising_hands_in_classroom_skynesher_Getty_Images.jpg" download>
+                                                    <a href={`http://localhost:5000/images/${this.state.currentImage}`} 
+                                                        download>
                                                         {this.state.currentImage}
                                                     </a>
                                                 </>
