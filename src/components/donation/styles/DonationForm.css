@@ -52,12 +52,12 @@
   /* background-color: #057abe; */
   text-align: right;
 }
-
+/* 
 .btn {
   width: 100%;
   background-color: #057abe;
   border-radius: 3px;
-}
+} */
 
 @media only screen and (max-width: 800px) {
   .rowForm {
