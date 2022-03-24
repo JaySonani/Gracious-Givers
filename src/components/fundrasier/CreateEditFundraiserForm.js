@@ -2,6 +2,7 @@ import { React, Component } from "react";
 import { Row, Col, Form, Button, Container } from "react-bootstrap";
 import Axios from "axios";
 import FundraiserStatus from "./FundraiserStatus";
+import * as FundraiserConstants from "./FundraiserConstants";
 
 export default class CreateEditFundraiserForm extends Component {
 
@@ -25,36 +26,32 @@ export default class CreateEditFundraiserForm extends Component {
                 activeDays: '',
                 cause: '',
             },
-            defaultCurrency: 'CAD'
+            defaultCurrency: FundraiserConstants.defaultCurrency,
+            currentImage: null
         }
     }
 
-    componentDidMount() {
-       
+    componentDidMount() {     
         const action = this.props.action;
         const fundraiserId = this.props.fundraiserId;
 
         if ( action === 'update' ) {
-
             const getFundraiserDetailsURI = `http://localhost:5000/fundraiser/${fundraiserId}`;
             console.log("The getFundraiserDetailsURI is " + getFundraiserDetailsURI);
             Axios.get(getFundraiserDetailsURI)
             .then((response) => {
-                // if (response.status === 200 && response.data.status === true) {
                 if (response.status === 200) {
                     const fundraiser = response.data;
-                    console.log("The fetched fundraiser is :" + fundraiser);
-                    console.log(fundraiser.activeDays)
-                    console.log(fundraiser.cause)
-                    console.log(fundraiser.image)
-                    this.setState({formField: fundraiser});
+                    this.setState({
+                        formField: fundraiser,
+                        currentImage: fundraiser.image
+                    });     
                 }
             })
             .catch((error) => {
                 console.log('Error in getting details of the fundraiser :' + error);           
             });
-        }
-        
+        }  
     }
 
     handleValueChange = (event) => {
@@ -121,53 +118,97 @@ export default class CreateEditFundraiserForm extends Component {
         if ( !form.cause || form.cause === '' ) {
             errors['cause'] = 'Please select a cause for this fundraiser';
         }
-
         this.setState({
             formErrors : errors,
         });
         return errors;
     }
 
-    handleSubmit = (event) => {
-        const createFundraiserUrl = "http://localhost:5000/fundraiser/create";
+    handleSubmit = (event) => {   
         event.preventDefault();
         const errors = this.validateForm();
         const numberOfErrors = Object.values(errors)
                                     .filter(value => value.length > 0)
-                                    .length;
-        
-        if (numberOfErrors === 0 && this.props.action === 'update') {
-            const formField = this.state.formField;
-            console.log("The form is valid, submitting request to backend");
-            
-            const formData = new FormData();
-            formData.append("title", formField.title);
-            formData.append("description", formField.description); 
-            formData.append("goalAmount", formField.goalAmount);
-            formData.append("currency", this.state.defaultCurrency);
-            formData.append("image", formField.image);
-            formData.append("status", formField.status);
-            formData.append("cause", formField.cause);
-            formData.append("activeDays", formField.activeDays);
-            // This created by should be the NGO id and should come from local storage
-            formData.append("ngoId", "1001");
-            // formData.append("createdBy", "1001");
+                                    .length;      
+        if (numberOfErrors === 0 ) {
+            if (this.props.action === 'create') {
+                this.createFundraiser();
+            }
+            else if (this.props.action === 'update') {
+                this.updateFundraiser()
+            }   
+        }
+    }
 
-            Axios
-                .post(createFundraiserUrl, formData)
-                .then((response) => { 
-                    if (response.status === 201) {
-                        const fundraiser = response.data.data;
-                        console.log("The created fundraiser is :", fundraiser);
-                        this.props.onCreateSuccess(fundraiser);
-                    }
-                })
-                .catch((error) => alert("Error in creating fundraiser"));
+    updateFundraiser = () => {
+        let formField = this.state.formField;
+        const editedFundraiser = {
+            title: formField.title,
+            description: formField.description,
+            ngoId: formField.ngoId,
+            goalAmount: formField.goalAmount,
+            cause: formField.cause,
+            activeDays: formField.activeDays,
         }
-        else 
-        {
-            console.log("Errors are present in the form")
-        }
+       
+        const updateFundraiserUrl = `http://localhost:5000/fundraiser/${formField._id}/ngo/${formField.ngoId}`;
+        Axios
+            .put(updateFundraiserUrl, editedFundraiser)
+            .then((response) => { 
+                if (response.status === 200) {
+                    console.log("Fundraiser updated successfully : ", formField);
+                }
+            })
+            .then(() => {
+                console.log("The image is being updated");
+                if (formField.image !== this.state.currentImage) {
+                    const updateFundraiserImageUrl = `http://localhost:5000/fundraiser/${formField._id}/image`
+                    const formData = new FormData();
+                    formData.append("image", formField.image);
+                    Axios
+                        .put(updateFundraiserImageUrl, formData)
+                        .then((response) => { 
+                            if (response.status === 200) {
+                                console.log("The fundraiser image updated successfully :");
+                            }
+                        })
+                        .catch((error) => alert("Error in updating the image for fundraiser"));
+                }
+                else
+                {
+                    console.log("Nothing to update");
+                }
+            })
+            .then(() => this.props.onCreateSuccess(formField))
+            .catch((error) => alert("Error in update fundraiser"));
+    }
+
+    createFundraiser = () => {
+        const formField = this.state.formField;
+        const createFundraiserUrl = "http://localhost:5000/fundraiser/create";   
+        const formData = new FormData();
+        formData.append("title", formField.title);
+        formData.append("description", formField.description); 
+        formData.append("goalAmount", formField.goalAmount);
+        formData.append("currency", this.state.defaultCurrency);
+        formData.append("image", formField.image);
+        formData.append("status", formField.status);
+        formData.append("cause", formField.cause);
+        formData.append("activeDays", formField.activeDays);
+        // This created by should be the NGO id and should come from local storage
+        formData.append("ngoId", "1001");
+        // formData.append("createdBy", "1001");
+
+        Axios
+            .post(createFundraiserUrl, formData)
+            .then((response) => { 
+                if (response.status === 201) {
+                    const fundraiser = response.data.data;
+                    console.log("The created fundraiser is :", fundraiser);
+                    this.props.onCreateSuccess(fundraiser);
+                }
+            })
+            .catch((error) => alert("Error in creating fundraiser"));
     }
 
     render() {
@@ -370,7 +411,22 @@ export default class CreateEditFundraiserForm extends Component {
                                 <Row>
                                     <Form.Group className="position-relative mb-3">
                                         <Form.Label>
-                                            <strong>Upload an image that relates to this fundraiser</strong>
+                                            {   
+                                                action === 'create' && 
+                                                <strong>Upload an image that relates to this fundraiser</strong>
+                                            }
+                                            {   
+                                                action === 'update' && 
+                                                <>
+                                                    <strong>Update the image added for this fundraiser</strong>
+                                                    <br/>
+                                                    <strong>Current image:&nbsp;</strong>
+                                                    <a href="http://localhost:5000/images/1648069783290_Students_raising_hands_in_classroom_skynesher_Getty_Images.jpg" download>
+                                                        {this.state.currentImage}
+                                                    </a>
+                                                </>
+                                                
+                                            }
                                         </Form.Label>
                                         <Form.Control
                                             type="file"
@@ -379,6 +435,7 @@ export default class CreateEditFundraiserForm extends Component {
                                             id="image"
                                             onChange={this.handleFileUpload}
                                             isInvalid={ !!this.state.formErrors.image }
+                                            accept=".jpg, .jpeg, .png"
                                             />
                                         <Form.Control.Feedback type="invalid">
                                             {this.state.formErrors.image}

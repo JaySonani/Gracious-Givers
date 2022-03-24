@@ -4,6 +4,8 @@ import FundraiserStatus from './FundraiserStatus';
 import FundrasierDeleteConfirmation from "./FundarsierDeleteConfirmation";
 import { useState } from "react";
 import FundrasierDeactivateConfirmation from "./FundraiserDeactivateConfirmation";
+import * as FundraiserConstants from './FundraiserConstants';
+import Axios from "axios";
 
 export default function NGOFundraiserCard(props) {
 
@@ -41,8 +43,22 @@ export default function NGOFundraiserCard(props) {
     }
 
     const handleDelete = (fundrasier) => {
-        setShowDelete(false);
+        
+        const id = fundrasier._id;
+        const ngoId = fundraiser.ngoId;
+        const deleteUrl =  FundraiserConstants.apiBaseUrl + `/${id}/ngo/${ngoId}`;
         console.log("Deleting fundraiser with ID :" + fundrasier._id);
+        console.log("Delete URL is :" + deleteUrl);
+        
+        Axios.delete(deleteUrl)
+            .then((response) => {
+                if (response.status === 200) {
+                    setShowDelete(false);
+                }
+            })
+            .catch((error) => {
+                console.log('Error in deleting fundraiser :' + error);           
+            }); 
     }
 
     const handleDeactivate = (fundrasier) => {
