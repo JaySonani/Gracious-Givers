@@ -18,8 +18,15 @@ export default function CreatUpdateFundraiser() {
     }
 
     const onCreateSuccess = (fundraiser) => {
-        console.log("Back to the parent component");
+        console.log("Back to the parent form");
+         // Add a pop here to show successful update
         // Navigate to a details page for NGO 
+        navigate("/ngo/fundraiser");
+    }
+
+    const onUpdateSuccess = (fundraiser) => {
+        console.log("Back to the parent form");
+        // Add a pop here to show successful update
         navigate("/ngo/fundraiser");
     }
 
@@ -30,7 +37,8 @@ export default function CreatUpdateFundraiser() {
             {console.log("This is from function render : paramEventId :" + paramEventId)}
             <CreateEditFundraiserForm action={action} 
                                         fundraiserId={paramEventId} 
-                                        onCreateSuccess={onCreateSuccess} />
+                                        onCreateSuccess={onCreateSuccess} 
+                                        onUpdateSuccess={onUpdateSuccess}/>
             <Footer />
         </>
     );

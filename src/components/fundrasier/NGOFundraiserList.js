@@ -23,7 +23,7 @@ export default function NGOFundraiserList(props) {
         .catch((error) => {
             console.log('Error in getting '+ period +' fundraiser :' + error);           
         });
-    }, [fundraisers]);
+    }, []);
 
     const onCardClickHandler = (id) => {
         navigate(`/ngo/fundraiser/${id}`);

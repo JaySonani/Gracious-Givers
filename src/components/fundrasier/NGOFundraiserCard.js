@@ -33,7 +33,6 @@ export default function NGOFundraiserCard(props) {
     
     const handleFundraiserAction = (event) => {
         const action = event.target.name;
-        console.log("This is the selection:" + action);
         if (action === 'deactivate' ) {
             setShowDeactivate(true);
         }
