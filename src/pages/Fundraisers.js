@@ -20,7 +20,7 @@ export default function FundRaisers() {
     // const [topDonors1, setTopDonors] = useState({});
     const getFundraiserDetailsURI = FundraiserConstants.apiBaseUrl + `/${eventId}`;
     // This is to be developed in the Donations feature 
-    // const getTopDonorsURI = `https://tutorial4-api.herokuapp.com/api/donors/${eventId}`;
+    // const getTopDonorsURI = FundraiserConstants.apiBaseUrl + `/donors/${eventId}`;
 
     useEffect(() => {
         console.log("The get URL is " + getFundraiserDetailsURI);

@@ -7,12 +7,11 @@ export default function FundraiserDonation(props) {
     const progress = ((props.event.amountRaised) / (props.event.goalAmount)) * 100;
 
     // Need to cite this https://www.geeksforgeeks.org/how-to-calculate-the-number-of-days-between-two-dates-in-javascript/
-    const calculateDaysRemaining = () => {
+    const getDaysRemaining = () => {
         let endDate = new Date(event.endDate);
-        let currentDate = new Date();
-        let Difference_In_Time = endDate.getTime() - currentDate.getTime();
-        let Difference_In_Days = Math.round(Difference_In_Time / (1000 * 3600 * 24));
-        return Difference_In_Days; 
+        let timeDifference = endDate.getTime() - new Date().getTime();
+        let daysRemaining = Math.round(timeDifference / (1000 * 60 * 60 * 24));
+        return daysRemaining; 
     }
 
     return (
@@ -42,7 +41,7 @@ export default function FundraiserDonation(props) {
                             supporters
                         </span><br/> 
                         <span>
-                            <strong style={{fontSize:'20px'}}>{calculateDaysRemaining()}</strong>
+                            <strong style={{fontSize:'20px'}}>{getDaysRemaining()}</strong>
                             &nbsp;days remaining
                         </span>  
                     </div>

@@ -35,7 +35,6 @@ export default function FundraiserList() {
 
     const handleCauseSelect = (event) => {
         const selectedCause = event;
-        console.log("Selected Cause value : " + event);
         setCause(selectedCause);
         fetchFundraisers(selectedCause);
     }
@@ -44,6 +43,7 @@ export default function FundraiserList() {
         navigate(`/fundraiser/${id}`);
     };
 
+    // Move this to constants
     const causes = [
         'All',
         'Education',
@@ -58,9 +58,9 @@ export default function FundraiserList() {
                 <Row className='mb-5' style={{ margin: '0.5rem 0' }}>
                     <Col xs={0} md={1} />
                     <Col xs={12} md={10}>
-                        <Row id=''>
+                        <Row style={{margin:'0.5rem 0'}}>
                             <Col xs={5} md={2}>
-                                Search By Cause
+                                <span><strong>Search By Cause</strong></span>
                             </Col>
                             <Col xs={7} md={10}>
                                 <DropdownButton id="causes-dropdown"

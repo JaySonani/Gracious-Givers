@@ -14,6 +14,10 @@ export default function NGOFundraiserList(props) {
     const navigate = useNavigate();
 
     useEffect(() => {
+        fetchFundrasiers();
+    }, []);
+
+    const fetchFundrasiers = () => {
         Axios.get(getNGOEventsURI)
         .then((response) => {
             if (response.status === 200) {
@@ -23,7 +27,7 @@ export default function NGOFundraiserList(props) {
         .catch((error) => {
             console.log('Error in getting '+ period +' fundraiser :' + error);           
         });
-    }, []);
+    }
 
     const onCardClickHandler = (id) => {
         navigate(`/ngo/fundraiser/${id}`);
@@ -40,8 +44,7 @@ export default function NGOFundraiserList(props) {
                     {
                         fundraisers.length > 0 && 
                         <span>Showing all <strong>{fundraisers.length} {period}</strong> fundraiser(s)</span>
-                    }
-                    
+                    }                    
                 </Col>
             </Row>
             <Row>
@@ -51,6 +54,7 @@ export default function NGOFundraiserList(props) {
                             details={fundraiser}
                             period={period}
                             onCardClick={onCardClickHandler} 
+                            onActionSuccess={fetchFundrasiers}
                         />
                     </Col>
                 )}
