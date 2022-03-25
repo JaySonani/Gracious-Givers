@@ -12,6 +12,13 @@ export const fundraiserStatus = {
     pendingApproval: 'Pending Admin Approval'
 }
 
+export const causes = [
+    'All',
+    'Education',
+    'Environment',
+    'Animal Welfare',
+];
+
 export const apiBaseUrl = "http://localhost:5000/fundraiser"; 
 
 export const defaultCurrency = "CAD";

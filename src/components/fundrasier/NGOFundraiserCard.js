@@ -3,16 +3,22 @@ import './styles/ngoFundraiserCard.css';
 import FundraiserStatus from './FundraiserStatus';
 import FundrasierDeleteConfirmation from "./FundarsierDeleteConfirmation";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import FundrasierDeactivateConfirmation from "./FundraiserDeactivateConfirmation";
 import * as FundraiserConstants from './FundraiserConstants';
 import Axios from "axios";
+import FundrasierResponseUp from "./FundraiserResponsePopup";
 
 export default function NGOFundraiserCard(props) {
 
     const fundraiser = props.details;
     const period = props.period;
+    const onActionSuccess = props.onActionSuccess;
     const [showDeactivate, setShowDeactivate] = useState(false);
     const [showDelete, setShowDelete] = useState(false);
+    const [showDeleteSuccess, setShowDeleteSuccess] = useState(false);
+    const [showDeactivateSuccess, setShowDeactivateSuccess] = useState(false);
+    const navigate = useNavigate();
     
     const formatDate = (dateString) => {
         const targetDate = new Date(dateString);
@@ -41,18 +47,17 @@ export default function NGOFundraiserCard(props) {
         }
     }
 
-    const handleDelete = (fundrasier) => {
-        
+    const handleDelete = (fundrasier) => {      
         const id = fundrasier._id;
         const ngoId = fundraiser.ngoId;
         const deleteUrl =  FundraiserConstants.apiBaseUrl + `/${id}/ngo/${ngoId}`;
         console.log("Deleting fundraiser with ID :" + fundrasier._id);
-        console.log("Delete URL is :" + deleteUrl);
-        
+        console.log("Delete URL is :" + deleteUrl);  
         Axios.delete(deleteUrl)
             .then((response) => {
                 if (response.status === 200) {
                     setShowDelete(false);
+                    setShowDeleteSuccess(true);
                 }
             })
             .catch((error) => {
@@ -61,13 +66,34 @@ export default function NGOFundraiserCard(props) {
     }
 
     const handleDeactivate = (fundrasier) => {
-        setShowDeactivate(false);
         console.log("Deactivating fundraiser with ID :" + fundrasier._id);
+        const id = fundrasier._id;
+        const deactivateUrl =  FundraiserConstants.apiBaseUrl + `/${id}/status/${FundraiserConstants.fundraiserStatus.deactivated}`;        
+        Axios.put(deactivateUrl)
+            .then((response) => {
+                if (response.status === 200) {
+                    setShowDeactivate(false);
+                    setShowDeactivateSuccess(true);
+                }
+            })
+            .catch((error) => {
+                console.log('Error in deleting fundraiser :' + error);           
+            }); 
     }
 
     const handleCloseDeactivate = () => setShowDeactivate(false);
 
     const handleCloseDelete = () => setShowDelete(false);
+
+    const handleCloseDeleteSuccess = () => {
+        setShowDeleteSuccess(false); 
+        onActionSuccess();
+    }
+
+    const handleCloseDeactivateSuccess = () => {
+        setShowDeactivateSuccess(false);
+        onActionSuccess();
+    }
 
     return (
         <Card id="ngo-fundraiser-card">
@@ -158,6 +184,15 @@ export default function NGOFundraiserCard(props) {
                                                                        show={true}
                                                                        onDeactivate={handleDeactivate}
                                                                        onHide={handleCloseDeactivate}/>}
+                                {showDeleteSuccess && <FundrasierResponseUp 
+                                                                        show={true}
+                                                                        type="success"
+                                                                        message="Fundraiser deleted successfully"
+                                                                        onHide={handleCloseDeleteSuccess}/>}
+                                {showDeactivateSuccess && <FundrasierResponseUp 
+                                                                        show={true}
+                                                                        message="Fundraiser deactivated successfully"
+                                                                        onHide={handleCloseDeactivateSuccess}/>}                                        
                             </Col>
                         </Row>
                     </Col>

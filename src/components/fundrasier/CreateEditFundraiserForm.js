@@ -3,6 +3,7 @@ import { Row, Col, Form, Button, Container } from "react-bootstrap";
 import Axios from "axios";
 import FundraiserStatus from "./FundraiserStatus";
 import * as FundraiserConstants from "./FundraiserConstants";
+import FundrasierResponseUp from "./FundraiserResponsePopup";
 
 export default class CreateEditFundraiserForm extends Component {
 
@@ -26,7 +27,10 @@ export default class CreateEditFundraiserForm extends Component {
                 activeDays: '',
                 cause: '',
             },
-            currentImage: null
+            currentImage: null,
+            showCreateSuccess: false,
+            showUpdateSuccess: false,
+            savedFundraiser:null
         }
     }
 
@@ -54,7 +58,6 @@ export default class CreateEditFundraiserForm extends Component {
     }
 
     handleValueChange = (event) => {
-        console.log("The event is :" + event);
         const field = event.target.name;
         const value = event.target.value;
         const fields = { ...this.state.formField };
@@ -183,13 +186,15 @@ export default class CreateEditFundraiserForm extends Component {
                         .catch((error) => alert("Error in updating the image for fundraiser"));
                 }
             })
-            .then(() => this.props.onUpdateSuccess(formField))
+            .then(() => {
+                this.setState({showUpdateSuccess:true})
+            })
             .catch((error) => alert("Error in update fundraiser"));
     }
 
     createFundraiser = () => {
         const formField = this.state.formField;
-        const createFundraiserUrl = "http://localhost:5000/fundraiser/create";   
+        const createFundraiserUrl = FundraiserConstants.apiBaseUrl;   
         const formData = new FormData();
         formData.append("title", formField.title);
         formData.append("description", formField.description); 
@@ -203,16 +208,27 @@ export default class CreateEditFundraiserForm extends Component {
         formData.append("ngoId", "1001");
         // formData.append("createdBy", "1001");
 
-        Axios
+         Axios
             .post(createFundraiserUrl, formData)
             .then((response) => { 
                 if (response.status === 201) {
                     const fundraiser = response.data.data;
                     console.log("The created fundraiser is :", fundraiser);
-                    this.props.onCreateSuccess(fundraiser);
+                    this.setState({showCreateSuccess:true, savedFundraiser:fundraiser})
+                    console.log("Completed setting up show prop")
                 }
             })
             .catch((error) => alert("Error in creating fundraiser"));
+    }
+
+    handleCloseCreateSuccess = () => {
+        this.setState({showCreateSuccess:false})
+        this.props.onCreateSuccess(this.state.savedFundraiser._id);
+    }
+
+    handleCloseUpdateSuccess = () => {
+        this.setState({showUpdateSuccess:false})
+        this.props.onUpdateSuccess(this.state.formField._id);
     }
 
     render() {
@@ -462,6 +478,22 @@ export default class CreateEditFundraiserForm extends Component {
                         </Col>
                         <Col xs={0} md={3}></Col>
                     </Row>
+                {
+                this.state.showCreateSuccess && 
+                <FundrasierResponseUp type="success"
+                                        show={true}
+                                        message="Fundraiser created successfully"
+                                        onHide={this.handleCloseCreateSuccess}/>
+               
+                }
+                {
+                this.state.showUpdateSuccess && 
+                <FundrasierResponseUp type="success"
+                                        show={true}
+                                        message="Fundraiser updated successfully"
+                                        onHide={this.handleCloseUpdateSuccess}/>
+               
+                }
                 </Container>
             </>
         );
