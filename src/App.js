@@ -15,6 +15,7 @@ import AdminHome from './pages/AdminHome';
 import DonationForm from './components/donation/DonationForm';
 import Payment from './components/donation/Payment';
 import PaymentSuccess from './components/donation/PaymentSuccess';
+import NGODetails from './components/moderation/NGODetails';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route exact path="/payment/success" element={<PaymentSuccess />} />
 
           <Route exact path="/admin" element={<AdminHome />} />
+          <Route exact path="/admin/ngodetails/:id" element={<NGODetails />} />
           {/* Add pages as needed */}
 
         </Routes>

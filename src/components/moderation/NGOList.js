@@ -1,6 +1,12 @@
 import classes from "./NGOList.module.css";
+import { useNavigate } from "react-router-dom";
 
 const NGOList = (props) => {
+    const navigate = useNavigate();
+    const onShowDetailsHandler = () => {
+        navigate(`ngodetails/${props.id}`);
+    };
+
     return (
         <li className={classes.ngo}>
             <div>
@@ -8,7 +14,7 @@ const NGOList = (props) => {
                 <div className={classes.description}>{props.description}</div>
             </div>
             <div>
-                <button>Details</button>
+                <button onClick={onShowDetailsHandler}>Details</button>
             </div>
         </li>
     );
