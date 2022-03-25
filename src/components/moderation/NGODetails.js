@@ -3,11 +3,19 @@ import Footer from "../Footer";
 import Header from "../Header";
 import classes from "./NGODetails.module.css";
 
+const details = {};
 const NGODetails = () => {
     return (
         <>
-            <Header />
-            <Card className={classes.ngo}>asd</Card>
+            <Header admin={true} />
+            <main>
+                <section className={classes.ngo}>
+                    <p>Angels</p>
+                    <Card>
+
+                    </Card>
+                </section>
+            </main>
             <Footer />
         </>
     );

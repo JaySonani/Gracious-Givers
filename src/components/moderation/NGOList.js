@@ -3,20 +3,35 @@ import { useNavigate } from "react-router-dom";
 
 const NGOList = (props) => {
     const navigate = useNavigate();
+
     const onShowDetailsHandler = () => {
-        navigate(`ngodetails/${props.id}`);
+        if (props.type == "approved") {
+            navigate(`ngodetails/${props.id}`);
+        }
+        if (props.type == "event") {
+            navigate(`fundraiserrequests/${props.id}`);
+        }
     };
 
+    const type = props.type;
+
     return (
-        <li className={classes.ngo}>
-            <div>
-                <h4>{props.name}</h4>
-                <div className={classes.description}>{props.description}</div>
-            </div>
-            <div>
-                <button onClick={onShowDetailsHandler}>Details</button>
-            </div>
-        </li>
+        <>
+            <li className={classes.ngo}>
+                <div>
+                    <h5>{props.name}</h5>
+                    <div className={classes.description}>
+                        {props.description}
+                    </div>
+                    {props.type == "event" && (
+                        <div className={classes.eventNgo}>NGO: {props.ngo}</div>
+                    )}
+                </div>
+                <div>
+                    <button onClick={onShowDetailsHandler}>Open</button>
+                </div>
+            </li>
+        </>
     );
 };
 

@@ -1,9 +1,12 @@
+main {
+    margin-bottom: 5rem;
+}
+
 .ngo {
     max-width: 60rem;
     width: 90%;
     margin: 2rem auto;
-    display: flex;
-    justify-content: space-between;
+    animation: list-appear 0.5s ease-out forwards;
 }
 
 .ngo h3 {
@@ -24,7 +27,27 @@
     background-color: #045b8d;
     border: 1px solid #045b8d;
 }
-/* 
-.description {
-    font-style: italic;
-} */
+
+.ngo ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.ngo p {
+    font-size: 25px;
+    margin-left: 20px;
+    font-weight: 500;
+}
+
+@keyframes list-appear {
+    from {
+        opacity: 0;
+        transform: translateX(2rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
