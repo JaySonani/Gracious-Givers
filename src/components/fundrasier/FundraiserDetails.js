@@ -1,6 +1,5 @@
 import React from 'react';
 import { Tabs, Tab } from 'react-bootstrap';
-import EventImage from './event1001.jpg';
 import PictureGallery from './PictureGallery';
 import './styles/fundraiserDetails.css';
 

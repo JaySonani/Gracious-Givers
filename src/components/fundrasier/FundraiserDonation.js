@@ -6,6 +6,14 @@ export default function FundraiserDonation(props) {
     const event = props.event;
     const progress = ((props.event.amountRaised) / (props.event.goalAmount)) * 100;
 
+    // Need to cite this https://www.geeksforgeeks.org/how-to-calculate-the-number-of-days-between-two-dates-in-javascript/
+    const getDaysRemaining = () => {
+        let endDate = new Date(event.endDate);
+        let timeDifference = endDate.getTime() - new Date().getTime();
+        let daysRemaining = Math.round(timeDifference / (1000 * 60 * 60 * 24));
+        return daysRemaining; 
+    }
+
     return (
         <Card className='card-custom' id='fundraiser-donation-details'>
             <Card.Body className='card-body-color'>
@@ -33,7 +41,7 @@ export default function FundraiserDonation(props) {
                             supporters
                         </span><br/> 
                         <span>
-                            <strong style={{fontSize:'20px'}}>{event.daysRemaining}</strong>
+                            <strong style={{fontSize:'20px'}}>{getDaysRemaining()}</strong>
                             &nbsp;days remaining
                         </span>  
                     </div>
