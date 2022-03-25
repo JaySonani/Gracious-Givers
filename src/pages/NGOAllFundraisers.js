@@ -3,14 +3,11 @@ import Footer from '../components/Footer';
 import NGOFundraiserList from '../components/fundrasier/NGOFundraiserList';
 import Header from '../components/Header';
 import './styles/allFundraisers.css';
+import * as FundraiserConstants from "../components/fundrasier/FundraiserConstants";
 
 export default function NGOAllFundraisers() {
 
-    const period = {
-        past : "past",
-        ongoing : "ongoing",
-        future : "future"
-    }
+    const period = FundraiserConstants.period;
 
     return (
         <>  

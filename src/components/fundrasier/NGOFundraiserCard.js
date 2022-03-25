@@ -4,6 +4,8 @@ import FundraiserStatus from './FundraiserStatus';
 import FundrasierDeleteConfirmation from "./FundarsierDeleteConfirmation";
 import { useState } from "react";
 import FundrasierDeactivateConfirmation from "./FundraiserDeactivateConfirmation";
+import * as FundraiserConstants from './FundraiserConstants';
+import Axios from "axios";
 
 export default function NGOFundraiserCard(props) {
 
@@ -25,13 +27,12 @@ export default function NGOFundraiserCard(props) {
     }
 
     const actionsUrl = {
-        "update":`/ngo/fundraiser/update/${fundraiser.eventId}`,
-        "donations":`/fundrasier/donations/${fundraiser.eventId}`,
+        "update":`/ngo/fundraiser/update/${fundraiser._id}`,
+        "donations":`/fundrasier/donations/${fundraiser._id}`,
     }
     
     const handleFundraiserAction = (event) => {
         const action = event.target.name;
-        console.log("This is the selection:" + action);
         if (action === 'deactivate' ) {
             setShowDeactivate(true);
         }
@@ -41,13 +42,27 @@ export default function NGOFundraiserCard(props) {
     }
 
     const handleDelete = (fundrasier) => {
-        setShowDelete(false);
-        console.log("Deleting fundraiser with ID :" + fundrasier.eventId);
+        
+        const id = fundrasier._id;
+        const ngoId = fundraiser.ngoId;
+        const deleteUrl =  FundraiserConstants.apiBaseUrl + `/${id}/ngo/${ngoId}`;
+        console.log("Deleting fundraiser with ID :" + fundrasier._id);
+        console.log("Delete URL is :" + deleteUrl);
+        
+        Axios.delete(deleteUrl)
+            .then((response) => {
+                if (response.status === 200) {
+                    setShowDelete(false);
+                }
+            })
+            .catch((error) => {
+                console.log('Error in deleting fundraiser :' + error);           
+            }); 
     }
 
     const handleDeactivate = (fundrasier) => {
         setShowDeactivate(false);
-        console.log("Deactivating fundraiser with ID :" + fundrasier.eventId);
+        console.log("Deactivating fundraiser with ID :" + fundrasier._id);
     }
 
     const handleCloseDeactivate = () => setShowDeactivate(false);
@@ -62,6 +77,10 @@ export default function NGOFundraiserCard(props) {
 
                 <Row>
                     <Col xs={12} md={8}>
+                        <Row>
+                            <Col xs={5} md={3}>Cause</Col>
+                            <Col xs={7} md={9}>{fundraiser.cause}</Col>
+                        </Row>
                         <Row>
                             <Col xs={5} md={3}>Goal Amount</Col>
                             <Col xs={7} md={9}>{fundraiser.currency}&nbsp;{fundraiser.goalAmount}</Col>
@@ -80,17 +99,21 @@ export default function NGOFundraiserCard(props) {
                                 <Col xs={7} md={9}>{fundraiser.donors}</Col>
                             </Row>
                         }
-                        {/* {
-                            (period === 'future') &&
+                        {
+                            (period === 'ongoing' || period === 'past') &&
                             <Row>
-                                <Col xs={5} md={3}>Start Date</Col>
-                                <Col xs={7} md={9}>{formatDate(fundraiser.startDate)}</Col>
+                                <Col xs={5} md={3}>End Date</Col>
+                                <Col xs={7} md={9}>{formatDate(fundraiser.endDate)}</Col>
                             </Row>
-                        } */}
-                        <Row>
-                            <Col xs={5} md={3}>End Date</Col>
-                            <Col xs={7} md={9}>{formatDate(fundraiser.endDate)}</Col>
-                        </Row>
+                        }
+                        {
+                            period === 'future' &&
+                            <Row>
+                                <Col xs={5} md={3}>Created for</Col>
+                                <Col xs={7} md={9}>{fundraiser.activeDays}&nbsp;days</Col>
+                            </Row>
+                        }
+                        
                     </Col>
                     <Col xs={12} md={4} style={{ textAlign: 'center' }}>
                         <Row style={{ margin: '0.1rem 0' }}>
