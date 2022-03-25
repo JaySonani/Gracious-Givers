@@ -3,13 +3,14 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 import NGOFundraiserCard from "./NGOFundraiserCard";
+import * as FundraiserConstants from "./FundraiserConstants";
 
 export default function NGOFundraiserList(props) {
 
     const period = props.period;
     // const ngoId = localStorage.getItem("ngo_id");
     const ngoId = "1001";
-    const getNGOEventsURI = `http://localhost:5000/fundraiser/ngo/${ngoId}/period/${period}`;
+    const getNGOEventsURI = FundraiserConstants.apiBaseUrl + `/ngo/${ngoId}/period/${period}`;
     const [fundraisers, setFundraisers] = useState([]);
     const navigate = useNavigate();
 
