@@ -11,9 +11,12 @@ import AboutUs from './pages/AboutUs';
 import FundraiserList from './pages/FundraiserList';
 import NGOAllFundraisers from './pages/NGOAllFundraisers';
 import CreatUpdateFundraiser from './pages/CreateUpdateFundraiser';
+import AdminHome from './pages/AdminHome';
 import DonationForm from './components/donation/DonationForm';
 import Payment from './components/donation/Payment';
 import PaymentSuccess from './components/donation/PaymentSuccess';
+import NGODetails from './components/moderation/NGODetails';
+import FundraiserRequests from './components/moderation/FundraiserRequests';
 
 function App() {
   return (
@@ -35,6 +38,11 @@ function App() {
           <Route exact path="/donation" element={<DonationForm />} />
           <Route exact path="/payment" element={<Payment />} />
           <Route exact path="/payment/success" element={<PaymentSuccess />} />
+
+          <Route exact path="/admin" element={<AdminHome />} />
+          <Route exact path="/admin/ngodetails/:id" element={<NGODetails />} />
+          <Route exact path="/admin/fundraiserrequests" element={<FundraiserRequests />} />
+          <Route exact path="/admin/fundraiserrequests/:id" element={<FundraiserRequests />} />
           {/* Add pages as needed */}
 
         </Routes>
