@@ -5,23 +5,23 @@ import NGOList from "../components/moderation/NGOList";
 import classes from "./styles/AdminHome.module.css";
 const DUMMY_NGO = [
     {
-        key: "n4",
+        id: "n4",
         name: "Clean Freaks",
         description:
             "The more you donate the cleaner this world becomes for future generations",
     },
     {
-        key: "n2",
+        id: "n2",
         name: "Angels",
         description: "You pay we do the rest",
     },
     {
-        key: "n3",
+        id: "n3",
         name: "Cancer beaters",
         description: "Helping Cancer patients since 1993 and counting",
     },
     {
-        key: "n1",
+        id: "n1",
         name: "Helping Hand",
         description: "Life is all about helping people",
     },
@@ -33,7 +33,7 @@ const AdminHome = () => {
             <NGOList
                 id={ngo.id}
                 name={ngo.name}
-                key={ngo.key}
+                key={ngo.id}
                 description={ngo.description}
             />
         );
