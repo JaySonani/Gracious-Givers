@@ -15,6 +15,7 @@ export default class CreateEditFundraiserForm extends Component {
                 description: '',
                 goalAmount: 0,
                 image: null,
+                imageName: '',
                 status: 'Draft', 
                 activeDays: 0,
                 cause: '',
@@ -27,7 +28,6 @@ export default class CreateEditFundraiserForm extends Component {
                 activeDays: '',
                 cause: '',
             },
-            currentImage: null,
             showCreateSuccess: false,
             showUpdateSuccess: false,
             savedFundraiser:null
@@ -47,7 +47,6 @@ export default class CreateEditFundraiserForm extends Component {
                     const fundraiser = response.data;
                     this.setState({
                         formField: fundraiser,
-                        currentImage: fundraiser.image
                     });     
                 }
             })
@@ -74,27 +73,41 @@ export default class CreateEditFundraiserForm extends Component {
         } 
     }
 
-    handleFileUpload = (event) => {
-        const uploadedImage = event.target.files[0];
-        this.setState({ formField: { ...this.state.formField, image: uploadedImage } });
-        this.setState({
-            formErrors: {
-                ...this.state.formErrors,
-                image: ""
-            }
-        })
+    handleFileUpload = (event) => {        
         const { target } = event;
         const { files } = target;
-        if (files && files[0] ) {
-            var reader = new FileReader();
-            reader.onload = (event) => {
-                // Store this value in the database
-                console.log(event.target.result);
+        if (files && files [0]) {
+            const image = files[0];
+            if (!FundraiserConstants.allowedImageType.includes(image.type)) {
+                this.setState({
+                    formErrors : {...this.state.formErrors, image: "Allowed image types are .jpg, .jpeg, .png, .bmp"}
+                })
             }
-            reader.readAsDataURL(files[0])
+            else if (image.size > 51200) {
+                this.setState({
+                    formErrors : {...this.state.formErrors, image: "Maximum size of the image should be 50 KB"}
+                })
+            }
+            else 
+            {
+                var reader = new FileReader();
+                reader.onload = (event) => {
+                    this.setState({ formField: { 
+                        ...this.state.formField, 
+                        image: event.target.result,
+                        imageName: files[0].name,
+                    } 
+                });}
+                reader.readAsDataURL(files[0])
+            
+                this.setState({
+                    formErrors: {
+                        ...this.state.formErrors,
+                        image: ""
+                    }
+                })
+            }
         }
-
-        console.log(URL.createObjectURL(uploadedImage))
     }
 
     validateForm = () => {
@@ -117,14 +130,14 @@ export default class CreateEditFundraiserForm extends Component {
         if ( !form.image || form.image === '') {
             errors['image'] = 'Please upload an image for this fundraiser';
         }
-        else if ( form.image.size > 5000000 ) {
-            errors['image'] = 'Fundraiser image size should be of maximum 5 MB';
+        else if ( form.image.size > 51200 ) {
+            errors['image'] = 'Maximum size of the image should be 50 KB';
         }
 
         if ( form.activeDays <= 0) {
             errors['activeDays'] = 'Please set the number of days for which this fundraiser should be active';
         } 
-        else if ( form.activeDays > 180) {
+        else if ( form.activeDays > FundraiserConstants.fundraiserMaxActiveDays) {
             errors['activeDays'] = 'Fundraiser can be created for a maximum period of 180 days';
         }
         if ( !form.cause || form.cause === '' ) {
@@ -157,37 +170,21 @@ export default class CreateEditFundraiserForm extends Component {
         const editedFundraiser = {
             title: formField.title,
             description: formField.description,
-            ngoId: formField.ngoId,
             goalAmount: formField.goalAmount,
             cause: formField.cause,
             activeDays: formField.activeDays,
+            image: formField.image,
+            imageName: formField.imageName,
         }
        
-        const updateFundraiserUrl = `http://localhost:5000/fundraiser/${formField._id}/ngo/${formField.ngoId}`;
+        const updateFundraiserUrl = FundraiserConstants.apiBaseUrl + `/${formField._id}/ngo/${formField.ngoId}`;
         Axios
             .put(updateFundraiserUrl, editedFundraiser)
             .then((response) => { 
                 if (response.status === 200) {
                     console.log("Fundraiser updated successfully : ", formField);
+                    this.setState({showUpdateSuccess:true})
                 }
-            })
-            .then(() => {
-                if (formField.image !== this.state.currentImage) {
-                    const updateFundraiserImageUrl = `http://localhost:5000/fundraiser/${formField._id}/image`
-                    const formData = new FormData();
-                    formData.append("image", formField.image);
-                    Axios
-                        .put(updateFundraiserImageUrl, formData)
-                        .then((response) => { 
-                            if (response.status === 200) {
-                                console.log("The fundraiser image updated successfully :");
-                            }
-                        })
-                        .catch((error) => alert("Error in updating the image for fundraiser"));
-                }
-            })
-            .then(() => {
-                this.setState({showUpdateSuccess:true})
             })
             .catch((error) => alert("Error in update fundraiser"));
     }
@@ -195,27 +192,31 @@ export default class CreateEditFundraiserForm extends Component {
     createFundraiser = () => {
         const formField = this.state.formField;
         const createFundraiserUrl = FundraiserConstants.apiBaseUrl;   
-        const formData = new FormData();
-        formData.append("title", formField.title);
-        formData.append("description", formField.description); 
-        formData.append("goalAmount", formField.goalAmount);
-        formData.append("currency", FundraiserConstants.defaultCurrency);
-        formData.append("image", formField.image);
-        formData.append("status", formField.status);
-        formData.append("cause", formField.cause);
-        formData.append("activeDays", formField.activeDays);
         // This created by should be the NGO id and should come from local storage
-        formData.append("ngoId", "1001");
-        // formData.append("createdBy", "1001");
+        // Check if there any value if not then redirect the user the login screen
+        // Put this method in some different JS 
+        // const ngoId = localStorage.getItem("ngoId");
+        const ngoId = "1001";
 
-         Axios
+        const formData = {
+            title: formField.title,
+            description: formField.description, 
+            goalAmount: formField.goalAmount,
+            currency: FundraiserConstants.defaultCurrency,
+            image: formField.image,
+            imageName: formField.imageName,
+            status: formField.status,
+            cause: formField.cause,
+            activeDays: formField.activeDays,
+            ngoId: ngoId
+        }
+
+        Axios
             .post(createFundraiserUrl, formData)
             .then((response) => { 
                 if (response.status === 201) {
                     const fundraiser = response.data.data;
-                    console.log("The created fundraiser is :", fundraiser);
                     this.setState({showCreateSuccess:true, savedFundraiser:fundraiser})
-                    console.log("Completed setting up show prop")
                 }
             })
             .catch((error) => alert("Error in creating fundraiser"));
@@ -234,8 +235,6 @@ export default class CreateEditFundraiserForm extends Component {
     render() {
         const maxGoalAmount = 1000000;
         const maxDescriptionLength = 1000;
-        // const formField = this.state.formField;
-        // const formError = this.state.formErrors;
         const action = this.props.action;
         
         const errorLabelStyle = {
@@ -274,6 +273,7 @@ export default class CreateEditFundraiserForm extends Component {
                                             name="title"
                                             type="text"
                                             placeholder="Title for the fundraiser"
+                                            maxLength="100"
                                             value={this.state.formField.title}
                                             onChange={this.handleValueChange}
                                             isInvalid={ !!this.state.formErrors.title }
@@ -374,7 +374,6 @@ export default class CreateEditFundraiserForm extends Component {
                                             {(action === 'update' && this.state.formField.status === 'Active') &&
                                             <strong>End Date</strong>}
                                         </Form.Label>
-                                        {console.log(this.state.formField.status === 'Active')}
                                         <Form.Control
                                             type="number"
                                             required
@@ -427,7 +426,7 @@ export default class CreateEditFundraiserForm extends Component {
                                     </Form.Group>
                                 </Row>
 
-                                <Row>
+                                <Row className='mb-3'>
                                     <Form.Group className="position-relative mb-3">
                                         <Form.Label>
                                             {   
@@ -436,16 +435,8 @@ export default class CreateEditFundraiserForm extends Component {
                                             }
                                             {   
                                                 action === 'update' && 
-                                                <>
-                                                    <strong>Update the image added for this fundraiser</strong>
-                                                    <br/>
-                                                    <strong>Current image:&nbsp;</strong>
-                                                    <a href={`http://localhost:5000/images/${this.state.currentImage}`} 
-                                                        download>
-                                                        {this.state.currentImage}
-                                                    </a>
-                                                </>
-                                                
+                                                    <strong>Update the image for this fundraiser</strong>
+                                                    
                                             }
                                         </Form.Label>
                                         <Form.Control
@@ -456,7 +447,15 @@ export default class CreateEditFundraiserForm extends Component {
                                             onChange={this.handleFileUpload}
                                             isInvalid={ !!this.state.formErrors.image }
                                             accept=".jpg, .jpeg, .png"
-                                            />
+                                        />
+                                        {action === 'update' && 
+                                        <>
+                                            <strong>Current image:&nbsp;</strong>
+                                            <a href={this.state.formField.image} target="_blank" rel="noopener">
+                                                {this.state.formField.imageName}
+                                            </a>
+                                            </>
+                                        }
                                         <Form.Control.Feedback type="invalid">
                                             {this.state.formErrors.image}
                                         </Form.Control.Feedback>
