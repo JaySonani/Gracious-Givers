@@ -1,4 +1,4 @@
-import { Card } from "react-bootstrap";
+import Card from "../components/moderation/Card";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import NGOList from "../components/moderation/NGOList";
@@ -31,6 +31,7 @@ const AdminHome = () => {
     const ngoList = DUMMY_NGO.map((ngo) => {
         return (
             <NGOList
+                type={"approved"}
                 id={ngo.id}
                 name={ngo.name}
                 key={ngo.id}
@@ -40,7 +41,7 @@ const AdminHome = () => {
     });
     return (
         <>
-            <Header />
+            <Header admin={true} />
             <main>
                 <section className={classes.admin}>
                     <p>Approved NGO List</p>

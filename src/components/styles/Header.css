@@ -37,3 +37,21 @@
   color: #ffffff !important;
   border-color: #057abe !important;
 }
+
+.custom-logout-btn-header {
+  background-color: #ffffff !important;
+  /* font-weight: 550 !important; */
+  /* font-size: 18px !important; */
+  border-color: #be0505 !important;
+  border: 1px solid !important;
+  color: #be0505 !important;
+  /* line-height: 1.4rem !important; */
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+  /* min-width: 100px; */
+}
+
+.custom-logout-btn-header:hover {
+  background-color: rgb(166, 3, 3) !important;
+  color: #ffffff !important;
+  border-color: #be0505 !important;
+} 
