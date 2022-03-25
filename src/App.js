@@ -11,6 +11,7 @@ import AboutUs from './pages/AboutUs';
 import FundraiserList from './pages/FundraiserList';
 import NGOAllFundraisers from './pages/NGOAllFundraisers';
 import CreatUpdateFundraiser from './pages/CreateUpdateFundraiser';
+import AdminHome from './pages/AdminHome';
 import DonationForm from './components/donation/DonationForm';
 import Payment from './components/donation/Payment';
 import PaymentSuccess from './components/donation/PaymentSuccess';
@@ -35,6 +36,8 @@ function App() {
           <Route exact path="/donation" element={<DonationForm />} />
           <Route exact path="/payment" element={<Payment />} />
           <Route exact path="/payment/success" element={<PaymentSuccess />} />
+
+          <Route exact path="/admin" element={<AdminHome />} />
           {/* Add pages as needed */}
 
         </Routes>
