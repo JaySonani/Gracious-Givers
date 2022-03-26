@@ -7,14 +7,18 @@ import Axios from "axios";
 import classes from "./FundraiserRequest.module.css";
 import { useNavigate } from "react-router-dom";
 
-const FundraiserRequest = () => {
+const FundraiserRequest = (props) => {
     const [fundraiser, setFundraiser] = useState([]);
     const { id } = useParams();
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetchFundraiser(id);
-    }, [id]);
+        if (props.all) {
+            fetchAllFundraiser(id);
+        } else {
+            fetchPendingFundraiser(id);
+        }
+    }, [id, props.all]);
 
     async function onApproveHandler() {
         if (
@@ -40,9 +44,10 @@ const FundraiserRequest = () => {
     }
 
     async function onRejectHandler() {
+        const type = props.all ? "Deactivate" : "Reject";
         if (
             window.confirm(
-                "Are you sure that you want to Reject this Request?"
+                "Are you sure that you want to " + type + " this Request?"
             ) === true
         ) {
             await Axios.put(
@@ -50,19 +55,32 @@ const FundraiserRequest = () => {
             )
                 .then((response) => {
                     if (response.status === 200) {
-                        window.alert("Request Rejected!");
+                        window.alert(type + "ed!");
                         navigate(-1);
                     }
                 })
                 .catch((error) => {
-                    console.log("Error in rejecting the request" + error);
+                    console.log("Error in " + type + "ing the request" + error);
                 });
         } else {
             window.alert("Action aborted!");
         }
     }
 
-    async function fetchFundraiser(id) {
+    async function fetchPendingFundraiser(id) {
+        await Axios.get("http://localhost:5000/fundraiser/" + id)
+            .then((response) => {
+                if (response.status === 200) {
+                    console.log(response.data);
+                    setFundraiser(response.data);
+                }
+            })
+            .catch((error) => {
+                console.log("Error in getting fundrasiers:" + error);
+            });
+    }
+
+    async function fetchAllFundraiser(id) {
         await Axios.get("http://localhost:5000/fundraiser/" + id)
             .then((response) => {
                 if (response.status === 200) {
@@ -93,27 +111,42 @@ const FundraiserRequest = () => {
                                             Cause:
                                             {" " + fundraiser.cause}
                                         </h6>
-                                        <h6>
+                                        {!props.all && <h6>
                                             Requested Active days:
                                             {" " + fundraiser.activeDays}
-                                        </h6>
+                                        </h6>}
+                                        {props.all && <h6>
+                                            Active days:
+                                            {" " + fundraiser.activeDays}
+                                        </h6>}
                                         <h5>
                                             Goal Amount: {fundraiser.currency}{" "}
                                             {fundraiser.goalAmount}
                                         </h5>
                                     </div>
                                 </div>
-                                <button onClick={onApproveHandler}>
-                                    Approve
-                                </button>
-                                <button
-                                    className={
-                                        classes["custom-logout-btn-header"]
-                                    }
-                                    onClick={onRejectHandler}
-                                >
-                                    Reject
-                                </button>
+                                {!props.all && <>
+                                    <button onClick={onApproveHandler}>
+                                        Approve
+                                    </button>
+                                    <button
+                                        className={
+                                            classes["custom-logout-btn-header"]
+                                        }
+                                        onClick={onRejectHandler}
+                                    >
+                                        Reject
+                                    </button>
+                                </>}{props.all && <>
+                                    <button
+                                        className={
+                                            classes["custom-logout-btn-header"]
+                                        }
+                                        onClick={onRejectHandler}
+                                    >
+                                        Deactivate
+                                    </button>
+                                </>}
                             </Card>
                         </section>
                     </main>
