@@ -87,11 +87,11 @@ function Header(props) {
                                     title="Requests (logged in admin)"
                                     id="basic-nav-dropdown"
                                 >
-                                    <NavDropdown.Item href="/ngo/fundraiser/create">
+                                    <NavDropdown.Item>
                                         Signup Requests
                                     </NavDropdown.Item>
                                     <NavDropdown.Item href="/admin/fundraiserrequests">
-                                        Fundrasiers Requests
+                                        Fundrasier Requests
                                     </NavDropdown.Item>
                                 </NavDropdown>
                             </Nav>

@@ -28,27 +28,33 @@ const FundraiserRequests = () => {
             });
     }
     let list;
-    fundraisers && (list = fundraisers.map((event) => {
-        return (
-            <NGOList
-                type={"event"}
-                id={event._id}
-                name={event.title}
-                key={event._id}
-                description={event.description}
-                ngo={event.createdBy}
-            />
-        );
-    }));
+    fundraisers &&
+        (list = fundraisers.map((event) => {
+            return (
+                <NGOList
+                    type={"event"}
+                    id={event._id}
+                    name={event.title}
+                    key={event._id}
+                    description={event.description}
+                    ngo={event.createdBy}
+                />
+            );
+        }));
     return (
         <>
             <Header admin={true} />
             <main>
                 <section className={classes.event}>
-                    <p>Fundraiser Requests</p>
-                    <Card>
-                        <ul>{list}</ul>
-                    </Card>
+                    {list && (
+                        <>
+                            <p>Fundraiser Requests</p>
+                            <Card>
+                                <ul>{list}</ul>
+                            </Card>
+                        </>
+                    )}
+                    {!list && <p>No New Fundraiser Requests</p>}
                 </section>
             </main>
             <Footer />
