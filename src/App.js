@@ -20,6 +20,7 @@ import FundraiserRequests from "./components/moderation/FundraiserRequests";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import AdminLogin from "./pages/AdminLogin";
+import FundraiserRequest from './components/moderation/FundraiserRequest';
 
 function App() {
   return (
@@ -54,16 +55,8 @@ function App() {
 
           <Route exact path="/admin" element={<AdminHome />} />
           <Route exact path="/admin/ngodetails/:id" element={<NGODetails />} />
-          <Route
-            exact
-            path="/admin/fundraiserrequests"
-            element={<FundraiserRequests />}
-          />
-          <Route
-            exact
-            path="/admin/fundraiserrequests/:id"
-            element={<FundraiserRequests />}
-          />
+          <Route exact path="/admin/fundraiserrequests" element={<FundraiserRequests />} />
+          <Route exact path="/admin/fundraiserrequests/:id" element={<FundraiserRequest />} />
           {/* Add pages as needed */}
         </Routes>
       </BrowserRouter>
