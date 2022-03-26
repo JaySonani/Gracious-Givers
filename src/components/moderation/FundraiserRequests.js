@@ -6,16 +6,18 @@ import classes from "./FundraiserRequests.module.css";
 import { useEffect, useState } from "react";
 import Axios from "axios";
 
-const FundraiserRequests = () => {
+const FundraiserRequests = (props) => {
     const [fundraisers, setFundraisers] = useState([]);
 
     useEffect(() => {
-        fetchFundraisers();
-    }, []);
+        if (props.all) {
+            fetchAllFundraisers();
+        } else {
+            fetchPendingFundraisers();
+        }
+    }, [props.all]);
 
-    async function fetchFundraisers() {
-        // const getFundraisersByCauseUrl =
-        //     FundrasierConstants.apiBaseUrl + `/cause/${selectedCause}`;
+    async function fetchPendingFundraisers() {
         await Axios.get("http://localhost:5000/fundraiser/pending")
             .then((response) => {
                 if (response.status === 200) {
@@ -27,6 +29,20 @@ const FundraiserRequests = () => {
                 console.log("Error in getting fundrasiers:" + error);
             });
     }
+
+    async function fetchAllFundraisers() {
+        await Axios.get("http://localhost:5000/fundraiser/cause/All")
+            .then((response) => {
+                if (response.status === 200) {
+                    setFundraisers(response.data); 
+                    console.log(response.data);
+                }
+            })
+            .catch((error) => {
+                console.log("Error in getting fundrasiers:" + error);
+            });
+    }
+
     let list;
     fundraisers &&
         (list = fundraisers.map((event) => {
@@ -48,7 +64,8 @@ const FundraiserRequests = () => {
                 <section className={classes.event}>
                     {list && (
                         <>
-                            <p>Fundraiser Requests</p>
+                            {!props.all && <p>Fundraiser Requests</p>}
+                            {props.all && <p>Active Fundraisers</p>}
                             <Card>
                                 <ul>{list}</ul>
                             </Card>

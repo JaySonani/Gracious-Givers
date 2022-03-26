@@ -55,6 +55,8 @@ function App() {
 
           <Route exact path="/admin" element={<AdminHome />} />
           <Route exact path="/admin/ngodetails/:id" element={<NGODetails />} />
+          <Route exact path="/admin/activefundraisers" element={<FundraiserRequests all={true}/>} />
+          <Route exact path="/admin/activefundraisers/:id" element={<FundraiserRequest all={true}/>} />
           <Route exact path="/admin/fundraiserrequests" element={<FundraiserRequests />} />
           <Route exact path="/admin/fundraiserrequests/:id" element={<FundraiserRequest />} />
           {/* Add pages as needed */}
