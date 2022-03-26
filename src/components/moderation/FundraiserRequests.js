@@ -6,18 +6,16 @@ import classes from "./FundraiserRequests.module.css";
 import { useEffect, useState } from "react";
 import Axios from "axios";
 
-const FundraiserRequests = (props) => {
+const FundraiserRequests = () => {
     const [fundraisers, setFundraisers] = useState([]);
 
     useEffect(() => {
-        if (props.all) {
-            fetchAllFundraisers();
-        } else {
-            fetchPendingFundraisers();
-        }
-    }, [props.all]);
+        fetchFundraisers();
+    }, []);
 
-    async function fetchPendingFundraisers() {
+    async function fetchFundraisers() {
+        // const getFundraisersByCauseUrl =
+        //     FundrasierConstants.apiBaseUrl + `/cause/${selectedCause}`;
         await Axios.get("http://localhost:5000/fundraiser/pending")
             .then((response) => {
                 if (response.status === 200) {
@@ -29,20 +27,6 @@ const FundraiserRequests = (props) => {
                 console.log("Error in getting fundrasiers:" + error);
             });
     }
-
-    async function fetchAllFundraisers() {
-        await Axios.get("http://localhost:5000/fundraiser/cause/All")
-            .then((response) => {
-                if (response.status === 200) {
-                    setFundraisers(response.data); 
-                    console.log(response.data);
-                }
-            })
-            .catch((error) => {
-                console.log("Error in getting fundrasiers:" + error);
-            });
-    }
-
     let list;
     fundraisers &&
         (list = fundraisers.map((event) => {
@@ -64,8 +48,7 @@ const FundraiserRequests = (props) => {
                 <section className={classes.event}>
                     {list && (
                         <>
-                            {!props.all && <p>Fundraiser Requests</p>}
-                            {props.all && <p>Active Fundraisers</p>}
+                            <p>Fundraiser Requests</p>
                             <Card>
                                 <ul>{list}</ul>
                             </Card>

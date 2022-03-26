@@ -35,9 +35,9 @@ function Header(props) {
             <Navbar.Brand href="/home">
               <img
                 src={BrandLogo}
-                width="90rem"
+                width="110rem"
                 height="55rem"
-                alt="Gracious Givers"
+                alt="Helping Hands"
                 className="rounded"
               />
             </Navbar.Brand>
@@ -109,9 +109,9 @@ function Header(props) {
             <Navbar.Brand href="/admin">
               <img
                 src={BrandLogo}
-                width="90rem"
+                width="110rem"
                 height="55rem"
-                alt="Gracious Givers"
+                alt="Helping Hands"
                 className="rounded"
               />
             </Navbar.Brand>
@@ -123,14 +123,13 @@ function Header(props) {
                   title="Requests (logged in admin)"
                   id="basic-nav-dropdown"
                 >
-                  <NavDropdown.Item>
+                  <NavDropdown.Item href="/ngo/fundraiser/create">
                     Signup Requests
                   </NavDropdown.Item>
                   <NavDropdown.Item href="/admin/fundraiserrequests">
                     Fundrasiers Requests
                   </NavDropdown.Item>
                 </NavDropdown>
-                <Label title="Active Fundraisers" path="/admin/activefundraisers" />
               </Nav>
               <Nav>
                 <Button variant="danger" className="custom-logout-btn-header">

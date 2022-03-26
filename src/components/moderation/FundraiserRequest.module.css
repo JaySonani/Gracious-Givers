@@ -33,6 +33,7 @@ main {
 .custom-logout-btn-header {
     background-color: #be0505 !important;
     border-color: #be0505 !important;
+    border: 1px solid !important;
     color: #ffffff !important;
 }
 
