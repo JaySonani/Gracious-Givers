@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Container, Navbar, Nav, Button, NavDropdown } from "react-bootstrap";
-import { isAuthenticated, setTokenOnLogOut } from "../utils/Network";
+import { isAuthenticated, setTokenOnLogOut } from "../../utils/Network";
 
-import BrandLogo from "./../assets/GraciousGivers.png";
+import BrandLogo from "./../../assets/GraciousGivers.png";
 import Label from "./Label";
 
 import "./styles/Header.css";
@@ -48,10 +48,10 @@ function Header(props) {
                 {
                   !isLoggedIn &&
                   <Label title="Fundraiser" path="/fundraiser" />
-                }       
+                }
                 {(isLoggedIn && props.admin !== 'admin') &&
                   <NavDropdown
-                    title="Fundrasier"
+                    title="Fundraiser"
                     id="basic-nav-dropdown"
                   >
                     <NavDropdown.Item href="/ngo/fundraiser/create">
@@ -62,6 +62,8 @@ function Header(props) {
                     </NavDropdown.Item>
                   </NavDropdown>
                 }
+                {<Label title="All Donations" path="all_donations" />}
+
                 <Label title="About Us" path="/about_us" />
               </Nav>
               {!isLoggedIn && (
@@ -91,10 +93,10 @@ function Header(props) {
               )}
               {isLoggedIn && (
                 <Nav>
-                <Button variant="danger" className="custom-logout-btn-header" onClick={() => setTokenOnLogOut()}>
-                  Logout
-                </Button>
-              </Nav>
+                  <Button variant="danger" className="custom-logout-btn-header" onClick={() => setTokenOnLogOut()}>
+                    Logout
+                  </Button>
+                </Nav>
               )}
             </Navbar.Collapse>
           </Container>

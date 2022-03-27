@@ -2,10 +2,10 @@ import { Container, Row, Col, Dropdown, DropdownButton } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
-import FundraiserCard from '../components/fundrasier/FundraiserCard.js';
-import Header from "../components/Header.js";
-import Footer from "../components/Footer.js";
-import * as FundrasierConstants from "../components/fundrasier/FundraiserConstants";
+import FundraiserCard from '../../components/fundraiser/FundraiserCard';
+import Header from "../../components/navbar/Header";
+import Footer from "../../components/navbar/Footer";
+import * as FundrasierConstants from "../../components/fundraiser/FundraiserConstants";
 import "./styles/fundraiserList.css";
 
 export default function FundraiserList() {
@@ -52,7 +52,7 @@ export default function FundraiserList() {
                 <Row className='mb-5' style={{ margin: '0.5rem 0' }}>
                     <Col xs={0} md={1} />
                     <Col xs={12} md={10}>
-                        <Row style={{margin:'0.5rem 0'}}>
+                        <Row style={{ margin: '0.5rem 0' }}>
                             <Col>
                                 <span><strong>Search By Cause</strong></span>
                             </Col>

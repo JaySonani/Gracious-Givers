@@ -1,16 +1,16 @@
-import { Modal, Button, Row, Col, Container } from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
 
 export default function FundrasierResponseUp(props) {
 
     const show = props.show;
     const handleHide = props.onHide;
     const message = props.message;
-    const type = props.type;
+    // const type = props.type;
 
     return (
 
         <Modal show={show} onHide={handleHide}>
-            <Modal.Body style = {{margin:'1rem 1rem'}}>
+            <Modal.Body style={{ margin: '1rem 1rem' }}>
                 {message}
             </Modal.Body>
             <Modal.Footer>

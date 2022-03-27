@@ -1,6 +1,6 @@
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-import CreateEditFundraiserForm from "../components/fundrasier/CreateEditFundraiserForm";
+import Footer from "../../components/navbar/Footer";
+import Header from "../../components/navbar/Header";
+import CreateEditFundraiserForm from "../../components/fundraiser/CreateEditFundraiserForm";
 import { useParams, useNavigate } from "react-router-dom";
 
 export default function CreatUpdateFundraiser() {
@@ -28,10 +28,10 @@ export default function CreatUpdateFundraiser() {
     return (
         <>
             <Header />
-            <CreateEditFundraiserForm action={action} 
-                                        fundraiserId={paramEventId} 
-                                        onCreateSuccess={onCreateSuccess} 
-                                        onUpdateSuccess={onUpdateSuccess}/>
+            <CreateEditFundraiserForm action={action}
+                fundraiserId={paramEventId}
+                onCreateSuccess={onCreateSuccess}
+                onUpdateSuccess={onUpdateSuccess} />
             <Footer />
         </>
     );

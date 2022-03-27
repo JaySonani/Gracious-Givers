@@ -1,13 +1,13 @@
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-import FundraiserDetails from '../components/fundrasier/FundraiserDetails';
-import FundraiserDonation from '../components/fundrasier/FundraiserDonation.js';
-import TopDonors from '../components/fundrasier/TopDonors.js';
+import Footer from "../../components/navbar/Footer";
+import Header from "../../components/navbar/Header";
+import FundraiserDetails from '../../components/fundraiser/FundraiserDetails';
+import FundraiserDonation from '../../components/fundraiser/FundraiserDonation';
+import TopDonors from '../../components/fundraiser/TopDonors';
 import { Button } from 'react-bootstrap';
 import { BiDonateHeart } from "react-icons/bi";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import * as FundraiserConstants from "../components/fundrasier/FundraiserConstants";
+import * as FundraiserConstants from "../../components/fundraiser/FundraiserConstants";
 import Axios from "axios";
 import './styles/fundraisers.css';
 
@@ -25,14 +25,14 @@ export default function FundRaisers() {
     useEffect(() => {
         console.log("The get URL is " + getFundraiserDetailsURI);
         Axios.get(getFundraiserDetailsURI)
-        .then((response) => {
-            if (response.status === 200) {
-                setEvent(response.data);
-            }
-        })
-        .catch((error) => {
-            console.log('Error in getting details of the fundraiser :' + error);           
-        });
+            .then((response) => {
+                if (response.status === 200) {
+                    setEvent(response.data);
+                }
+            })
+            .catch((error) => {
+                console.log('Error in getting details of the fundraiser :' + error);
+            });
 
         // This is to be developed in the Donations feature 
         // Axios.get(getTopDonorsURI)

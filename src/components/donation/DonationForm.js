@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
-import Footer from "../Footer";
-import Header from "../Header";
+import Footer from "../navbar/Footer";
+import Header from "../navbar/Header";
 import './styles/DonationForm.css';
 
 const DonationForm = () => {

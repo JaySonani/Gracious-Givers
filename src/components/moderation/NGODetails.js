@@ -1,7 +1,7 @@
 import Card from "./Card";
-import Footer from "../Footer";
-import Header from "../Header";
-import classes from "./NGODetails.module.css";
+import Footer from "../navbar/Footer";
+import Header from "../navbar/Header";
+import classes from "./styles/NGODetails.module.css";
 
 const details = {};
 const NGODetails = () => {

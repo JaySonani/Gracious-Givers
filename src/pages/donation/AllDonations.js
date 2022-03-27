@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useEffect } from "react";
-import Footer from "../Footer";
-import Header from "../Header";
-import DonationCard from "./DonationCard";
+import Footer from "../../components/navbar/Footer";
+import Header from "../../components/navbar/Header";
+import DonationCard from "../../components/donation/DonationCard";
 import './styles/AllDonations.css';
 const axios = require('axios');
 
@@ -12,28 +12,29 @@ function AllDonation() {
     const [donations, setDonations] = useState([]);
 
     useEffect(() => {
+
+        const retrieveAllDonations = () => {
+            var config = {
+                method: 'get',
+                url: 'https://gracious-givers-backend.herokuapp.com/donation/alldonations',
+                headers: {}
+            };
+            axios(config)
+                .then(function (response) {
+                    setDonations(response.data.donations);
+                    // console.log(response.data.donations);
+                    // console.log(donations);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+
+
         retrieveAllDonations();
         console.log("All donations are retrieved..")
         // console.log(donations);
     }, []);
-
-    const retrieveAllDonations = () => {
-        var config = {
-            method: 'get',
-            url: 'https://gracious-givers-backend.herokuapp.com/donation/alldonations',
-            headers: {}
-        };
-        axios(config)
-            .then(function (response) {
-                setDonations(response.data.donations);
-                // console.log(response.data.donations);
-                // console.log(donations);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    }
-
 
 
 

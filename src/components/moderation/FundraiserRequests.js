@@ -1,8 +1,8 @@
-import Footer from "../Footer";
-import Header from "../Header";
+import Footer from "../navbar/Footer";
+import Header from "../navbar/Header";
 import Card from "./Card";
 import NGOList from "./NGOList";
-import classes from "./FundraiserRequests.module.css";
+import classes from "./styles/FundraiserRequests.module.css";
 import { useEffect, useState } from "react";
 import Axios from "axios";
 

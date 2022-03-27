@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
-import Footer from '../Footer';
-import Header from '../Header';
+import Footer from "../navbar/Footer";
+import Header from "../navbar/Header";
 var axios = require('axios');
 
 // import './styles/Payment.css';

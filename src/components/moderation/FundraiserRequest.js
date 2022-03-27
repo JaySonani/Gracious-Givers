@@ -1,10 +1,10 @@
 import Card from "./Card";
-import Footer from "../Footer";
-import Header from "../Header";
+import Footer from "../navbar/Footer";
+import Header from "../navbar/Header";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Axios from "axios";
-import classes from "./FundraiserRequest.module.css";
+import classes from "./styles/FundraiserRequest.module.css";
 import { useNavigate } from "react-router-dom";
 
 const FundraiserRequest = (props) => {
@@ -149,7 +149,7 @@ const FundraiserRequest = (props) => {
                                         <button
                                             className={
                                                 classes[
-                                                    "custom-logout-btn-header"
+                                                "custom-logout-btn-header"
                                                 ]
                                             }
                                             onClick={onRejectHandler}
@@ -163,7 +163,7 @@ const FundraiserRequest = (props) => {
                                         <button
                                             className={
                                                 classes[
-                                                    "custom-logout-btn-header"
+                                                "custom-logout-btn-header"
                                                 ]
                                             }
                                             onClick={onRejectHandler}

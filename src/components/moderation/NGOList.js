@@ -1,4 +1,4 @@
-import classes from "./NGOList.module.css";
+import classes from "./styles/NGOList.module.css";
 import { useNavigate } from "react-router-dom";
 
 const NGOList = (props) => {

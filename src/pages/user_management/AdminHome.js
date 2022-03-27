@@ -1,7 +1,7 @@
-import Card from "../components/moderation/Card";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-import NGOList from "../components/moderation/NGOList";
+import Card from "../../components/moderation/Card";
+import Footer from "../../components/navbar/Footer";
+import Header from "../../components/navbar/Header";
+import NGOList from "../../components/moderation/NGOList";
 import classes from "./styles/AdminHome.module.css";
 const DUMMY_NGO = [
     {
