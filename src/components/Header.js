@@ -106,7 +106,7 @@ function Header(props) {
           id="header-nav-bar"
         >
           <Container>
-            <Navbar.Brand href="/admin">
+            <Navbar.Brand>
               <img
                 src={BrandLogo}
                 width="90rem"
@@ -119,6 +119,7 @@ function Header(props) {
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
                 <Label title="Home" path="/admin" />
+                <Label title="Active Fundraisers" path="/admin/activefundraisers" />
                 <NavDropdown
                   title="Requests (logged in admin)"
                   id="basic-nav-dropdown"
@@ -130,7 +131,6 @@ function Header(props) {
                     Fundrasiers Requests
                   </NavDropdown.Item>
                 </NavDropdown>
-                <Label title="Active Fundraisers" path="/admin/activefundraisers" />
               </Nav>
               <Nav>
                 <Button variant="danger" className="custom-logout-btn-header">

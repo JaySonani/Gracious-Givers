@@ -23,7 +23,7 @@ const FundraiserRequest = (props) => {
     async function onApproveHandler() {
         if (
             window.confirm(
-                "Are you sure that you want to Approve this Request?"
+                "Are you sure that you want to Approve?"
             ) === true
         ) {
             await Axios.put(
@@ -36,7 +36,7 @@ const FundraiserRequest = (props) => {
                     }
                 })
                 .catch((error) => {
-                    console.log("Error in approving the request" + error);
+                    console.log("Error while Approving" + error);
                 });
         } else {
             window.alert("Action aborted!");
@@ -47,7 +47,7 @@ const FundraiserRequest = (props) => {
         const type = props.all ? "Deactivate" : "Reject";
         if (
             window.confirm(
-                "Are you sure that you want to " + type + " this Request?"
+                "Are you sure that you want to " + type + "?"
             ) === true
         ) {
             await Axios.put(
@@ -60,7 +60,7 @@ const FundraiserRequest = (props) => {
                     }
                 })
                 .catch((error) => {
-                    console.log("Error in " + type + "ing the request" + error);
+                    console.log("Error while " + type + "ing." + error);
                 });
         } else {
             window.alert("Action aborted!");
@@ -117,17 +117,28 @@ const FundraiserRequest = (props) => {
                                                 {" " + fundraiser.activeDays}
                                             </h6>
                                         )}
-                                        {props.all && (
-                                            <h6>
-                                                Active days:
-                                                {" " + fundraiser.activeDays}
-                                            </h6>
-                                        )}
-
                                         <h5>
                                             Goal Amount: {fundraiser.currency}{" "}
                                             {fundraiser.goalAmount}
                                         </h5>
+                                        {props.all && (
+                                            <h6>
+                                                Amount Raised:
+                                                {" CAD " + fundraiser.amountRaised}
+                                            </h6>
+                                        )}
+                                        {props.all && (
+                                            <h6>
+                                                Total Donors:
+                                                {" " + fundraiser.donors}
+                                            </h6>
+                                        )}
+                                        {props.all && fundraiser && (
+                                            <h6>
+                                                End Date:
+                                                {" " + new Date(fundraiser.endDate).toDateString()}
+                                            </h6>
+                                        )}
                                     </div>
                                 </div>
                                 {!props.all && (
