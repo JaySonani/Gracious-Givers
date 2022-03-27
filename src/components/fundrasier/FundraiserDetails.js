@@ -1,6 +1,5 @@
 import React from 'react';
 import { Tabs, Tab } from 'react-bootstrap';
-import EventImage from './event1001.jpg';
 import PictureGallery from './PictureGallery';
 import './styles/fundraiserDetails.css';
 
@@ -15,9 +14,11 @@ export default class FundraiserDetails extends React.Component {
                     </div>
                 </div>
                 <div className='row'>
-                    <div className='col-12' style={{margin:'10px 0px'}}>
-                        <img src={EventImage} 
-                            className="img-fluid fundraiser-image" 
+                    <div className='col-12' style={{margin:'10px 0px', textAlign:'center'}}>
+                    <img src={event.image}
+                            height="350rem"
+                            width="580rem"
+                            className="img-fluid fundraiser-image rounded" 
                             alt={event.title} />
                     </div>
                 </div>

@@ -1,21 +1,25 @@
 import { Card, ProgressBar } from "react-bootstrap";
-// import "./styles/fundraiserCard";
-import "./styles/fundraiserDonation.css";
-import EventImage from './event1001.jpg';
+import "./styles/fundraiserCard.css";
 
 export default function FundraiserCard(props) {
 
     const fundraiser = props.details;
     const onCardClick = props.onCardClick;
-    // const [fundraiser, onCardClick] = props;
     const progress = ((fundraiser.amountRaised) / (fundraiser.goalAmount)) * 100;
+
+    const getDaysRemaining = () => {
+        let endDate = new Date(fundraiser.endDate);
+        let timeDifference = endDate.getTime() - new Date().getTime();
+        let daysRemaining = Math.round(timeDifference / (1000 * 60 * 60 * 24));
+        return daysRemaining < 0 ? 0 : daysRemaining;
+    }
 
     return (
 
         <Card className='card-custom' onClick={() => onCardClick(fundraiser.eventId)}>
-            <Card.Img variant="top" src={EventImage} />
+            <Card.Img variant="top" src={fundraiser.image} />
             <Card.Body>
-                <Card.Title style={{ textAlign: 'center' }}>{fundraiser.title}</Card.Title>
+                <Card.Title style={{ textAlign: 'center', fontWeight: '600' }}>{fundraiser.title}</Card.Title>
                 <Card.Text>
                     <div id='createdDetails'>
                         <div>
@@ -45,7 +49,7 @@ export default function FundraiserCard(props) {
                                 &nbsp;supporters<br />
                             </span>
                             <span>
-                                <strong>{fundraiser.daysRemaining}</strong>
+                                <strong>{getDaysRemaining()}</strong>
                                 &nbsp;days remaining
                             </span>
                         </div>
