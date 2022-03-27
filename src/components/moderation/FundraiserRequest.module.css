@@ -64,7 +64,9 @@ main {
 }
 
 .event img {
-    border-radius: 5px;
+    border-radius: 5px; 
+    height: 15rem;
+    width: auto;
 }
 
 .event h6 {
