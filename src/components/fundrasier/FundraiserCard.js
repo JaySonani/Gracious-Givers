@@ -11,7 +11,7 @@ export default function FundraiserCard(props) {
         let endDate = new Date(fundraiser.endDate);
         let timeDifference = endDate.getTime() - new Date().getTime();
         let daysRemaining = Math.round(timeDifference / (1000 * 60 * 60 * 24));
-        return daysRemaining; 
+        return daysRemaining < 0 ? 0 : daysRemaining;
     }
 
     return (

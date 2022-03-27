@@ -45,19 +45,24 @@ function Header(props) {
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
                 <Label title="Home" path="/" />
-                <Label title="Fundraiser" path="/fundraiser" />
+                {
+                  !isLoggedIn &&
+                  <Label title="Fundraiser" path="/fundraiser" />
+                }       
+                {(isLoggedIn && props.admin !== 'admin') &&
+                  <NavDropdown
+                    title="Fundrasier"
+                    id="basic-nav-dropdown"
+                  >
+                    <NavDropdown.Item href="/ngo/fundraiser/create">
+                      Create
+                    </NavDropdown.Item>
+                    <NavDropdown.Item href="/ngo/fundraiser">
+                      All Fundrasiers
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                }
                 <Label title="About Us" path="/about_us" />
-                <NavDropdown
-                  title="Fundrasier (Logged-in NGO)"
-                  id="basic-nav-dropdown"
-                >
-                  <NavDropdown.Item href="/ngo/fundraiser/create">
-                    Create
-                  </NavDropdown.Item>
-                  <NavDropdown.Item href="/ngo/fundraiser">
-                    All Fundrasiers
-                  </NavDropdown.Item>
-                </NavDropdown>
               </Nav>
               {!isLoggedIn && (
                 <Nav>

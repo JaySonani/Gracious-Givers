@@ -3,7 +3,8 @@ import { Row, Col, Form, Button, Container } from "react-bootstrap";
 import Axios from "axios";
 import FundraiserStatus from "./FundraiserStatus";
 import * as FundraiserConstants from "./FundraiserConstants";
-import FundrasierResponseUp from "./FundraiserResponsePopup";
+import FundrasierResponsePopup from "./FundraiserResponsePopup";
+import "./styles/createEditFundraiserForm.css";
 
 export default class CreateEditFundraiserForm extends Component {
 
@@ -37,7 +38,6 @@ export default class CreateEditFundraiserForm extends Component {
     componentDidMount() {     
         const action = this.props.action;
         const fundraiserId = this.props.fundraiserId;
-
         if ( action === 'update' ) {
             const getFundraiserDetailsURI = FundraiserConstants.apiBaseUrl + `/${fundraiserId}`;
             console.log("The getFundraiserDetailsURI is " + getFundraiserDetailsURI);
@@ -62,7 +62,6 @@ export default class CreateEditFundraiserForm extends Component {
         const fields = { ...this.state.formField };
         fields[field] = value;
         this.setState({ formField: fields })
-        // Remove error on the field
         if ( !!this.state.formErrors[field] ) {
             this.setState({
                 formErrors : {
@@ -95,10 +94,10 @@ export default class CreateEditFundraiserForm extends Component {
                     this.setState({ formField: { 
                         ...this.state.formField, 
                         image: event.target.result,
-                        imageName: files[0].name,
+                        imageName: image.name,
                     } 
                 });}
-                reader.readAsDataURL(files[0])
+                reader.readAsDataURL(image)
             
                 this.setState({
                     formErrors: {
@@ -129,9 +128,6 @@ export default class CreateEditFundraiserForm extends Component {
 
         if ( !form.image || form.image === '') {
             errors['image'] = 'Please upload an image for this fundraiser';
-        }
-        else if ( form.image.size > 51200 ) {
-            errors['image'] = 'Maximum size of the image should be 50 KB';
         }
 
         if ( form.activeDays <= 0) {
@@ -192,11 +188,7 @@ export default class CreateEditFundraiserForm extends Component {
     createFundraiser = () => {
         const formField = this.state.formField;
         const createFundraiserUrl = FundraiserConstants.apiBaseUrl;   
-        // This created by should be the NGO id and should come from local storage
-        // Check if there any value if not then redirect the user the login screen
-        // Put this method in some different JS 
-        // const ngoId = localStorage.getItem("ngoId");
-        const ngoId = "1001";
+        const ngoId = FundraiserConstants.getNgoId();
 
         const formData = {
             title: formField.title,
@@ -233,7 +225,7 @@ export default class CreateEditFundraiserForm extends Component {
     }
 
     render() {
-        const maxGoalAmount = 1000000;
+        const maxGoalAmount = FundraiserConstants.maxGoalAmount;
         const maxDescriptionLength = 1000;
         const action = this.props.action;
         
@@ -464,14 +456,19 @@ export default class CreateEditFundraiserForm extends Component {
 
                                 <Row className='mb-3 text-center'>
                                     <Col as={Col} md="6" xs="6">
-                                        <Button type="submit">
-                                            {action === 'create' && "Create"}
-                                            {action === 'update' && "Update"}
+                                        <Button type="button" 
+                                                id='form-cancel-button'
+                                                href="/ngo/fundraiser">
+                                            Cancel
                                         </Button>
                                     </Col>
                                     <Col as={Col} md="6" xs="6">
-                                        <Button type="button" href="/ngo/fundraiser">Cancel</Button>
-                                    </Col>
+                                        <Button type="submit"
+                                                id='form-create-update-button' >
+                                            {action === 'create' && "Create"}
+                                            {action === 'update' && "Update"}
+                                        </Button>
+                                    </Col>                                    
                                 </Row>
                             </Form>
                         </Col>
@@ -479,7 +476,7 @@ export default class CreateEditFundraiserForm extends Component {
                     </Row>
                 {
                 this.state.showCreateSuccess && 
-                <FundrasierResponseUp type="success"
+                <FundrasierResponsePopup type="success"
                                         show={true}
                                         message="Fundraiser created successfully"
                                         onHide={this.handleCloseCreateSuccess}/>
@@ -487,7 +484,7 @@ export default class CreateEditFundraiserForm extends Component {
                 }
                 {
                 this.state.showUpdateSuccess && 
-                <FundrasierResponseUp type="success"
+                <FundrasierResponsePopup type="success"
                                         show={true}
                                         message="Fundraiser updated successfully"
                                         onHide={this.handleCloseUpdateSuccess}/>

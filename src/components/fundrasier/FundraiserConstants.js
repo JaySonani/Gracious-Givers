@@ -1,3 +1,5 @@
+import { isAuthenticated, redirectUser } from "../../utils/Network";
+
 export const period = {
     past : "past",
     ongoing : "ongoing",
@@ -33,3 +35,15 @@ export const allowedImageType = [
     "image/pjpeg",
     "image/png",
 ]
+
+export const getNgoId = () => {
+    const ngoUser = isAuthenticated();
+    if(ngoUser) {
+        return ngoUser._id;
+    }
+    else {
+        redirectUser("/");
+    }
+}
+
+export const maxGoalAmount = 1000000;

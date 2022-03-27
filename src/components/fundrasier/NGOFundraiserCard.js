@@ -3,7 +3,6 @@ import './styles/ngoFundraiserCard.css';
 import FundraiserStatus from './FundraiserStatus';
 import FundrasierDeleteConfirmation from "./FundarsierDeleteConfirmation";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import FundrasierDeactivateConfirmation from "./FundraiserDeactivateConfirmation";
 import * as FundraiserConstants from './FundraiserConstants';
 import Axios from "axios";
@@ -18,7 +17,6 @@ export default function NGOFundraiserCard(props) {
     const [showDelete, setShowDelete] = useState(false);
     const [showDeleteSuccess, setShowDeleteSuccess] = useState(false);
     const [showDeactivateSuccess, setShowDeactivateSuccess] = useState(false);
-    const navigate = useNavigate();
     
     const formatDate = (dateString) => {
         const targetDate = new Date(dateString);
@@ -51,7 +49,6 @@ export default function NGOFundraiserCard(props) {
         const id = fundrasier._id;
         const ngoId = fundraiser.ngoId;
         const deleteUrl =  FundraiserConstants.apiBaseUrl + `/${id}/ngo/${ngoId}`;
-        console.log("Deleting fundraiser with ID :" + fundrasier._id);
         console.log("Delete URL is :" + deleteUrl);  
         Axios.delete(deleteUrl)
             .then((response) => {
@@ -97,46 +94,49 @@ export default function NGOFundraiserCard(props) {
 
     return (
         <Card id="ngo-fundraiser-card">
-            <Card.Header as="h5"> <strong>{fundraiser.title}</strong></Card.Header>
+            <Card.Header as="h5">{fundraiser.title}</Card.Header>
             <Card.Body className='card-body-color'>
                 {/* <Card.Title>{fundraiser.title}</Card.Title> */}
 
                 <Row>
-                    <Col xs={12} md={8}>
+                    <Col xs={12} md={3}>
+                        <Card.Img variant="top" src={fundraiser.image} />
+                    </Col>
+                    <Col xs={12} md={5}>
                         <Row>
-                            <Col xs={5} md={3}>Cause</Col>
-                            <Col xs={7} md={9}>{fundraiser.cause}</Col>
+                            <Col xs={5} md={4}>Cause</Col>
+                            <Col xs={7} md={8}>{fundraiser.cause}</Col>
                         </Row>
                         <Row>
-                            <Col xs={5} md={3}>Goal Amount</Col>
-                            <Col xs={7} md={9}>{fundraiser.currency}&nbsp;{fundraiser.goalAmount}</Col>
+                            <Col xs={5} md={4}>Goal Amount</Col>
+                            <Col xs={7} md={8}>{fundraiser.currency}&nbsp;{fundraiser.goalAmount}</Col>
                         </Row>
                         {
                             (period === 'ongoing' || period === 'past') &&
                             <Row>
-                                <Col xs={5} md={3}>Amount Raised</Col>
-                                <Col xs={7} md={9}>{fundraiser.currency}&nbsp;{fundraiser.amountRaised}</Col>
+                                <Col xs={5} md={4}>Amount Raised</Col>
+                                <Col xs={7} md={8}>{fundraiser.currency}&nbsp;{fundraiser.amountRaised}</Col>
                             </Row>
                         }
                         {
                             (period === 'ongoing' || period === 'past') &&
                             <Row>
-                                <Col xs={5} md={3}>Donors</Col>
-                                <Col xs={7} md={9}>{fundraiser.donors}</Col>
+                                <Col xs={5} md={4}>Donors</Col>
+                                <Col xs={7} md={8}>{fundraiser.donors}</Col>
                             </Row>
                         }
                         {
                             (period === 'ongoing' || period === 'past') &&
                             <Row>
-                                <Col xs={5} md={3}>End Date</Col>
-                                <Col xs={7} md={9}>{formatDate(fundraiser.endDate)}</Col>
+                                <Col xs={5} md={4}>End Date</Col>
+                                <Col xs={7} md={8}>{formatDate(fundraiser.endDate)}</Col>
                             </Row>
                         }
                         {
                             period === 'future' &&
                             <Row>
-                                <Col xs={5} md={3}>Created for</Col>
-                                <Col xs={7} md={9}>{fundraiser.activeDays}&nbsp;days</Col>
+                                <Col xs={5} md={4}>Created for</Col>
+                                <Col xs={7} md={8}>{fundraiser.activeDays}&nbsp;days</Col>
                             </Row>
                         }
                         

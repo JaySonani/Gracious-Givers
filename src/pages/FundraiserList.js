@@ -6,10 +6,12 @@ import FundraiserCard from '../components/fundrasier/FundraiserCard.js';
 import Header from "../components/Header.js";
 import Footer from "../components/Footer.js";
 import * as FundrasierConstants from "../components/fundrasier/FundraiserConstants";
+import "./styles/fundraiserList.css";
 
 export default function FundraiserList() {
 
     const defaultCause = 'All';
+    const causes = FundrasierConstants.causes;
     const [cause, setCause] = useState(defaultCause);
     const [fundraisers, setFundraisers] = useState([]);
     const navigate = useNavigate();
@@ -43,14 +45,6 @@ export default function FundraiserList() {
         navigate(`/fundraiser/${id}`);
     };
 
-    // Move this to constants
-    const causes = [
-        'All',
-        'Education',
-        'Environment',
-        'Animal Welfare',
-    ];
-
     return (
         <>
             <Header />
@@ -59,7 +53,7 @@ export default function FundraiserList() {
                     <Col xs={0} md={1} />
                     <Col xs={12} md={10}>
                         <Row style={{margin:'0.5rem 0'}}>
-                            <Col xs={5} md={2}>
+                            <Col>
                                 <span><strong>Search By Cause</strong></span>
                             </Col>
                             <Col xs={7} md={10}>
