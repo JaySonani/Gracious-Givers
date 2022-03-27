@@ -8,17 +8,16 @@ import * as FundraiserConstants from "./FundraiserConstants";
 export default function NGOFundraiserList(props) {
 
     const period = props.period;
-    // const ngoId = localStorage.getItem("ngo_id");
-    const ngoId = "1001";
-    const getNGOEventsURI = FundraiserConstants.apiBaseUrl + `/ngo/${ngoId}/period/${period}`;
     const [fundraisers, setFundraisers] = useState([]);
     const navigate = useNavigate();
-
+    
     useEffect(() => {
         fetchFundrasiers();
     }, []);
 
     const fetchFundrasiers = () => {
+        const ngoId = FundraiserConstants.getNgoId();
+        const getNGOEventsURI = FundraiserConstants.apiBaseUrl + `/ngo/${ngoId}/period/${period}`;
         Axios.get(getNGOEventsURI)
         .then((response) => {
             if (response.status === 200) {
