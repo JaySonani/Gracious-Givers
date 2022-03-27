@@ -1,0 +1,24 @@
+.donationCard {
+  width: 300px;
+  /* height: 50px; */
+  border-radius: 5px;
+  box-shadow: 3px 3px 8px 0 grey;
+  /* padding: 10px; */
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+
+.donationAmount {
+  font-size: 25px;
+  background-color: #057abe;
+  text-align: center;
+  color: white;
+}
+
+.donationDetails {
+  text-align: right;
+}
+
+.donationContent {
+  padding: 10px;
+}

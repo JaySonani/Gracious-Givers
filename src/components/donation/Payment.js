@@ -3,6 +3,8 @@ import { Form, Button } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Footer from '../Footer';
 import Header from '../Header';
+var axios = require('axios');
+
 // import './styles/Payment.css';
 
 function Payment() {
@@ -12,7 +14,7 @@ function Payment() {
     let navigate = useNavigate();
 
     const { state } = useLocation();
-    const { amount, fname, email, lname } = state;
+    // const { id, amount, fname, lname, email } = state;
 
     console.log(state);
 
@@ -43,9 +45,40 @@ function Payment() {
         }
     }
 
+    function storeData(state) {
+        var data = JSON.stringify({
+            "donation_event_id": state.id,
+            "donation_amount": state.amount,
+            "donor_firstname": state.fname,
+            "donor_lastname": state.lname,
+            "donor_email": state.email
+        });
+
+        var config = {
+            method: 'post',
+            url: 'https://gracious-givers-backend.herokuapp.com/donation/adddonation',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: data
+        };
+
+        axios(config)
+            .then(function (response) {
+                console.log(JSON.stringify(response.data));
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
     function makePayment() {
         if (cardNumber.length === 16) {
-            // Write logic to add data to donation here
+
+            storeData(state);
+
+            console.log("from payment page");
+            console.log(state);
             navigate("/payment/success");
         } else {
             setError(true);
@@ -60,7 +93,7 @@ function Payment() {
             <Header />
             <div className="form">
                 <br /><br />
-                Payment for $ {amount}
+                Payment for $ {state.amount}
                 <br /><br />
 
                 <Form.Control required className={error && "redError"} placeholder={error ? errorHelperText : "Enter card number"} value={cardNumber} type="text" onChange={(e) => acceptInput(e.target.value)} />

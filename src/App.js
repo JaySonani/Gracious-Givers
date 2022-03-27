@@ -14,6 +14,7 @@ import CreatUpdateFundraiser from './pages/CreateUpdateFundraiser';
 import DonationForm from './components/donation/DonationForm';
 import Payment from './components/donation/Payment';
 import PaymentSuccess from './components/donation/PaymentSuccess';
+import AllDonation from './components/donation/AllDonations';
 
 function App() {
   return (
@@ -23,18 +24,27 @@ function App() {
           <Route exact path="/" element={<HomePage />} />
           <Route exact path="/about_us" element={<AboutUs />} />
 
+
+          {/* All routes regarding fundraiser */}
+          <Route exact path="/ngo/fundraiser" element={<NGOAllFundraisers />} />
+          <Route exact path="/ngo/fundraiser/create" element={<CreatUpdateFundraiser />} />
+          <Route exact path="/ngo/fundraiser/update/:id" element={<CreatUpdateFundraiser />} />
           <Route exact path="/fundraiser">
             <Route path=":id" element={<FundRaiser />} />
             <Route index element={<FundraiserList />} />
           </Route>
 
-          <Route exact path="/ngo/fundraiser" element={<NGOAllFundraisers />} />
-          <Route exact path="/ngo/fundraiser/create" element={<CreatUpdateFundraiser />} />
-          <Route exact path="/ngo/fundraiser/update/:id" element={<CreatUpdateFundraiser />} />
 
+          {/* All routes regarding donations */}
           <Route exact path="/donation" element={<DonationForm />} />
+          <Route exact path="/all_donations" element={<AllDonation />} />
           <Route exact path="/payment" element={<Payment />} />
           <Route exact path="/payment/success" element={<PaymentSuccess />} />
+
+
+
+
+
           {/* Add pages as needed */}
 
         </Routes>

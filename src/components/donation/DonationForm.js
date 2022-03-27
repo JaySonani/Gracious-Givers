@@ -50,10 +50,7 @@ const DonationForm = () => {
     }
 
     function validateForm() {
-        console.log(fname);
-        console.log(lname);
-        console.log(email);
-        console.log(amount);
+
 
 
         if (fname === "") {
@@ -85,7 +82,7 @@ const DonationForm = () => {
         }
 
         if (validForm) {
-            navigate("/payment", { state: { fname, lname, email, amount } });
+            navigate("/payment", { state: { id, amount, fname, lname, email } });
             console.log("Form validated");
         } else {
             if (errorText.length > 0) {
@@ -107,7 +104,6 @@ const DonationForm = () => {
         setEmailError(false);
         setAmountError(false);
     }
-
 
     return (
         <div>
@@ -139,11 +135,11 @@ const DonationForm = () => {
                 </div>
 
                 <div className="rowForm">
-                    <Button variant="primary" onClick={validateForm} >Donate</Button>
+                    <Button className="btns" variant="primary" onClick={validateForm} >Donate</Button>
                 </div>
 
                 <div className="rowForm">
-                    <Button variant="outline-primary" onClick={resetForm} >Reset</Button>
+                    <Button className="btns" variant="outline-primary" onClick={resetForm} >Reset</Button>
                 </div>
 
             </div >
