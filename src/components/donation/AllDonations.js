@@ -1,10 +1,42 @@
+import { useState } from "react";
+import { useEffect } from "react";
 import Footer from "../Footer";
 import Header from "../Header";
 import DonationCard from "./DonationCard";
-import './styles/AllDonations.css'
+import './styles/AllDonations.css';
+const axios = require('axios');
 
 
 function AllDonation() {
+
+    const [donations, setDonations] = useState([]);
+
+    useEffect(() => {
+        retrieveAllDonations();
+        console.log("All donations are retrieved..")
+        // console.log(donations);
+    }, []);
+
+    const retrieveAllDonations = () => {
+        var config = {
+            method: 'get',
+            url: 'https://gracious-givers-backend.herokuapp.com/donation/alldonations',
+            headers: {}
+        };
+        axios(config)
+            .then(function (response) {
+                setDonations(response.data.donations);
+                // console.log(response.data.donations);
+                // console.log(donations);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+
+
+
     return (
         <div>
             <Header />
@@ -14,19 +46,19 @@ function AllDonation() {
                     Donations made till now
                 </div>
                 <div className="allCards" >
-                    <DonationCard />
-                    <DonationCard />
-                    <DonationCard />
-                    <DonationCard />
-                    <DonationCard />
-                    <DonationCard />
-                    <DonationCard />
-                    <DonationCard />
-                    <DonationCard />
-                    <DonationCard />
-                    <DonationCard />
-                    <DonationCard />
-                    <DonationCard />
+
+                    {
+                        donations.map((item, index) => {
+                            // console.log(item);
+                            return (
+                                // <p>Hello</p>
+                                <DonationCard key={index.toString()} amount={item.donation_amount} name={item.donor_firstname + ' ' + item.donor_lastname} email={item.donor_email} event_name="ABC" time={item.createdAt} />
+                            )
+                        })
+                    }
+
+
+
                 </div>
 
             </div>

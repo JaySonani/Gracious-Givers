@@ -1,22 +1,21 @@
 import './styles/DonationCard.css';
 
-const DonationCard = () => {
+const DonationCard = (props) => {
     return (
         <div className='donationCard'>
             <div className='donationAmount'>
-                Amount: $100
+                Amount: {props.amount}
             </div>
             <div className='donationContent'>
-
-                By Sam Browniie
+                By {props.name}
                 <br />
-                Email: sam@browniie.ca
+                Email: {props.email}
                 <br />
 
                 <div className='donationDetails'>
-                    Event name
+                    {props.event_name}
                     <br />
-                    Donated on: March 24th, 2022
+                    Donated on: {props.time}
                 </div>
 
             </div>
