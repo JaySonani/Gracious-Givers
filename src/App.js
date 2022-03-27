@@ -22,13 +22,11 @@ import Register from "./pages/user_management/Register";
 import AdminLogin from "./pages/user_management/AdminLogin";
 import FundraiserRequest from './components/moderation/FundraiserRequest';
 import AllDonation from "./pages/donation/AllDonations";
-import Header from "./components/navbar/Header";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Header />
         <Routes>
           {/* All routes from NavBar */}
           <Route exact path="/" element={<HomePage />} />
