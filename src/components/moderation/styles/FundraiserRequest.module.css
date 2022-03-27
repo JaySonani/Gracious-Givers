@@ -74,6 +74,10 @@ main {
     font-weight: 100;
 }
 
+.description {
+    font-style: italic;
+}
+
 @keyframes list-appear {
     from {
         opacity: 0;
