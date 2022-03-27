@@ -1,12 +1,9 @@
-import Footer from "../components/navbar/Footer";
-import Header from "../components/navbar/Header";
-
 const HomePage = () => {
     return (
         <div>
-            <Header />
+            {/* <Header /> */}
             This is a home page
-            <Footer />
+            {/* <Footer /> */}
         </div>
     );
 }

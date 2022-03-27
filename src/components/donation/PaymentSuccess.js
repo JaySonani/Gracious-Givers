@@ -1,12 +1,10 @@
-import Footer from "../navbar/Footer";
-import Header from "../navbar/Header";
 import './styles/PaymentSuccess.css';
 
 function PaymentSuccess() {
 
     return (
         <div>
-            <Header />
+            {/* <Header /> */}
             <div className="form">
                 <br /><br />
                 <div className='title'>
@@ -23,7 +21,7 @@ function PaymentSuccess() {
                 <br />
                 <br /><br />
             </div >
-            <Footer />
+            {/* <Footer /> */}
         </div>
     );
 }

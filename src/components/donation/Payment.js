@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
-import Footer from "../navbar/Footer";
-import Header from "../navbar/Header";
 var axios = require('axios');
 
 // import './styles/Payment.css';
@@ -90,7 +88,7 @@ function Payment() {
     return (
         <div>
 
-            <Header />
+            {/* <Header /> */}
             <div className="form">
                 <br /><br />
                 Payment for $ {state.amount}
@@ -106,7 +104,7 @@ function Payment() {
                 <br /><br />
 
             </div >
-            <Footer />
+            {/* <Footer /> */}
         </div>
     );
 }

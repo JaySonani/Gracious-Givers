@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
-import Footer from "../navbar/Footer";
-import Header from "../navbar/Header";
 import './styles/DonationForm.css';
 
 const DonationForm = () => {
@@ -107,7 +105,7 @@ const DonationForm = () => {
 
     return (
         <div>
-            <Header />
+            {/* <Header /> */}
             <div className="form">
                 <div className="title">
                     Enter details for your donation
@@ -143,7 +141,7 @@ const DonationForm = () => {
                 </div>
 
             </div >
-            <Footer />
+            {/* <Footer /> */}
         </div>
     );
 }

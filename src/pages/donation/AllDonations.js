@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { useEffect } from "react";
-import Footer from "../../components/navbar/Footer";
-import Header from "../../components/navbar/Header";
 import DonationCard from "../../components/donation/DonationCard";
 import './styles/AllDonations.css';
 const axios = require('axios');
@@ -40,7 +38,7 @@ function AllDonation() {
 
     return (
         <div>
-            <Header />
+            {/* <Header /> */}
             <div className="rootDiv">
 
                 <div className="donationTitle">
@@ -63,7 +61,7 @@ function AllDonation() {
                 </div>
 
             </div>
-            <Footer />
+            {/* <Footer /> */}
         </div>
     );
 }
