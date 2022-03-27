@@ -49,7 +49,9 @@ function App() {
             element={<CreatUpdateFundraiser />}
           />
 
+          {/* All routes regarding donations */}
           <Route exact path="/donation" element={<DonationForm />} />
+          <Route exact path="/all_donations" element={<AllDonation />} />
           <Route exact path="/payment" element={<Payment />} />
           <Route exact path="/payment/success" element={<PaymentSuccess />} />
 
