@@ -68,7 +68,7 @@ export default class AdminLogin extends Component {
       .then(function (response) {
         console.log(response);
         authenticateUser(response);
-        redirectUser("/AdminHome");
+        redirectUser("/admin");
       })
       .catch(function (error) {
         console.log(error);
