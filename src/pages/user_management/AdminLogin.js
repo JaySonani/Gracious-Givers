@@ -59,7 +59,7 @@ export default class AdminLogin extends Component {
   handleAdminLogin = (event) => {
     event.preventDefault();
     axios
-      .post("http://localhost:5000/login/admin", {
+      .post("https://gracious-givers-backend.herokuapp.com/auth/login/admin", {
         username: this.state.formField.username,
         password: this.state.formField.password,
         security_a1: this.state.formField.security_a1,
