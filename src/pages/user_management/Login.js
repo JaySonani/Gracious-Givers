@@ -38,44 +38,70 @@ export default class Login extends Component {
     }
   };
 
+  showError = () => {
+    if (this.state.formErrors.email) {
+      return (
+        <div>
+          <div
+            style={{ margin: 20 + "px" }}
+            class="alert alert-danger"
+            role="alert"
+          >
+            {this.state.formErrors.email}
+          </div>
+        </div>
+      );
+    }
+  };
+
   validateForm = () => {
     console.log("Validating the form");
   };
   handleUserLogin = (event) => {
     event.preventDefault();
-    //this.validateForm();
-    // const numberOfErrors = Object.values(this.state.formErrors).filter(
-    //   (value) => value == null || value !== ""
-    // ).length;
-    // console.log(numberOfErrors);
-    // if (numberOfErrors > 0) {
-    // } else {
-    axios
-      .post("https://gracious-givers-backend.herokuapp.com/auth/login/ngo", {
-        email: this.state.formField.email,
-        password: this.state.formField.password,
-      })
-      .then(function (response) {
-        console.log(response);
-        authenticateUser(response);
-        redirectUser("/");
-      })
-      .catch(function (error) {
-        console.log(error);
+    this.validateForm();
+    let email = this.state.formField.email;
+    let password = this.state.formField.password;
+    var validEmailRegex = /\S+@\S+\.\S+/;
+    if (email && !validEmailRegex.test(email)) {
+      this.setState({
+        formErrors: {
+          ...this.state.formErrors,
+          email: "Please enter a valid email address",
+        },
       });
+    } else if (password.length == 0) {
+      this.setState({
+        formErrors: {
+          ...this.state.formErrors,
+          password: "Please enter a password",
+        },
+      });
+    } else {
+      axios
+        .post("https://gracious-givers-backend.herokuapp.com/auth/login/ngo", {
+          email: this.state.formField.email,
+          password: this.state.formField.password,
+        })
+        .then(function (response) {
+          console.log(response);
+          if (response.data.status === "success") {
+            console.log("Success block");
+            authenticateUser(response);
+            redirectUser("/");
+          } else {
+            console.log("Error block");
+          }
+        })
+        .catch(function (error) {
+          console.log("Catch block");
+          if (error.response.status === 401) {
+            alert("Invalid credentials");
+          }
+        });
+    }
     //}
   };
-  //   handleSubmit = (event) => {
-  //     event.preventDefault();
-  //     this.validateForm();
-  //     const numberOfErrors = Object.values(this.state.formErrors).filter(
-  //       (value) => value != null || value !== ""
-  //     ).length;
-  //     if (numberOfErrors > 0) {
-  //     } else {
-  //       window.alert("Make a POST API request");
-  //     }
-  //   };
   render() {
     const formField = this.state.formField;
     const formError = this.state.formErrors;
