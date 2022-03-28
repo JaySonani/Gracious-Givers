@@ -10,6 +10,10 @@ const axios = require('axios');
 function AllDonation() {
 
     const [donations, setDonations] = useState([]);
+    const [searchKeyword, setSearchKeyword] = useState("");
+    const [searchActive, setSearchActive] = useState(false);
+    const [filteredDonations, setFilteredDonations] = useState(donations);
+
 
     useEffect(() => {
 
@@ -45,17 +49,60 @@ function AllDonation() {
 
                 <div className="donationTitle">
                     Donations made till now
+
+                    {/* <div className='searchParent'> */}
+                    <input onChange={(e) => {
+                        setSearchKeyword(e.target.value);
+                        if (e.target.value === "") {
+                            setSearchActive(false);
+                        } else {
+                            const filtered = donations.filter((item) => {
+                                if (item.donation_event_name.toLowerCase().includes(e.target.value.toLowerCase())) {
+                                    return item;
+                                }
+                            })
+                            setFilteredDonations(filtered);
+                            setSearchActive(true);
+                        }
+
+
+                    }} value={searchKeyword} type={'text'} className='searchBar' placeholder='Search for an event'></input>
+                    {/* </div> */}
+
+
                 </div>
                 <div className="allCards" >
 
                     {
-                        donations.map((item, index) => {
-                            // console.log(item);
-                            return (
-                                // <p>Hello</p>
-                                <DonationCard key={index.toString()} amount={item.donation_amount} name={item.donor_firstname + ' ' + item.donor_lastname} email={item.donor_email} event_name="ABC" time={item.createdAt} />
-                            )
-                        })
+
+                        searchActive ?
+                            <> {
+                                filteredDonations.map((item, index) => {
+                                    // console.log(item);
+                                    return (
+                                        // <p>Hello</p>
+                                        <DonationCard key={index.toString()} amount={item.donation_amount} name={item.donor_firstname + ' ' + item.donor_lastname} email={item.donor_email} event_name={item.donation_event_name} time={item.createdAt.slice(0, 10)} />
+                                    )
+                                })
+                            }
+                            </>
+
+                            :
+
+                            // <div>
+                            <> {
+                                donations.map((item, index) => {
+                                    // console.log(item);
+                                    return (
+                                        // <p>Hello</p>
+                                        <DonationCard key={index.toString()} amount={item.donation_amount} name={item.donor_firstname + ' ' + item.donor_lastname} email={item.donor_email} event_name={item.donation_event_name} time={item.createdAt.slice(0, 10)} />
+                                    )
+                                })
+                            }
+                            </>
+
+
+
                     }
 
 
@@ -64,7 +111,7 @@ function AllDonation() {
 
             </div>
             <Footer />
-        </div>
+        </div >
     );
 }
 
