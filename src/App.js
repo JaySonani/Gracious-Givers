@@ -51,8 +51,10 @@ function App() {
           <Route exact path="/payment/success" element={<PaymentSuccess />} />
 
           {/* All routes regarding moderation */}
-          <Route exact path="/admin" element={<AdminHome />} />
-          <Route exact path="/admin/ngodetails/:id" element={<NGODetails />} />
+          <Route exact path="/admin" element={<AdminHome all={true}/>} />
+          <Route exact path="/admin/:id" element={<NGODetails all={true}/>} />
+          <Route exact path="/admin/ngorequests" element={<AdminHome />} />
+          <Route exact path="/admin/ngorequests/:id" element={<NGODetails />} />
           <Route exact path="/admin/activefundraisers" element={<FundraiserRequests all={true} />} />
           <Route exact path="/admin/activefundraisers/:id" element={<FundraiserRequest all={true} />} />
           <Route exact path="/admin/fundraiserrequests" element={<FundraiserRequests />} />
