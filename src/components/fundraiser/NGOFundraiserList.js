@@ -54,7 +54,7 @@ export default function NGOFundraiserList(props) {
             </Row>
             <Row>
                 {fundraisers.map(fundraiser =>
-                    <Col xs={12} md={11} key={fundraiser._id} style={{ margin: '0.5rem 0rem' }}>
+                    <Col xs={12} md={12} key={fundraiser._id} style={{ margin: '0.5rem 0rem' }}>
                         <NGOFundraiserCard 
                             details={fundraiser}
                             period={period}

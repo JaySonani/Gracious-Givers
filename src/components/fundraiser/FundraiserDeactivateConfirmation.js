@@ -11,7 +11,7 @@ export default function FundrasierDeactivateConfirmation(props) {
 
         <Modal show={show} onHide={handleHide}>
             <Modal.Header closeButton>
-                <Modal.Title>Confirm deactivation</Modal.Title>
+            <Modal.Title style={{fontSize:'1.4rem'}}>Confirm deactivation</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 Are you should you want to deactivate the fundraiser <strong>"{fundraiser.title}"</strong>?
@@ -21,15 +21,16 @@ export default function FundrasierDeactivateConfirmation(props) {
             <Modal.Footer>
                 <Container className='text-center'>
                     <Row>
-                        <Col xs={6} md={6}>
-                            <Button id="button-confirm-deactivate" onClick={() => handleDeactivate(fundraiser)}>
-                                Deactivate
-                            </Button>   
-                        </Col>
+                        
                         <Col xs={6} md={6}>
                             <Button id="button-cancel" onClick={handleHide} >
                                 Cancel
                             </Button>
+                        </Col>
+                        <Col xs={6} md={6}>
+                            <Button id="button-confirm" onClick={() => handleDeactivate(fundraiser)}>
+                                Deactivate
+                            </Button>   
                         </Col>
                     </Row>
                 </Container>
