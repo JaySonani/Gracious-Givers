@@ -21,7 +21,8 @@ export const causes = [
     'Animal Welfare',
 ];
 
-export const apiBaseUrl = "http://localhost:5000/fundraiser"; 
+// export const apiBaseUrl = "http://localhost:5000/fundraiser"; 
+export const apiBaseUrl = "https://gracious-givers-backend.herokuapp.com/fundraiser"; 
 
 export const defaultCurrency = "CAD";
 
