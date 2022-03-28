@@ -207,7 +207,11 @@ const AdminLogin = () => {
             Login
           </Button>
           {showError()}
-          <Row className="mb-3"></Row>
+            <Row className="mb-3" style={{height:'40px'}}>
+              <Col>
+                
+              </Col>
+            </Row>
         </Form>
       </Container>
       <Footer />
