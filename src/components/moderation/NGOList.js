@@ -5,10 +5,10 @@ const NGOList = (props) => {
     const navigate = useNavigate();
 
     const onShowDetailsHandler = () => {
-        if (props.type === "approved") {
-            navigate(`ngodetails/${props.id}`);
+        if (props.type === "ngo") {
+            navigate(`${props.id}`);
         }
-        if (props.type === "event") {
+        else if (props.type === "event") {
             navigate(`${props.id}`);
         }
     };

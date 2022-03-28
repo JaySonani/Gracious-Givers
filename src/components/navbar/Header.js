@@ -131,7 +131,7 @@ function Header(props) {
                   title="Requests (logged in admin)"
                   id="basic-nav-dropdown"
                 >
-                  <NavDropdown.Item>
+                  <NavDropdown.Item href="/admin/ngorequests">
                     Signup Requests
                   </NavDropdown.Item>
                   <NavDropdown.Item href="/admin/fundraiserrequests">
@@ -140,7 +140,7 @@ function Header(props) {
                 </NavDropdown>
               </Nav>
               <Nav>
-                <Button variant="danger" className="custom-logout-btn-header">
+                <Button variant="danger" className="custom-logout-btn-header" onClick={() => setTokenOnLogOut()}>
                   Logout
                 </Button>
               </Nav>
