@@ -62,9 +62,9 @@ function Header(props) {
                     </NavDropdown.Item>
                   </NavDropdown>
                 }
-                {<Label title="All Donations" path="all_donations" />}
+                {<Label title="All Donations" path="./all_donations" />}
 
-                <Label title="About Us" path="/about_us" />
+                <Label title="About Us" path="./about_us" />
               </Nav>
               {!isLoggedIn && (
                 <Nav>
