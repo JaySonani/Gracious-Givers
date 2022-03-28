@@ -1,10 +1,10 @@
 import Card from "./Card";
-import Footer from "../Footer";
-import Header from "../Header";
+import Footer from "../navbar/Footer";
+import Header from "../navbar/Header";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Axios from "axios";
-import classes from "./FundraiserRequest.module.css";
+import classes from "./styles/FundraiserRequest.module.css";
 import { useNavigate } from "react-router-dom";
 
 const FundraiserRequest = (props) => {
@@ -21,11 +21,7 @@ const FundraiserRequest = (props) => {
     }, [id, props.all]);
 
     async function onApproveHandler() {
-        if (
-            window.confirm(
-                "Are you sure that you want to Approve?"
-            ) === true
-        ) {
+        if (window.confirm("Are you sure that you want to Approve?") === true) {
             await Axios.put(
                 "http://localhost:5000/fundraiser/" + id + "/status/Active"
             )
@@ -46,9 +42,8 @@ const FundraiserRequest = (props) => {
     async function onRejectHandler() {
         const type = props.all ? "Deactivate" : "Reject";
         if (
-            window.confirm(
-                "Are you sure that you want to " + type + "?"
-            ) === true
+            window.confirm("Are you sure that you want to " + type + "?") ===
+            true
         ) {
             await Axios.put(
                 "http://localhost:5000/fundraiser/" + id + "/status/Deactivated"
@@ -106,7 +101,9 @@ const FundraiserRequest = (props) => {
                                     <img src={fundraiser.image} alt="" />
                                     <div>
                                         <h5>NGO: {fundraiser.createdBy}</h5>
-                                        <h6>{" " + fundraiser.description}</h6>
+                                        <h6 className={classes.description}>
+                                            {" " + fundraiser.description}
+                                        </h6>
                                         <h6>
                                             Cause:
                                             {" " + fundraiser.cause}
@@ -124,7 +121,8 @@ const FundraiserRequest = (props) => {
                                         {props.all && (
                                             <h6>
                                                 Amount Raised:
-                                                {" CAD " + fundraiser.amountRaised}
+                                                {" CAD " +
+                                                    fundraiser.amountRaised}
                                             </h6>
                                         )}
                                         {props.all && (
@@ -136,7 +134,10 @@ const FundraiserRequest = (props) => {
                                         {props.all && fundraiser && (
                                             <h6>
                                                 End Date:
-                                                {" " + new Date(fundraiser.endDate).toDateString()}
+                                                {" " +
+                                                    new Date(
+                                                        fundraiser.endDate
+                                                    ).toDateString()}
                                             </h6>
                                         )}
                                     </div>
@@ -149,7 +150,7 @@ const FundraiserRequest = (props) => {
                                         <button
                                             className={
                                                 classes[
-                                                    "custom-logout-btn-header"
+                                                "custom-logout-btn-header"
                                                 ]
                                             }
                                             onClick={onRejectHandler}
@@ -163,7 +164,7 @@ const FundraiserRequest = (props) => {
                                         <button
                                             className={
                                                 classes[
-                                                    "custom-logout-btn-header"
+                                                "custom-logout-btn-header"
                                                 ]
                                             }
                                             onClick={onRejectHandler}

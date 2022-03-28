@@ -1,13 +1,12 @@
-import { useNavigate } from 'react-router-dom';
 import { Nav } from 'react-bootstrap';
 
 import './styles/Label.css';
 
 const Label = (props) => {
 
-    let navigate = useNavigate();
-
-    const changeRoute = () => navigate(props.path);
+    const changeRoute = () => {
+        window.location.href = props.path;
+    }
 
     return (
         <Nav.Link onClick={changeRoute} >

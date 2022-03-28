@@ -17,7 +17,7 @@ export default class CreateEditFundraiserForm extends Component {
                 goalAmount: 0,
                 image: null,
                 imageName: '',
-                status: 'Draft', 
+                status: 'Draft',
                 activeDays: 0,
                 cause: '',
             },
@@ -31,29 +31,29 @@ export default class CreateEditFundraiserForm extends Component {
             },
             showCreateSuccess: false,
             showUpdateSuccess: false,
-            savedFundraiser:null
+            savedFundraiser: null
         }
     }
 
-    componentDidMount() {     
+    componentDidMount() {
         const action = this.props.action;
         const fundraiserId = this.props.fundraiserId;
-        if ( action === 'update' ) {
+        if (action === 'update') {
             const getFundraiserDetailsURI = FundraiserConstants.apiBaseUrl + `/${fundraiserId}`;
             console.log("The getFundraiserDetailsURI is " + getFundraiserDetailsURI);
             Axios.get(getFundraiserDetailsURI)
-            .then((response) => {
-                if (response.status === 200) {
-                    const fundraiser = response.data;
-                    this.setState({
-                        formField: fundraiser,
-                    });     
-                }
-            })
-            .catch((error) => {
-                console.log('Error in getting details of the fundraiser :' + error);           
-            });
-        }  
+                .then((response) => {
+                    if (response.status === 200) {
+                        const fundraiser = response.data;
+                        this.setState({
+                            formField: fundraiser,
+                        });
+                    }
+                })
+                .catch((error) => {
+                    console.log('Error in getting details of the fundraiser :' + error);
+                });
+        }
     }
 
     handleValueChange = (event) => {
@@ -62,43 +62,44 @@ export default class CreateEditFundraiserForm extends Component {
         const fields = { ...this.state.formField };
         fields[field] = value;
         this.setState({ formField: fields })
-        if ( !!this.state.formErrors[field] ) {
+        if (!!this.state.formErrors[field]) {
             this.setState({
-                formErrors : {
+                formErrors: {
                     ...this.state.formErrors,
                     [field]: ""
                 }
             })
-        } 
+        }
     }
 
-    handleFileUpload = (event) => {        
+    handleFileUpload = (event) => {
         const { target } = event;
         const { files } = target;
-        if (files && files [0]) {
+        if (files && files[0]) {
             const image = files[0];
             if (!FundraiserConstants.allowedImageType.includes(image.type)) {
                 this.setState({
-                    formErrors : {...this.state.formErrors, image: "Allowed image types are .jpg, .jpeg, .png, .bmp"}
+                    formErrors: { ...this.state.formErrors, image: "Allowed image types are .jpg, .jpeg, .png, .bmp" }
                 })
             }
             else if (image.size > 51200) {
                 this.setState({
-                    formErrors : {...this.state.formErrors, image: "Maximum size of the image should be 50 KB"}
+                    formErrors: { ...this.state.formErrors, image: "Maximum size of the image should be 50 KB" }
                 })
             }
-            else 
-            {
+            else {
                 var reader = new FileReader();
                 reader.onload = (event) => {
-                    this.setState({ formField: { 
-                        ...this.state.formField, 
-                        image: event.target.result,
-                        imageName: image.name,
-                    } 
-                });}
+                    this.setState({
+                        formField: {
+                            ...this.state.formField,
+                            image: event.target.result,
+                            imageName: image.name,
+                        }
+                    });
+                }
                 reader.readAsDataURL(image)
-            
+
                 this.setState({
                     formErrors: {
                         ...this.state.formErrors,
@@ -113,50 +114,50 @@ export default class CreateEditFundraiserForm extends Component {
         const form = this.state.formField;
         let errors = { ...this.state.formErrors };
 
-        if ( !form.title || form.title === '' ) {
+        if (!form.title || form.title === '') {
             errors['title'] = 'Title cannot be blank';
         }
 
-        if ( !form.description || form.description === '' ) {
+        if (!form.description || form.description === '') {
             errors['description'] = 'Description cannot be blank';
         }
 
-        if ( form.goalAmount <= 0 ) {
+        if (form.goalAmount <= 0) {
             errors['goalAmount'] = 'Please set the amount to raise for this fundraiser';
         }
 
-        if ( !form.image || form.image === '') {
+        if (!form.image || form.image === '') {
             errors['image'] = 'Please upload an image for this fundraiser';
         }
 
-        if ( form.activeDays <= 0) {
+        if (form.activeDays <= 0) {
             errors['activeDays'] = 'Please set the number of days for which this fundraiser should be active';
-        } 
-        else if ( form.activeDays > FundraiserConstants.fundraiserMaxActiveDays) {
+        }
+        else if (form.activeDays > FundraiserConstants.fundraiserMaxActiveDays) {
             errors['activeDays'] = 'Fundraiser can be created for a maximum period of 180 days';
         }
-        if ( !form.cause || form.cause === '' ) {
+        if (!form.cause || form.cause === '') {
             errors['cause'] = 'Please select a cause for this fundraiser';
         }
         this.setState({
-            formErrors : errors,
+            formErrors: errors,
         });
         return errors;
     }
 
-    handleSubmit = (event) => {   
+    handleSubmit = (event) => {
         event.preventDefault();
         const errors = this.validateForm();
         const numberOfErrors = Object.values(errors)
-                                    .filter(value => value.length > 0)
-                                    .length;      
-        if (numberOfErrors === 0 ) {
+            .filter(value => value.length > 0)
+            .length;
+        if (numberOfErrors === 0) {
             if (this.props.action === 'create') {
                 this.createFundraiser();
             }
             else if (this.props.action === 'update') {
                 this.updateFundraiser()
-            }   
+            }
         }
     }
 
@@ -171,14 +172,14 @@ export default class CreateEditFundraiserForm extends Component {
             image: formField.image,
             imageName: formField.imageName,
         }
-       
+
         const updateFundraiserUrl = FundraiserConstants.apiBaseUrl + `/${formField._id}/ngo/${formField.ngoId}`;
         Axios
             .put(updateFundraiserUrl, editedFundraiser)
-            .then((response) => { 
+            .then((response) => {
                 if (response.status === 200) {
                     console.log("Fundraiser updated successfully : ", formField);
-                    this.setState({showUpdateSuccess:true})
+                    this.setState({ showUpdateSuccess: true })
                 }
             })
             .catch((error) => alert("Error in update fundraiser"));
@@ -186,12 +187,12 @@ export default class CreateEditFundraiserForm extends Component {
 
     createFundraiser = () => {
         const formField = this.state.formField;
-        const createFundraiserUrl = FundraiserConstants.apiBaseUrl;   
+        const createFundraiserUrl = FundraiserConstants.apiBaseUrl;
         const ngoId = FundraiserConstants.getNgoId();
 
         const formData = {
             title: formField.title,
-            description: formField.description, 
+            description: formField.description,
             goalAmount: formField.goalAmount,
             currency: FundraiserConstants.defaultCurrency,
             image: formField.image,
@@ -204,22 +205,22 @@ export default class CreateEditFundraiserForm extends Component {
 
         Axios
             .post(createFundraiserUrl, formData)
-            .then((response) => { 
+            .then((response) => {
                 if (response.status === 201) {
                     const fundraiser = response.data.data;
-                    this.setState({showCreateSuccess:true, savedFundraiser:fundraiser})
+                    this.setState({ showCreateSuccess: true, savedFundraiser: fundraiser })
                 }
             })
             .catch((error) => alert("Error in creating fundraiser, please try again"));
     }
 
     handleCloseCreateSuccess = () => {
-        this.setState({showCreateSuccess:false})
+        this.setState({ showCreateSuccess: false })
         this.props.onCreateSuccess(this.state.savedFundraiser._id);
     }
 
     handleCloseUpdateSuccess = () => {
-        this.setState({showUpdateSuccess:false})
+        this.setState({ showUpdateSuccess: false })
         this.props.onUpdateSuccess(this.state.formField._id);
     }
 
@@ -227,14 +228,14 @@ export default class CreateEditFundraiserForm extends Component {
         const maxGoalAmount = FundraiserConstants.maxGoalAmount;
         const maxDescriptionLength = 1000;
         const action = this.props.action;
-        
+
         const errorLabelStyle = {
             width: '100%',
             marginTop: '0.25rem',
             fontSize: '0.875em',
             color: '#dc3545'
         }
-          
+
         return (
             <>
                 <Container className='mb-5' id="create-update-form">
@@ -248,7 +249,7 @@ export default class CreateEditFundraiserForm extends Component {
                                         {action === 'update' && "Update Fundraiser"}                                        
                                     </h5>
                                 </Col>
-                                <Col style={{textAlign:"right", marginTop:'1rem', fontStyle: 'italic'}}>
+                                <Col style={{ textAlign: "right", marginTop: '1rem', fontStyle: 'italic' }}>
                                     <FundraiserStatus statusValue={this.state.formField.status} />
                                 </Col>
                             </Row>
@@ -265,7 +266,7 @@ export default class CreateEditFundraiserForm extends Component {
                                             maxLength="100"
                                             value={this.state.formField.title}
                                             onChange={this.handleValueChange}
-                                            isInvalid={ !!this.state.formErrors.title }
+                                            isInvalid={!!this.state.formErrors.title}
                                         />
                                         <Form.Control.Feedback type="invalid">
                                             {this.state.formErrors.title}
@@ -292,18 +293,18 @@ export default class CreateEditFundraiserForm extends Component {
                                             isInvalid={ !!this.state.formErrors.description }
                                             style={{marginTop:'0.5rem'}}
                                         />
-                                        
-                                        <div style={{textAlign:'right'}}>
+
+                                        <div style={{ textAlign: 'right' }}>
                                             <span>
                                                 <small>
                                                     <strong>
-                                                        {maxDescriptionLength - this.state.formField.description.length} 
+                                                        {maxDescriptionLength - this.state.formField.description.length}
                                                     </strong>
                                                     &nbsp;characters remaining
                                                 </small>
                                             </span>
                                         </div>
-                                        
+
                                         <Form.Control.Feedback type="invalid">
                                             {this.state.formErrors.description}
                                         </Form.Control.Feedback>
@@ -342,9 +343,9 @@ export default class CreateEditFundraiserForm extends Component {
                                                     </Col>
                                                 </Row>
                                             </>
-                                        }  
+                                        }
 
-                                        {this.state.formErrors.goalAmount && 
+                                        {this.state.formErrors.goalAmount &&
                                             <div style={errorLabelStyle}>
                                                 {this.state.formErrors.goalAmount}
                                             </div>
@@ -369,8 +370,8 @@ export default class CreateEditFundraiserForm extends Component {
                                             type="number"
                                             required
                                             name="activeDays"
-                                            step="1" 
-                                            min="0" 
+                                            step="1"
+                                            min="0"
                                             max="180"
                                             value={this.state.formField.activeDays}
                                             readOnly={this.state.formField.status === 'Active'}
@@ -385,7 +386,7 @@ export default class CreateEditFundraiserForm extends Component {
 
                                 <Row className='mb-3'>
                                     <Form.Group as={Col} xs="12" md="12" controlId="validationCustom03">
-                                        { this.state.formField.status !== 'Active' && 
+                                        {this.state.formField.status !== 'Active' &&
                                             <>
                                                 <Form.Label>
                                                     Cause
@@ -404,8 +405,8 @@ export default class CreateEditFundraiserForm extends Component {
                                             </>
                                         }
 
-                                        { 
-                                            this.state.formField.status === 'Active' && 
+                                        {
+                                            this.state.formField.status === 'Active' &&
                                             <Form.Label>
                                                 <label>Cause:</label> <label>{this.state.formField.cause }</label> 
                                             </Form.Label> 
@@ -413,7 +414,7 @@ export default class CreateEditFundraiserForm extends Component {
 
                                         <Form.Control.Feedback type="invalid">
                                             {this.state.formErrors.cause}
-                                        </Form.Control.Feedback>     
+                                        </Form.Control.Feedback>
                                     </Form.Group>
                                 </Row>
 
@@ -454,19 +455,19 @@ export default class CreateEditFundraiserForm extends Component {
 
                                 <Row className='mb-4 text-center'>
                                     <Col as={Col} md="6" xs="6">
-                                        <Button type="button" 
-                                                id='form-cancel-button'
-                                                href="/ngo/fundraiser">
+                                        <Button type="button"
+                                            id='form-cancel-button'
+                                            href="/ngo/fundraiser">
                                             Cancel
                                         </Button>
                                     </Col>
                                     <Col as={Col} md="6" xs="6">
                                         <Button type="submit"
-                                                id='form-create-update-button' >
+                                            id='form-create-update-button' >
                                             {action === 'create' && "Create"}
                                             {action === 'update' && "Update"}
                                         </Button>
-                                    </Col>                                    
+                                    </Col>
                                 </Row>
                             </Form>
                         </Col>

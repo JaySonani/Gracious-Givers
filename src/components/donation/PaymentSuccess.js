@@ -1,5 +1,5 @@
-import Footer from '../Footer';
-import Header from '../Header';
+import Footer from "../navbar/Footer";
+import Header from "../navbar/Header";
 import './styles/PaymentSuccess.css';
 
 function PaymentSuccess() {

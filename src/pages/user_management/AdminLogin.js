@@ -1,9 +1,9 @@
 import { React, Component } from "react";
-import { Row, Col, Form, Button, Container, Dropdown } from "react-bootstrap";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
+import { Row, Col, Form, Button, Container } from "react-bootstrap";
+import Header from "../../components/navbar/Header";
+import Footer from "../../components/navbar/Footer";
 import axios from "axios";
-import Network, { authenticateUser,redirectUser } from "../utils/Network";
+import { authenticateUser, redirectUser } from "../../utils/Network";
 export default class AdminLogin extends Component {
   constructor(props) {
     super(props);
@@ -68,7 +68,7 @@ export default class AdminLogin extends Component {
       .then(function (response) {
         console.log(response);
         authenticateUser(response);
-        redirectUser("/AdminHome");
+        redirectUser("/admin");
       })
       .catch(function (error) {
         console.log(error);

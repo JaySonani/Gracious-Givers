@@ -6,7 +6,7 @@ export default function FundrasierResponseUp(props) {
     const show = props.show;
     const handleHide = props.onHide;
     const message = props.message;
-    const type = props.type;
+    // const type = props.type;
 
     return (
         <Modal show={show} onHide={handleHide}>

@@ -1,5 +1,5 @@
-import Footer from "../components/Footer";
-import Header from "../components/Header";
+import Footer from "../components/navbar/Footer";
+import Header from "../components/navbar/Header";
 
 const AboutUs = () => {
     return (

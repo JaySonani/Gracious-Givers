@@ -10,8 +10,10 @@ export default function NGOFundraiserList(props) {
     const period = props.period;
     const [fundraisers, setFundraisers] = useState([]);
     const navigate = useNavigate();
-    
+
     useEffect(() => {
+
+
         fetchFundrasiers();
     }, []);
 
@@ -19,14 +21,14 @@ export default function NGOFundraiserList(props) {
         const ngoId = FundraiserConstants.getNgoId();
         const getNGOEventsURI = FundraiserConstants.apiBaseUrl + `/ngo/${ngoId}/period/${period}`;
         Axios.get(getNGOEventsURI)
-        .then((response) => {
-            if (response.status === 200) {
-                setFundraisers(response.data);
-            }
-        })
-        .catch((error) => {
-            console.log('Error in getting '+ period +' fundraiser :' + error);           
-        });
+            .then((response) => {
+                if (response.status === 200) {
+                    setFundraisers(response.data);
+                }
+            })
+            .catch((error) => {
+                console.log('Error in getting ' + period + ' fundraiser :' + error);
+            });
     }
 
     const onCardClickHandler = (id) => {
@@ -38,7 +40,7 @@ export default function NGOFundraiserList(props) {
             <Row>
                 <Col style={{ margin: '0.5rem 1.2rem' }}>
                     {
-                        fundraisers.length === 0 && 
+                        fundraisers.length === 0 &&
                         <span>No fundraisers to display</span>
                     }
                     {
@@ -56,12 +58,12 @@ export default function NGOFundraiserList(props) {
                         <NGOFundraiserCard 
                             details={fundraiser}
                             period={period}
-                            onCardClick={onCardClickHandler} 
+                            onCardClick={onCardClickHandler}
                             onActionSuccess={fetchFundrasiers}
                         />
                     </Col>
                 )}
-            </Row>   
+            </Row>
         </Container>
     );
 

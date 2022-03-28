@@ -5,14 +5,11 @@ import {
   Form,
   Button,
   Container,
-  Dropdown,
-  DropdownButton,
 } from "react-bootstrap";
-import { Router, useNavigate } from "react-router-dom";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
+import Footer from "../../components/navbar/Footer";
+import Header from "../../components/navbar/Header";
 import axios from "axios";
-import {redirectUser} from "../utils/Network";
+import { redirectUser } from "../../utils/Network";
 export default class Register extends Component {
   constructor(props) {
     super(props);
@@ -87,7 +84,7 @@ export default class Register extends Component {
   };
   toggleTargetGroup = (event) => {
     console.log(event);
-    const field = event.target.name;
+    // const field = event.target.name;
     const value = event.target.value;
     console.log(value);
   };
