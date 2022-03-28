@@ -18,7 +18,7 @@ const AdminHome = (props) => {
     }, [props.all]);
 
     async function fetchAllNgo() {
-        await Axios.get("http://localhost:5000/ngo/active")
+        await Axios.get("https://gracious-givers-backend.herokuapp.com/ngo/active")
             .then((response) => {
                 if (response.status === 200) {
                     console.log(response.data);
@@ -31,7 +31,7 @@ const AdminHome = (props) => {
     }
 
     async function fetchPendingNgo() {
-        await Axios.get("http://localhost:5000/ngo/pending")
+        await Axios.get("https://gracious-givers-backend.herokuapp.com/ngo/pending")
             .then((response) => {
                 if (response.status === 200) {
                     setNgo(response.data);

@@ -51,7 +51,7 @@ export default class Login extends Component {
     // if (numberOfErrors > 0) {
     // } else {
     axios
-      .post("http://localhost:5000/login/ngo", {
+      .post("https://gracious-givers-backend.herokuapp.com/auth/login/ngo", {
         email: this.state.formField.email,
         password: this.state.formField.password,
       })

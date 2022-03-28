@@ -66,7 +66,7 @@ export default class Register extends Component {
     //if (numberOfErrors > 0) {
     //} else {
     axios
-      .post("http://localhost:5000/register", {
+      .post("https://gracious-givers-backend.herokuapp.com/auth/register", {
         email: this.state.formField.email,
         password: this.state.formField.password,
         user_id: this.state.formField.user_id,
