@@ -4,7 +4,7 @@ const DonationCard = (props) => {
     return (
         <div className='donationCard'>
             <div className='donationAmount'>
-                Amount: {props.amount}
+                {`Amount $${props.amount}`}
             </div>
             <div className='donationContent'>
                 By {props.name}

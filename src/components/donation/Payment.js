@@ -48,6 +48,7 @@ function Payment() {
     function storeData(state) {
         var data = JSON.stringify({
             "donation_event_id": state.id,
+            "donation_event_name": state.name,
             "donation_amount": state.amount,
             "donor_firstname": state.fname,
             "donor_lastname": state.lname,
@@ -56,7 +57,7 @@ function Payment() {
 
         var config = {
             method: 'post',
-            url: 'https://gracious-givers-backend.herokuapp.com/donation/adddonation',
+            url: 'http://localhost:5000/donation/adddonation',
             headers: {
                 'Content-Type': 'application/json'
             },

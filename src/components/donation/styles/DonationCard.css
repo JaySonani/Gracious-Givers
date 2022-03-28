@@ -10,9 +10,12 @@
 }
 
 .donationAmount {
-  font-size: 25px;
+  font-size: 20px;
+  height: 40px;
   background-color: #057abe;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: white;
 }
 
