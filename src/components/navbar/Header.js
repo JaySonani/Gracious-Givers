@@ -140,7 +140,7 @@ function Header(props) {
                 </NavDropdown>
               </Nav>
               <Nav>
-                <Button variant="danger" className="custom-logout-btn-header">
+                <Button variant="danger" className="custom-logout-btn-header" onClick={() => setTokenOnLogOut()}>
                   Logout
                 </Button>
               </Nav>
