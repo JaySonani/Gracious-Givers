@@ -1,5 +1,6 @@
 import { Card, ProgressBar } from "react-bootstrap";
 import './styles/fundraiserDonation.css';
+import * as FundraiserConstants from './FundraiserConstants';
 
 export default function FundraiserDonation(props) {
 
@@ -18,31 +19,33 @@ export default function FundraiserDonation(props) {
         <Card className='card-custom' id='fundraiser-donation-details'>
             <Card.Body className='card-body-color'>
                 <div id='createdDetails'>               
-                    <span style={{fontSize:'20px'}}>
-                        <strong>Created By</strong>
+                    <span style={{ fontWeight:600}}>
+                        <small>Created By</small>
                     </span>
                     <br/>
                     <span>{event.createdBy}</span>                             
                 </div>
                 <div id='donationDetails'>                
-                    <span>
-                        Raised<br/>
+                    <span style={{ fontWeight:600}}>
+                        <small>Raised</small><br/>
                         <span style={{fontSize:'25px', fontWeight:'600', color:'rgb(3, 106, 166, 1)'}}>
-                            {event.currency} {event.amountRaised} 
+                            {FundraiserConstants.currencyFormatting(event.currency, event.amountRaised, 0)}                            
                         </span>
-                        &nbsp;of {event.currency} {event.goalAmount}
+                        &nbsp;of&nbsp;{FundraiserConstants.currencyFormatting(event.currency,event.goalAmount, 0)}
                         <ProgressBar now={progress} 
                             className="blue-progress-bar" 
                             style={{borderRadius: '19.5px', background:'rgb(170 207 232)', height:'20px', margin:'8px 0'}} />
                     </span>      
                     <div id='supporters-days-remaining'>
                         <span>
-                            <strong style={{fontSize:'20px'}}>{event.donors}</strong>&nbsp;
+                        <span style={{fontSize:'1.2rem', fontWeight:700}}>{event.donors}</span>&nbsp;
                             supporters
                         </span><br/> 
                         <span>
-                            <strong style={{fontSize:'20px'}}>{getDaysRemaining()}</strong>
-                            &nbsp;days remaining
+                            <span style={{fontSize:'1.2rem', fontWeight:700}}>
+                                {getDaysRemaining()}
+                            </span>
+                            &nbsp;days remaining                            
                         </span>  
                     </div>
                 </div>

@@ -21,7 +21,8 @@ export const causes = [
     'Animal Welfare',
 ];
 
-export const apiBaseUrl = "http://localhost:5000/fundraiser"; 
+// export const apiBaseUrl = "http://localhost:5000/fundraiser"; 
+export const apiBaseUrl = "https://gracious-givers-backend.herokuapp.com/fundraiser"; 
 
 export const defaultCurrency = "CAD";
 
@@ -48,10 +49,12 @@ export const getNgoId = () => {
 
 export const maxGoalAmount = "1,000,000";
 
-export const currencyFormatting = (currency, amount, minimumFractionDigits) => {
+export const currencyFormatting = (currency, amount, minimumFractionDigits) => {    
+    currency = !currency ? defaultCurrency : currency;
+    amount = !amount ? 0 : amount;
     return new Intl.NumberFormat(`en-US`, {
-    currency: currency,
-    style: 'currency',
-    minimumFractionDigits: minimumFractionDigits
+        currency: currency,
+        style: 'currency',
+        minimumFractionDigits: minimumFractionDigits
     }).format(amount);
 }
