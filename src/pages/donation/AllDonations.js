@@ -14,11 +14,6 @@ function AllDonation() {
     const [searchActive, setSearchActive] = useState(false);
     const [filteredDonations, setFilteredDonations] = useState(donations);
 
-    function searchItem(item) {
-        return item.toLowerCase().includes(searchKeyword.toLowerCase());
-    }
-
-
 
     useEffect(() => {
 

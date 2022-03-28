@@ -57,7 +57,7 @@ function Payment() {
 
         var config = {
             method: 'post',
-            url: 'http://localhost:5000/donation/adddonation',
+            url: 'https://gracious-givers-backend.herokuapp.com/donation/adddonation',
             headers: {
                 'Content-Type': 'application/json'
             },

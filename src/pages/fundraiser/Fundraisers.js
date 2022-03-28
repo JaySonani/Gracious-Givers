@@ -20,7 +20,7 @@ export default function FundRaisers() {
     const [topDonors, setTopDonors] = useState([]);
     const getFundraiserDetailsURI = FundraiserConstants.apiBaseUrl + `/${eventId}`;
     // const getTopDonorsURI = `https://gracious-givers-backend.herokuapp.com/donation/topdonors/${eventId}`;
-    const getTopDonorsURI = `http://localhost:5000/donation/topdonors/${eventId}`;
+    const getTopDonorsURI = `https://gracious-givers-backend.herokuapp.com/donation/topdonors/${eventId}`;
 
     console.log(getTopDonorsURI);
 
