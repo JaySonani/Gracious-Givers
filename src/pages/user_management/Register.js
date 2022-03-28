@@ -1,13 +1,8 @@
 import { React, Component } from "react";
-import {
-  Row,
-  Col,
-  Form,
-  Button,
-  Container,
-} from "react-bootstrap";
+import { Row, Col, Form, Button, Container } from "react-bootstrap";
 import Footer from "../../components/navbar/Footer";
 import Header from "../../components/navbar/Header";
+import { Link } from "react-router";
 import axios from "axios";
 import { redirectUser } from "../../utils/Network";
 export default class Register extends Component {
@@ -21,6 +16,7 @@ export default class Register extends Component {
         cpassword: "",
         ngo_name: "",
         target_group: "",
+        description: "",
       },
       formErrors: {
         user_id: "",
@@ -29,6 +25,7 @@ export default class Register extends Component {
         cpassword: "",
         ngo_name: "",
         target_group: "",
+        description: "",
       },
       // validated: false
     };
@@ -58,13 +55,6 @@ export default class Register extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-
-    //this.validateForm();
-    //const numberOfErrors = Object.values(this.state.formErrors).filter(
-    //(value) => value != null || value !== ""
-    // ).length;
-    //if (numberOfErrors > 0) {
-    //} else {
     axios
       .post("https://gracious-givers-backend.herokuapp.com/auth/register", {
         email: this.state.formField.email,
@@ -72,6 +62,7 @@ export default class Register extends Component {
         user_id: this.state.formField.user_id,
         ngo_name: this.state.formField.ngo_name,
         target_group: this.state.formField.target_group,
+        description: this.state.formField.description,
       })
       .then(function (response) {
         console.log(response);
@@ -84,7 +75,6 @@ export default class Register extends Component {
   };
   toggleTargetGroup = (event) => {
     console.log(event);
-    // const field = event.target.name;
     const value = event.target.value;
     console.log(value);
   };
@@ -115,12 +105,12 @@ export default class Register extends Component {
                   name="user_id"
                   type="text"
                   placeholder="Please enter the userid"
-                  value={formField.userid}
+                  value={formField.user_id}
                   onChange={this.handleValueChange}
-                  isInvalid={!!formError.userid}
+                  isInvalid={!!formError.user_id}
                 />
                 <Form.Control.Feedback type="invalid">
-                  {formError.userid}
+                  {formError.user_id}
                 </Form.Control.Feedback>
               </Form.Group>
             </Row>
@@ -183,9 +173,9 @@ export default class Register extends Component {
                   name="ngo_name"
                   type="text"
                   placeholder="Please enter the NGO name"
-                  value={formField.ngoname}
+                  value={formField.ngo_name}
                   onChange={this.handleValueChange}
-                  isInvalid={!!formError.ngoname}
+                  isInvalid={!!formError.ngo_name}
                 />
 
                 <Form.Control.Feedback type="invalid">
@@ -195,15 +185,33 @@ export default class Register extends Component {
             </Row>
             <Row className="mb-3">
               <Form.Group as={Col} xs="5" md="5" controlId="validationCustom06">
+                <Form.Label>Description</Form.Label>
+                <Form.Control
+                  required
+                  name="description"
+                  type="text"
+                  placeholder="Please enter the NGO Description"
+                  value={formField.description}
+                  onChange={this.handleValueChange}
+                  isInvalid={!!formError.description}
+                />
+
+                <Form.Control.Feedback type="invalid">
+                  {formError.description}
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Row>
+            <Row className="mb-3">
+              <Form.Group as={Col} xs="5" md="5" controlId="validationCustom07">
                 <Form.Label>Target Group</Form.Label>
                 <Form.Control
                   required
                   name="target_group"
                   type="text"
                   placeholder="Please enter the target group (Eg: Children,social welfare)"
-                  value={formField.ngoname}
+                  value={formField.target_group}
                   onChange={this.handleValueChange}
-                  isInvalid={!!formError.ngoname}
+                  isInvalid={!!formError.target_group}
                 />
 
                 <Form.Control.Feedback type="invalid">
@@ -218,6 +226,11 @@ export default class Register extends Component {
             >
               Register
             </Button>
+            <Row className="mb-3" style={{height:'40px'}}>
+              <Col>
+                
+              </Col>
+            </Row>
           </Form>
         </Container>
         <Footer />
