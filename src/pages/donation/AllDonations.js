@@ -1,3 +1,5 @@
+// Author: Jay Bhagvanbhai Sonani (B00891984)
+
 import { useState } from "react";
 import { useEffect } from "react";
 import Footer from "../../components/navbar/Footer";

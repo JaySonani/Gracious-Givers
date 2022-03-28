@@ -1,3 +1,5 @@
+// Author: Jay Bhagvanbhai Sonani (B00891984)
+
 // Package imports
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 

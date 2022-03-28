@@ -1,3 +1,5 @@
+// Author: Jay Bhagvanbhai Sonani (B00891984)
+
 import { Nav } from 'react-bootstrap';
 
 import './styles/Label.css';
