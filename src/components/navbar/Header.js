@@ -128,7 +128,7 @@ function Header(props) {
                 <Label title="Home" path="/admin" />
                 <Label title="Active Fundraisers" path="/admin/activefundraisers" />
                 <NavDropdown
-                  title="Requests (logged in admin)"
+                  title="Requests"
                   id="basic-nav-dropdown"
                 >
                   <NavDropdown.Item href="/admin/ngorequests">
