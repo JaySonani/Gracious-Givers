@@ -73,7 +73,8 @@ const FundraiserRequests = (props) => {
                             </Card>
                         </>
                     )}
-                    {!list && <p>No New Fundraiser Requests</p>}
+                    {!list && props.all && <p>No Active Fundraisers</p>}
+                    {!list && !props.all && <p>No New Fundraiser Requests</p>}
                 </section>
             </main>
             <Footer />
