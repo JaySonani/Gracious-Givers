@@ -1,6 +1,8 @@
 import { Modal, Button } from "react-bootstrap";
 import "./styles/popupDialog.css";
-
+// FaExclamationCircle
+// FaExclamationTriangle
+// FaCheckCircle
 export default function FundrasierResponseUp(props) {
 
     const show = props.show;

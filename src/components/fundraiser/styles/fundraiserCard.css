@@ -11,9 +11,9 @@
     background-color: #057abe;
 }
      
-.card-custom  {
+#donor-fundraiser-card .card-custom  {
     box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.5), 0 6px 6px 0 rgba(0, 0, 0, 0.19);
-    border-radius: 10px !important;
+    border-radius: 10px !important;    
 }
 
 .card-body-color {

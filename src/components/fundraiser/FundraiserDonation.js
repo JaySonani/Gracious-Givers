@@ -19,15 +19,15 @@ export default function FundraiserDonation(props) {
         <Card className='card-custom' id='fundraiser-donation-details'>
             <Card.Body className='card-body-color'>
                 <div id='createdDetails'>               
-                    <span style={{fontSize:'20px', fontWeight:600}}>
-                        Created By
+                    <span style={{ fontWeight:600}}>
+                        <small>Created By</small>
                     </span>
                     <br/>
                     <span>{event.createdBy}</span>                             
                 </div>
                 <div id='donationDetails'>                
-                    <span>
-                        Raised<br/>
+                    <span style={{ fontWeight:600}}>
+                        <small>Raised</small><br/>
                         <span style={{fontSize:'25px', fontWeight:'600', color:'rgb(3, 106, 166, 1)'}}>
                             {FundraiserConstants.currencyFormatting(event.currency, event.amountRaised, 0)}                            
                         </span>
