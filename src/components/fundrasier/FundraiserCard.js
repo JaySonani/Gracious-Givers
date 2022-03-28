@@ -1,4 +1,5 @@
 import { Card, ProgressBar } from "react-bootstrap";
+import * as FundraiserConstants from './FundraiserConstants';
 import "./styles/fundraiserCard.css";
 
 export default function FundraiserCard(props) {
@@ -34,10 +35,9 @@ export default function FundraiserCard(props) {
                             <span>Raised</span>
                             <div>
                                 <span style={{ fontWeight: '800', color: 'rgb(3, 106, 166, 1)' }}>
-                                    {fundraiser.currency} {fundraiser.amountRaised}  
-                                    &nbsp;
+                                    {FundraiserConstants.currencyFormatting(fundraiser.currency,fundraiser.amountRaised, 0)}                            
                                 </span>
-                                <span>of {fundraiser.currency} {fundraiser.goalAmount}</span>
+                                <span>&nbsp;of {FundraiserConstants.currencyFormatting(fundraiser.currency,fundraiser.goalAmount, 0)}</span>
                             </div>
                             <ProgressBar now={progress}
                                 className="blue-progress-bar"

@@ -94,63 +94,62 @@ export default function NGOFundraiserCard(props) {
 
     return (
         <Card id="ngo-fundraiser-card">
-            <Card.Header as="h5">{fundraiser.title}</Card.Header>
-            <Card.Body className='card-body-color'>
-                {/* <Card.Title>{fundraiser.title}</Card.Title> */}
-
+            <Card.Header as="h5" style={{fontWeight: 600}}>{fundraiser.title}</Card.Header>
+            <Card.Body id='ngo-fundraiser-card-body' className='card-body-color'>
                 <Row>
-                    <Col xs={12} md={3}>
+                    <Col xs={12} md={4}>
                         <Card.Img variant="top" src={fundraiser.image} />
                     </Col>
-                    <Col xs={12} md={5}>
+                    <Col xs={12} md={4}>
                         <Row>
-                            <Col xs={5} md={4}>Cause</Col>
-                            <Col xs={7} md={8}>{fundraiser.cause}</Col>
+                            <Col xs={5} md={6} className="fundraiser-card-label">Cause</Col>
+                            <Col xs={7} md={6}>{fundraiser.cause}</Col>
                         </Row>
                         <Row>
-                            <Col xs={5} md={4}>Goal Amount</Col>
-                            <Col xs={7} md={8}>{fundraiser.currency}&nbsp;{fundraiser.goalAmount}</Col>
+                            <Col xs={5} md={6} className="fundraiser-card-label">Goal Amount</Col>
+                            <Col xs={7} md={6}>{FundraiserConstants.currencyFormatting(fundraiser.currency,fundraiser.goalAmount, 0)}</Col>
                         </Row>
                         {
                             (period === 'ongoing' || period === 'past') &&
                             <Row>
-                                <Col xs={5} md={4}>Amount Raised</Col>
-                                <Col xs={7} md={8}>{fundraiser.currency}&nbsp;{fundraiser.amountRaised}</Col>
+                                <Col xs={5} md={6} className="fundraiser-card-label">Amount Raised</Col>
+                                <Col xs={7} md={6}>{fundraiser.currency}&nbsp;{fundraiser.amountRaised}
+                                </Col>
                             </Row>
                         }
                         {
                             (period === 'ongoing' || period === 'past') &&
                             <Row>
-                                <Col xs={5} md={4}>Donors</Col>
-                                <Col xs={7} md={8}>{fundraiser.donors}</Col>
+                                <Col xs={5} md={6} className="fundraiser-card-label">Donors</Col>
+                                <Col xs={7} md={6}>{fundraiser.donors}</Col>
                             </Row>
                         }
                         {
                             (period === 'ongoing' || period === 'past') &&
                             <Row>
-                                <Col xs={5} md={4}>End Date</Col>
-                                <Col xs={7} md={8}>{formatDate(fundraiser.endDate)}</Col>
+                                <Col xs={5} md={6} className="fundraiser-card-label">End Date</Col>
+                                <Col xs={7} md={6}>{formatDate(fundraiser.endDate)}</Col>
                             </Row>
                         }
                         {
                             period === 'future' &&
                             <Row>
-                                <Col xs={5} md={4}>Created for</Col>
-                                <Col xs={7} md={8}>{fundraiser.activeDays}&nbsp;days</Col>
+                                <Col xs={5} md={6} className="fundraiser-card-label">Created for</Col>
+                                <Col xs={7} md={6}>{fundraiser.activeDays}&nbsp;days</Col>
                             </Row>
                         }
                         
                     </Col>
                     <Col xs={12} md={4} style={{ textAlign: 'center' }}>
-                        <Row style={{ margin: '0.1rem 0' }}>
+                        <Row style={{ margin: '0.5rem 0' }}>
                             <Col>
                                 <FundraiserStatus statusValue={fundraiser.status} />
                             </Col>
                         </Row>
-                        <Row style={{ margin: '0.1rem 0' }}>
+                        <Row style={{ margin: '0.2rem 0' }}>
                             <Col>
                                 <Dropdown>
-                                    <Dropdown.Toggle id="dropdown-basic-button" className="actions-drop-down"  >
+                                    <Dropdown.Toggle id="dropdown-basic-button" className="actions-drop-down" >
                                         Actions
                                     </Dropdown.Toggle>
                                     <Dropdown.Menu >

@@ -43,13 +43,16 @@ export default function NGOFundraiserList(props) {
                     }
                     {
                         fundraisers.length > 0 && 
-                        <span>Showing all <strong>{fundraisers.length} {period}</strong> fundraiser(s)</span>
+                        <span>Showing all 
+                            <span style={{fontWeight:'600'}}>&nbsp;{fundraisers.length} {period}</span> 
+                            &nbsp;fundraiser(s)
+                        </span>
                     }                    
                 </Col>
             </Row>
             <Row>
                 {fundraisers.map(fundraiser =>
-                    <Col xs={12} md={12} key={fundraiser._id} style={{ margin: '0.6rem 1rem' }}>
+                    <Col xs={12} md={11} key={fundraiser._id} style={{ margin: '0.5rem 0rem' }}>
                         <NGOFundraiserCard 
                             details={fundraiser}
                             period={period}

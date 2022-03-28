@@ -11,25 +11,26 @@ export default function FundrasierDeleteConfirmation(props) {
 
         <Modal show={show} onHide={handleHide}>
             <Modal.Header closeButton>
-                <Modal.Title>Confirm delete</Modal.Title>
+                <Modal.Title style={{fontSize:'1.4rem'}}>Confirm delete</Modal.Title>              
             </Modal.Header>
-            <Modal.Body>
-                Are you should you want to delete the fundraiser <strong>"{fundraiser.title}"</strong>?
+            <Modal.Body>                
+                Clicking <strong>“Delete”</strong> will permanently delete your fundraiser <strong>"{fundraiser.title}"</strong>.
                 <br/><br/>
-                Clicking <strong>“Delete”</strong> will permanently delete your fundraiser.
+                Are you should you want to delete the fundraiser?
             </Modal.Body>
             <Modal.Footer>
                 <Container className='text-center'>
                 <Row>
-                    <Col xs={6} md={6}>
-                        <Button id="button-confirm-delete" onClick={() => handleDelete(fundraiser)}>
-                            Delete
-                        </Button>   
-                    </Col>
+                    
                     <Col xs={6} md={6}>
                         <Button id="button-cancel" onClick={handleHide} >
                             Cancel
                         </Button>
+                    </Col>
+                    <Col xs={6} md={6}>
+                        <Button id="button-confirm" onClick={() => handleDelete(fundraiser)}>
+                            Delete
+                        </Button>   
                     </Col>
                 </Row>
                 </Container>

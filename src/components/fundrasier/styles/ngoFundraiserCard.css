@@ -3,24 +3,28 @@
     color: white !important;
     margin-top: 0.3rem;
     margin-bottom: 0.3rem;
+    border-color: #057abe !important;
 }
 
 #ngo-fundraiser-card button:hover {
-    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1), 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 #ngo-fundraiser-card {
     border-radius: 10px !important;
-
 }
 
 #ngo-fundraiser-card:hover {
-    box-shadow: 0 0 10px 5px grey;
+    box-shadow: 0 0 4px 4px  rgba(97, 97, 97, 0.2);
 }
 
 #ngo-fundraiser-card .card-body-color .card-body {
-    border-top-right-radius: 10px 10px !important;
-    border-top-left-radius: 10px 10px !important;
+    border-top-right-radius: 0px 0px !important;
+    border-top-left-radius: 0px 0px !important;
     background-color: rgb(244, 246, 248) !important;
+}
+
+#ngo-fundraiser-card-body .fundraiser-card-label {
+    font-weight: 600;
 }
 
