@@ -13,7 +13,7 @@ export default function FundraiserStatus(props) {
     return (
         
         <div id="fundraiser-status" 
-            style={{fontWeight:'600', fontSize:'1.2rem'}}>
+            style={{fontWeight:'600', fontSize:'1.1rem', fontStyle: 'italic'}}>
             {
                 status === allStatus.active && 
                 <span style={active}>{allStatus.active}</span> 

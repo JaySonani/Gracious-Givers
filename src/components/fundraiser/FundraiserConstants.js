@@ -46,4 +46,12 @@ export const getNgoId = () => {
     }
 }
 
-export const maxGoalAmount = 1000000;
+export const maxGoalAmount = "1,000,000";
+
+export const currencyFormatting = (currency, amount, minimumFractionDigits) => {
+    return new Intl.NumberFormat(`en-US`, {
+    currency: currency,
+    style: 'currency',
+    minimumFractionDigits: minimumFractionDigits
+    }).format(amount);
+}

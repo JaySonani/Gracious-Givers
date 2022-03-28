@@ -110,8 +110,7 @@ export default class CreateEditFundraiserForm extends Component {
         }
     }
 
-    validateForm = () => {
-        console.log("Validating the form");
+    validateForm = () => {      
         const form = this.state.formField;
         let errors = { ...this.state.formErrors };
 
@@ -212,7 +211,7 @@ export default class CreateEditFundraiserForm extends Component {
                     this.setState({ showCreateSuccess: true, savedFundraiser: fundraiser })
                 }
             })
-            .catch((error) => alert("Error in creating fundraiser"));
+            .catch((error) => alert("Error in creating fundraiser, please try again"));
     }
 
     handleCloseCreateSuccess = () => {
@@ -244,13 +243,11 @@ export default class CreateEditFundraiserForm extends Component {
                         <Col xs={0} md={3}></Col>
                         <Col xs={12} md={6}>
                             <Row className='mb-3'>
-                                <Col style={{ marginTop: '1rem' }}>
-                                    <h4 id='create-update-form-label' >
-                                        <strong>
-                                            {action === 'create' && "Create Fundraiser"}
-                                            {action === 'update' && "Update Fundraiser"}
-                                        </strong>
-                                    </h4>
+                                <Col style={{marginTop:'1rem'}}>
+                                    <h5 id='create-update-form-label' style={{fontWeight: 700}}>                                        
+                                        {action === 'create' && "Create Fundraiser"}
+                                        {action === 'update' && "Update Fundraiser"}                                        
+                                    </h5>
                                 </Col>
                                 <Col style={{ textAlign: "right", marginTop: '1rem', fontStyle: 'italic' }}>
                                     <FundraiserStatus statusValue={this.state.formField.status} />
@@ -260,7 +257,7 @@ export default class CreateEditFundraiserForm extends Component {
                                 onSubmit={this.handleSubmit}>
                                 <Row className='mb-3'>
                                     <Form.Group as={Col} xs="12" md="12" controlId="validationCustom01">
-                                        <Form.Label><strong>Title</strong></Form.Label>
+                                        <Form.Label>Title</Form.Label>
                                         <Form.Control
                                             required
                                             name="title"
@@ -280,9 +277,11 @@ export default class CreateEditFundraiserForm extends Component {
                                 <Row className='mb-3'>
                                     <Form.Group as={Col} xs="12" md="12" controlId="validationCustom02">
                                         <Form.Label>
-                                            <strong>Description</strong>&nbsp;
-                                            <small>(Describe the purpose, beneficiaries, and other information about the fundraiser)</small>
+                                            Description&nbsp;                                             
                                         </Form.Label>
+                                        <span style={{fontWeight:'500'}}>
+                                            <small><em>(Describe the purpose, beneficiaries, and other information about the fundraiser)</em></small>
+                                        </span>
                                         <Form.Control
                                             required
                                             as="textarea"
@@ -291,7 +290,8 @@ export default class CreateEditFundraiserForm extends Component {
                                             rows="7"
                                             value={this.state.formField.description}
                                             onChange={this.handleValueChange}
-                                            isInvalid={!!this.state.formErrors.description}
+                                            isInvalid={ !!this.state.formErrors.description }
+                                            style={{marginTop:'0.5rem'}}
                                         />
 
                                         <div style={{ textAlign: 'right' }}>
@@ -314,10 +314,10 @@ export default class CreateEditFundraiserForm extends Component {
                                 <Row className='mb-3'>
                                     <Form.Group as={Col} xs="12" md="12" controlId="validationCustom03">
                                         <Form.Label>
-                                            <strong>Amount to raise:</strong> {FundraiserConstants.defaultCurrency} {this.state.formField.goalAmount}
+                                            Amount to raise:
                                         </Form.Label>
-
-                                        {(action === 'create'
+                                        &nbsp;{FundraiserConstants.defaultCurrency} {this.state.formField.goalAmount}
+                                        {(action === 'create' 
                                             || (action === 'update' && this.state.formField.status === 'Pending Admin Approval')) &&
                                             <>
                                                 <input
@@ -327,20 +327,19 @@ export default class CreateEditFundraiserForm extends Component {
                                                     max={maxGoalAmount}
                                                     step="1000"
                                                     value={this.state.formField.goalAmount}
-                                                    onChange={this.handleValueChange}
-
-                                                    style={{ width: '100%' }}
+                                                    onChange={this.handleValueChange}                                                    
+                                                    style={{width:'100%'}}
                                                 />
                                                 <Row>
                                                     <Col>
-                                                        <Form.Label>
-                                                            0 {FundraiserConstants.defaultCurrency}
-                                                        </Form.Label>
+                                                        <span>
+                                                            <small>0 {FundraiserConstants.defaultCurrency}</small>
+                                                        </span>  
                                                     </Col>
-                                                    <Col style={{ textAlign: 'right' }}>
-                                                        <Form.Label>
-                                                            {maxGoalAmount} {FundraiserConstants.defaultCurrency}
-                                                        </Form.Label>
+                                                    <Col style={{textAlign:'right'}}>
+                                                        <span>
+                                                            <small>{maxGoalAmount} {FundraiserConstants.defaultCurrency}</small>
+                                                        </span>
                                                     </Col>
                                                 </Row>
                                             </>
@@ -357,15 +356,15 @@ export default class CreateEditFundraiserForm extends Component {
                                 <Row>
                                     <Form.Group className="position-relative mb-3">
                                         <Form.Label>
-                                            {(action === 'create'
-                                                || (action === 'update' && this.state.formField.status === 'Pending Admin Approval')) &&
-                                                <strong>For how many days do you want this fundraiser to be active?</strong>}
-
+                                            {(action === 'create' 
+                                            || (action === 'update' && this.state.formField.status === 'Pending Admin Approval')) &&
+                                            <label>For how many days do you want this fundraiser to be active?</label>}
+                                            
                                             {(action === 'update' && this.state.formField.status !== 'Pending Admin Approval') &&
-                                                <strong>Duration of the fundraiser</strong>}
-
+                                            <label>Duration of the fundraiser</label>}
+                                            
                                             {(action === 'update' && this.state.formField.status === 'Active') &&
-                                                <strong>End Date</strong>}
+                                            <label>End Date</label>}
                                         </Form.Label>
                                         <Form.Control
                                             type="number"
@@ -378,7 +377,7 @@ export default class CreateEditFundraiserForm extends Component {
                                             readOnly={this.state.formField.status === 'Active'}
                                             onChange={this.handleValueChange}
                                             isInvalid={!!this.state.formErrors.activeDays}
-                                        />
+                                            />
                                         <Form.Control.Feedback type="invalid">
                                             {this.state.formErrors.activeDays}
                                         </Form.Control.Feedback>
@@ -390,8 +389,8 @@ export default class CreateEditFundraiserForm extends Component {
                                         {this.state.formField.status !== 'Active' &&
                                             <>
                                                 <Form.Label>
-                                                    <strong>Cause:</strong>
-                                                </Form.Label>
+                                                    Cause
+                                                </Form.Label> 
                                                 <Form.Select
                                                     name="cause"
                                                     isInvalid={!!this.state.formErrors.cause}
@@ -409,8 +408,8 @@ export default class CreateEditFundraiserForm extends Component {
                                         {
                                             this.state.formField.status === 'Active' &&
                                             <Form.Label>
-                                                <strong>Cause:</strong> <span>{this.state.formField.cause}</span>
-                                            </Form.Label>
+                                                <label>Cause:</label> <label>{this.state.formField.cause }</label> 
+                                            </Form.Label> 
                                         }
 
                                         <Form.Control.Feedback type="invalid">
@@ -422,14 +421,13 @@ export default class CreateEditFundraiserForm extends Component {
                                 <Row className='mb-3'>
                                     <Form.Group className="position-relative mb-3">
                                         <Form.Label>
-                                            {
-                                                action === 'create' &&
-                                                <strong>Upload an image that relates to this fundraiser</strong>
+                                            {   
+                                                action === 'create' && 
+                                                <label>Upload an image that relates to this fundraiser</label>
                                             }
-                                            {
-                                                action === 'update' &&
-                                                <strong>Update the image for this fundraiser</strong>
-
+                                            {   
+                                                action === 'update' && 
+                                                <label>Update the image for this fundraiser</label>                                                    
                                             }
                                         </Form.Label>
                                         <Form.Control
@@ -439,14 +437,14 @@ export default class CreateEditFundraiserForm extends Component {
                                             id="image"
                                             onChange={this.handleFileUpload}
                                             isInvalid={!!this.state.formErrors.image}
-                                            accept=".jpg, .jpeg, .png"
+                                            accept=".jpg, .jpeg, .png, .bmp"
                                         />
-                                        {action === 'update' &&
-                                            <>
-                                                <strong>Current image:&nbsp;</strong>
-                                                <a href={this.state.formField.image} target="_blank" rel="noreferrer">
-                                                    {this.state.formField.imageName}
-                                                </a>
+                                        {action === 'update' && 
+                                        <>
+                                            <label>Current image:&nbsp;</label>
+                                            <a href={this.state.formField.image} target="_blank" rel="noopener">
+                                                {this.state.formField.imageName}
+                                            </a>
                                             </>
                                         }
                                         <Form.Control.Feedback type="invalid">
@@ -455,7 +453,7 @@ export default class CreateEditFundraiserForm extends Component {
                                     </Form.Group>
                                 </Row>
 
-                                <Row className='mb-3 text-center'>
+                                <Row className='mb-4 text-center'>
                                     <Col as={Col} md="6" xs="6">
                                         <Button type="button"
                                             id='form-cancel-button'
@@ -475,22 +473,22 @@ export default class CreateEditFundraiserForm extends Component {
                         </Col>
                         <Col xs={0} md={3}></Col>
                     </Row>
-                    {
-                        this.state.showCreateSuccess &&
-                        <FundrasierResponsePopup type="success"
-                            show={true}
-                            message="Fundraiser created successfully"
-                            onHide={this.handleCloseCreateSuccess} />
-
-                    }
-                    {
-                        this.state.showUpdateSuccess &&
-                        <FundrasierResponsePopup type="success"
-                            show={true}
-                            message="Fundraiser updated successfully"
-                            onHide={this.handleCloseUpdateSuccess} />
-
-                    }
+                {
+                this.state.showCreateSuccess && 
+                <FundrasierResponsePopup type="success"
+                                        show={true}
+                                        message="Fundraiser created successfully!"
+                                        onHide={this.handleCloseCreateSuccess}/>
+               
+                }
+                {
+                this.state.showUpdateSuccess && 
+                <FundrasierResponsePopup type="success"
+                                        show={true}
+                                        message="Fundraiser updated successfully!"
+                                        onHide={this.handleCloseUpdateSuccess}/>
+               
+                }
                 </Container>
             </>
         );

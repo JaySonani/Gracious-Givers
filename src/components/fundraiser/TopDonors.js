@@ -15,13 +15,12 @@ export default function TopDonors (props) {
         <Card className='card-custom'>
             <Card.Body className='card-body-color'>                
                 <Card.Title className='top-donors-title'>
-                    <strong>Top Donors</strong>
+                    Top Donors
                     <div>
-                        <FaDonate size='20px'
-                            style={{ color: "black", fontSize: "20px", marginRight: "5px" }}/>
+                        <FaDonate size='20px' style={{ color: "black"}}/>
                     </div>        
                 </Card.Title>
-                <Card.Body>                                                          
+                <Card.Body>                      
                     <Table responsive>
                         <tbody>
                             {topDonors}
