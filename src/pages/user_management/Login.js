@@ -85,14 +85,9 @@ export default class Login extends Component {
         })
         .then(function (response) {
           console.log(response);
-          if (response.data.status === "success") {
-            console.log("Success block");
             authenticateUser(response);
             redirectUser("/");
-          } else {
-            console.log("Error block");
-          }
-        })
+          })
         .catch(function (error) {
           console.log("Catch block");
           if (error.response.status === 401) {
