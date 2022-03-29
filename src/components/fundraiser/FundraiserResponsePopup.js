@@ -1,9 +1,10 @@
+// Author: Akanksha Singh (B00892887)
+
 import { Modal, Button } from "react-bootstrap";
 import "./styles/popupDialog.css";
 import { FaCheckCircle } from "react-icons/fa";
 // FaExclamationCircle
-// FaExclamationTriangle
-// FaCheckCircle
+
 export default function FundrasierResponseUp(props) {
 
     const show = props.show;

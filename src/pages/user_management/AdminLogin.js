@@ -3,7 +3,6 @@ import { Row, Col, Form, Button, Container } from "react-bootstrap";
 import Header from "../../components/navbar/Header";
 import Footer from "../../components/navbar/Footer";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { authenticateUser, redirectUser } from "../../utils/Network";
 
 const AdminLogin = () => {
@@ -36,11 +35,10 @@ const AdminLogin = () => {
       );
     }
   };
-  const navigate = useNavigate();
+
   const handleValueChange = (event) => {
     const field = event.target.name;
     const value = event.target.value;
-    const fields = { ...formField };
 
     setFormField({
       ...formField,
@@ -53,10 +51,6 @@ const AdminLogin = () => {
         [field]: null,
       });
     }
-  };
-
-  const validateForm = () => {
-    console.log("Validating the form");
   };
 
   const handleAdminLogin = (event) => {
@@ -84,7 +78,7 @@ const AdminLogin = () => {
       });
     }
     if (!formField.security_a1) {
-      message = "Security Answer1 is required";
+      message = "Security Answer is required";
       setFormErrors({
         ...formErrors,
         status: true,
@@ -92,7 +86,7 @@ const AdminLogin = () => {
       });
     }
     if (!formField.security_a2) {
-      message = "Security Answer2 is required";
+      message = "Security Answer is required";
       setFormErrors({
         ...formErrors,
         status: true,
@@ -203,10 +197,11 @@ const AdminLogin = () => {
               </Form.Control.Feedback>
             </Form.Group>
           </Row>
+          {showError()}
           <Button variant="primary" type="submit" className="custom-btn-header">
             Login
           </Button>
-          {showError()}
+       
             <Row className="mb-3" style={{height:'40px'}}>
               <Col>
                 

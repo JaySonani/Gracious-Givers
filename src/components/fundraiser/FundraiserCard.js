@@ -1,3 +1,5 @@
+// Author: Akanksha Singh (B00892887)
+
 import { Card, ProgressBar } from "react-bootstrap";
 import * as FundraiserConstants from './FundraiserConstants';
 import "./styles/fundraiserCard.css";
@@ -20,42 +22,42 @@ export default function FundraiserCard(props) {
         <Card id='donor-fundraiser-card' onClick={() => onCardClick(fundraiser.eventId)}>
             <Card.Img variant="top" src={fundraiser.image} />
             <Card.Body>
-                <Card.Title style={{ textAlign: 'center', fontWeight:'600'}}>{fundraiser.title}</Card.Title>
-                
+                <Card.Title style={{ textAlign: 'center', fontWeight: '600' }}>{fundraiser.title}</Card.Title>
+
                 <div id='createdDetails'>
-                        <div>
-                            <span>
-                                <small style={{ fontWeight:'600'}}>Created By</small>
-                            </span>
-                        </div>
-                        <div><span>{fundraiser.createdBy}</span></div>
+                    <div>
+                        <span>
+                            <small style={{ fontWeight: '600' }}>Created By</small>
+                        </span>
                     </div>
-                    <div id='donationDetails'>
+                    <div><span>{fundraiser.createdBy}</span></div>
+                </div>
+                <div id='donationDetails'>
+                    <div>
+                        <span><small style={{ fontWeight: '600' }}>Raised</small></span>
                         <div>
-                            <span><small style={{ fontWeight:'600'}}>Raised</small></span>
-                            <div>
-                                <span style={{ fontWeight: '800', color: 'rgb(3, 106, 166, 1)' }}>
-                                    {FundraiserConstants.currencyFormatting(fundraiser.currency,fundraiser.amountRaised, 0)}                            
-                                </span>
-                                <span>&nbsp;of {FundraiserConstants.currencyFormatting(fundraiser.currency,fundraiser.goalAmount, 0)}</span>
-                            </div>
-                            <ProgressBar now={progress}
-                                className="blue-progress-bar"
-                                style={{ borderRadius: '19.5px', background: 'rgb(170 207 232)', height: '20px', margin: '8px 0' }} />
-                        </div>
-                        <div id='supporters-days-remaining'>
-                            <span>
-                                <strong>{fundraiser.donors}</strong>
-                                &nbsp;supporters<br />
+                            <span style={{ fontWeight: '800', color: 'rgb(3, 106, 166, 1)' }}>
+                                {FundraiserConstants.currencyFormatting(fundraiser.currency, fundraiser.amountRaised, 0)}
                             </span>
-                            <span>
-                                <strong>{getDaysRemaining()}</strong>
-                                &nbsp;days remaining
-                            </span>
+                            <span>&nbsp;of {FundraiserConstants.currencyFormatting(fundraiser.currency, fundraiser.goalAmount, 0)}</span>
                         </div>
+                        <ProgressBar now={progress}
+                            className="blue-progress-bar"
+                            style={{ borderRadius: '19.5px', background: 'rgb(170 207 232)', height: '20px', margin: '8px 0' }} />
                     </div>
-                    
-                
+                    <div id='supporters-days-remaining'>
+                        <span>
+                            <strong>{fundraiser.donors}</strong>
+                            &nbsp;donations<br />
+                        </span>
+                        <span>
+                            <strong>{getDaysRemaining()}</strong>
+                            &nbsp;days remaining
+                        </span>
+                    </div>
+                </div>
+
+
             </Card.Body>
         </Card>
     );

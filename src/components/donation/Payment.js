@@ -18,7 +18,7 @@ function Payment() {
     const { state } = useLocation();
     // const { id, amount, fname, lname, email } = state;
 
-    console.log(state);
+    // console.log(state);
 
     const [cardNumber, setCardNumber] = useState("");
     const [error, setError] = useState(false);
@@ -104,7 +104,7 @@ function Payment() {
                 <br /><br />
 
                 <div className="btn">
-                    <Button className="donateButton" onClick={makePayment} fullWidth>MAKE PAYMENT</Button>
+                    <Button className="donateButton" onClick={makePayment} >MAKE PAYMENT</Button>
                 </div>
                 <br /><br />
 

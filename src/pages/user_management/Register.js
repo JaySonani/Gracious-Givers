@@ -2,7 +2,6 @@ import { React, Component } from "react";
 import { Row, Col, Form, Button, Container } from "react-bootstrap";
 import Footer from "../../components/navbar/Footer";
 import Header from "../../components/navbar/Header";
-import { Link } from "react-router";
 import axios from "axios";
 import { redirectUser } from "../../utils/Network";
 export default class Register extends Component {
@@ -26,6 +25,10 @@ export default class Register extends Component {
         ngo_name: "",
         target_group: "",
         description: "",
+        apiresponses: "",
+      },
+      formSuccess: {
+        apiresponses: "",
       },
       // validated: false
     };
@@ -53,24 +56,122 @@ export default class Register extends Component {
     console.log("Validating the form");
   };
 
+  showError = () => {
+    if (this.state.formErrors.apiresponses) {
+      return (
+        <div>
+          <div
+            style={{ margin: 20 + "px" }}
+            class="alert alert-danger"
+            role="alert"
+          >
+            {this.state.formErrors.apiresponses.message}
+          </div>
+        </div>
+      );
+    }
+  };
+
+  showSuccess = () => {
+    if (this.state.formSuccess.apiresponses) {
+      return (
+        <div>
+          <div
+            style={{ margin: 20 + "px" }}
+            class="alert alert-success"
+            role="alert"
+          >
+            {this.state.formSuccess.apiresponses}
+          </div>
+        </div>
+      );
+    }
+  };
+
   handleSubmit = (event) => {
     event.preventDefault();
-    axios
-      .post("https://gracious-givers-backend.herokuapp.com/auth/register", {
-        email: this.state.formField.email,
-        password: this.state.formField.password,
-        user_id: this.state.formField.user_id,
-        ngo_name: this.state.formField.ngo_name,
-        target_group: this.state.formField.target_group,
-        description: this.state.formField.description,
-      })
-      .then(function (response) {
-        console.log(response);
-        redirectUser("/Login");
-      })
-      .catch(function (error) {
-        console.log(error);
+    let email = this.state.formField.email;
+    let password = this.state.formField.password;
+    var validEmailRegex = /\S+@\S+\.\S+/;
+    if (email && !validEmailRegex.test(email)) {
+      this.setState({
+        formErrors: {
+          ...this.state.formErrors,
+          email: "Please enter a valid email address",
+        },
       });
+    } else if (email.length == 0) {
+      this.setState({
+        formErrors: {
+          ...this.state.formErrors,
+          email: "Please enter an email address",
+        },
+      });
+    } else if (password.length == 0) {
+      this.setState({
+        formErrors: {
+          ...this.state.formErrors,
+          password: "Please enter a password",
+        },
+      });
+    } else if (password != this.state.formField.cpassword) {
+      this.setState({
+        formErrors: {
+          ...this.state.formErrors,
+          cpassword: "Password and confirm password does not match",
+        },
+      });
+    } else if (this.state.formField.ngo_name.length == 0) {
+      this.setState({
+        formErrors: {
+          ...this.state.formErrors,
+          ngo_name: "Please enter all the ngo name",
+        },
+      });
+    } else if (this.state.formField.target_group.length == 0) {
+      this.setState({
+        formErrors: {
+          ...this.state.formErrors,
+          target_group: "Please enter all the target group",
+        },
+      });
+    } else if (this.state.formField.description.length == 0) {
+      this.setState({
+        formErrors: {
+          ...this.state.formErrors,
+          description: "Please enter the description",
+        },
+      });
+    } else {
+      axios
+        .post("https://gracious-givers-backend.herokuapp.com/auth/register", {
+          email: this.state.formField.email,
+          password: this.state.formField.password,
+          user_id: this.state.formField.user_id,
+          ngo_name: this.state.formField.ngo_name,
+          target_group: this.state.formField.target_group,
+          description: this.state.formField.description,
+        })
+        .then(function (response) {
+          console.log(response);
+          redirectUser("/");
+        })
+        .catch((error) => {
+          console.log("Catch block");
+          console.log(error);
+          if (error && error.response && error.response.data) {
+            console.log(error.response.data.message);
+            this.setState({
+              formErrors: {
+                ...this.state.formErrors,
+                apiresponses: error.response.data.message,
+              },
+            });
+          } else {
+            console.log(error);
+          }
+        });
+    }
     //}
   };
   toggleTargetGroup = (event) => {
@@ -78,6 +179,7 @@ export default class Register extends Component {
     const value = event.target.value;
     console.log(value);
   };
+
   render() {
     const formField = this.state.formField;
     const formError = this.state.formErrors;
@@ -219,6 +321,8 @@ export default class Register extends Component {
                 </Form.Control.Feedback>
               </Form.Group>
             </Row>
+            {this.showError()}
+            {this.showSuccess()}
             <Button
               variant="primary"
               type="submit"
@@ -226,10 +330,8 @@ export default class Register extends Component {
             >
               Register
             </Button>
-            <Row className="mb-3" style={{height:'40px'}}>
-              <Col>
-                
-              </Col>
+            <Row className="mb-3" style={{ height: "40px" }}>
+              <Col></Col>
             </Row>
           </Form>
         </Container>

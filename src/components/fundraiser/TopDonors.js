@@ -1,3 +1,5 @@
+// Author: Akanksha Singh (B00892887)
+
 import { Card, Table } from 'react-bootstrap';
 import { FaDonate } from "react-icons/fa";
 import './styles/topDonors.css';

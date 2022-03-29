@@ -1,3 +1,6 @@
+/*
+    Author: Jay Nimeshkumar Patel
+*/
 import Card from "./Card";
 import Footer from "../navbar/Footer";
 import Header from "../navbar/Header";
@@ -36,7 +39,7 @@ const FundraiserRequest = (props) => {
                 });
         } else {
             window.alert("Action aborted!");
-        }
+        }   
     }
 
     async function onRejectHandler() {
@@ -66,7 +69,7 @@ const FundraiserRequest = (props) => {
         await Axios.get("https://gracious-givers-backend.herokuapp.com/fundraiser/" + id)
             .then((response) => {
                 if (response.status === 200) {
-                    console.log(response.data);
+                    // console.log(response.data);
                     setFundraiser(response.data);
                 }
             })
@@ -79,7 +82,7 @@ const FundraiserRequest = (props) => {
         await Axios.get("https://gracious-givers-backend.herokuapp.com/fundraiser/" + id)
             .then((response) => {
                 if (response.status === 200) {
-                    console.log(response.data);
+                    // console.log(response.data);
                     setFundraiser(response.data);
                 }
             })
