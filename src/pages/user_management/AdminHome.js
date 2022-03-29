@@ -1,5 +1,5 @@
 /*
-    Author: Jay Nimeshkumar Patel
+    Author: Jay Nimeshkumar Patel (B00885078)
 */
 import Card from "../../components/moderation/Card";
 import Footer from "../../components/navbar/Footer";
