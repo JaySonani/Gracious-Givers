@@ -8,6 +8,7 @@ import classes from "./styles/NGODetails.module.css";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Axios from "axios";
+import { isAuthenticated, redirectUser } from "../../utils/Network";
 
 const NGODetails = (props) => {
     const [ngo, setNgo] = useState([]);
@@ -15,6 +16,9 @@ const NGODetails = (props) => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        if (!isAuthenticated()) {
+            redirectUser("/AdminLogin");
+        }
         if (props.all) {
             fetchActiveNgo(id);
         } else {
