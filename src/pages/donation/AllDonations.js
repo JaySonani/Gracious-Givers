@@ -7,8 +7,8 @@ import Header from "../../components/navbar/Header";
 import DonationCard from "../../components/donation/DonationCard";
 import './styles/AllDonations.css';
 import NoEventsFound from "../../components/donation/NoEventsFound";
+import { isAuthenticated, redirectUser } from "../../utils/Network";
 const axios = require('axios');
-
 
 function AllDonation() {
 
@@ -17,9 +17,10 @@ function AllDonation() {
     const [searchActive, setSearchActive] = useState(false);
     const [filteredDonations, setFilteredDonations] = useState(donations);
 
-
     useEffect(() => {
-
+        if (!isAuthenticated()) {
+            redirectUser("/");
+        }
         const retrieveAllDonations = () => {
             var config = {
                 method: 'get',
