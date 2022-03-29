@@ -58,7 +58,7 @@ export default class Login extends Component {
       .then(function (response) {
         console.log(response);
         authenticateUser(response);
-        redirectUser("/");
+        redirectUser("/ngo/fundraiser");
       })
       .catch(function (error) {
         console.log(error);

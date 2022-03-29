@@ -12,7 +12,7 @@ export default function FundraiserDonation(props) {
         let endDate = new Date(event.endDate);
         let timeDifference = endDate.getTime() - new Date().getTime();
         let daysRemaining = Math.round(timeDifference / (1000 * 60 * 60 * 24));
-        return daysRemaining; 
+        return !daysRemaining ? 0 : daysRemaining; 
     }
 
     return (
@@ -38,11 +38,13 @@ export default function FundraiserDonation(props) {
                     </span>      
                     <div id='supporters-days-remaining'>
                         <span>
-                        <span style={{fontSize:'1.2rem', fontWeight:700}}>{event.donors}</span>&nbsp;
-                            supporters
-                        </span><br/> 
+                            <span style={{fontSize:'1.1rem', fontWeight:700}}>{event.donors}
+                                </span>&nbsp;
+                                    supporters
+                                </span>
+                                <br/> 
                         <span>
-                            <span style={{fontSize:'1.2rem', fontWeight:700}}>
+                            <span style={{fontSize:'1.1rem', fontWeight:700}}>
                                 {getDaysRemaining()}
                             </span>
                             &nbsp;days remaining                            

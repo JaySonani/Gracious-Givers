@@ -14,7 +14,7 @@ export default function FundrasierDeactivateConfirmation(props) {
             <Modal.Title style={{fontSize:'1.4rem'}}>Confirm deactivation</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                Are you should you want to deactivate the fundraiser <strong>"{fundraiser.title}"</strong>?
+                Are you should you want to deactivate the fundraiser <em style={{fontWeight:'600'}}>"{fundraiser.title}"</em>&nbsp;?
                 <br/><br/>
                 Your organization can longer raise funds against this fundraiser after deactivation.
             </Modal.Body>

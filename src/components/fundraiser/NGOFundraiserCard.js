@@ -159,8 +159,7 @@ export default function NGOFundraiserCard(props) {
                                         }
                                         {     
                                             fundraiser.status  === 'Pending Admin Approval' &&
-                                            <Dropdown.Item name="delete" onClick={handleFundraiserAction} >Delete</Dropdown.Item>
-                                            
+                                            <Dropdown.Item name="delete" onClick={handleFundraiserAction} >Delete</Dropdown.Item>                                            
                                         }
                                         {
                                             fundraiser.status  === 'Active' &&
@@ -189,6 +188,7 @@ export default function NGOFundraiserCard(props) {
                                                                         onHide={handleCloseDeleteSuccess}/>}
                                 {showDeactivateSuccess && <FundrasierResponseUp 
                                                                         show={true}
+                                                                        type="success"
                                                                         message="Fundraiser deactivated successfully"
                                                                         onHide={handleCloseDeactivateSuccess}/>}                                        
                             </Col>

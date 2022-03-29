@@ -54,7 +54,9 @@ export default function FundraiserList() {
                     <Col xs={12} md={10}>
                         <Row style={{ margin: '0.5rem 0' }}>
                             <Col>
-                                <span><strong>Search By Cause</strong></span>
+                                <span style={{ textAlign: 'right', fontWeight:'600'}}>
+                                    Search By Cause
+                                </span>
                             </Col>
                             <Col xs={7} md={10}>
                                 <DropdownButton id="causes-dropdown"
@@ -68,7 +70,7 @@ export default function FundraiserList() {
                                 </DropdownButton>
                             </Col>
                         </Row>
-                        <Row>
+                        <Row>                           
                             {fundraisers.map(fundraiser =>
                                 <Col key={fundraiser._id} xs={12} md={4}
                                     style={{ margin: '0.6rem 0' }} >
@@ -76,7 +78,7 @@ export default function FundraiserList() {
                                         onCardClick={() => onCardClickHandler(fundraiser._id)}
                                     />
                                 </Col>
-                            )}
+                            )}                                                                   
                         </Row>
                     </Col>
                     <Col xs={0} md={1} />
