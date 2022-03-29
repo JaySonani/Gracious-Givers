@@ -1,3 +1,6 @@
+/*
+    Author: Jay Nimeshkumar Patel
+*/
 import classes from "./styles/Card.module.css";
 
 const Card = (props) => {

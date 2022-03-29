@@ -1,3 +1,6 @@
+/*
+    Author: Jay Nimeshkumar Patel
+*/
 import Footer from "../navbar/Footer";
 import Header from "../navbar/Header";
 import Card from "./Card";
@@ -24,7 +27,7 @@ const FundraiserRequests = (props) => {
             .then((response) => {
                 if (response.status === 200) {
                     setFundraisers(response.data);
-                    console.log(response.data);
+                    // console.log(response.data);
                 }
             })
             .catch((error) => {
@@ -37,7 +40,7 @@ const FundraiserRequests = (props) => {
             .then((response) => {
                 if (response.status === 200) {
                     setFundraisers(response.data);
-                    console.log(response.data);
+                    // console.log(response.data);
                 }
             })
             .catch((error) => {
