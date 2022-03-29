@@ -1,5 +1,5 @@
 /*
-    Author: Jay Nimeshkumar Patel
+    Author: Jay Nimeshkumar Patel (B00885078)
 */
 import classes from "./styles/NGOList.module.css";
 import { useNavigate } from "react-router-dom";
