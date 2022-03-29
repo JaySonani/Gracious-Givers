@@ -85,10 +85,10 @@ export default class Login extends Component {
         })
         .then(function (response) {
           console.log(response);
-            authenticateUser(response);
-            redirectUser("/ngo/fundraiser");
-          })
-        .catch(function (error) {
+          authenticateUser(response);
+          redirectUser("/ngo/fundraiser");
+        })
+        .catch((error) => {
           console.log("Catch block");
           console.log(error);
           if (error.response.data) {
