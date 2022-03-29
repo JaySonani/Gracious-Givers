@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom";
 import Axios from "axios";
 import classes from "./styles/FundraiserRequest.module.css";
 import { useNavigate } from "react-router-dom";
+import { isAuthenticated, redirectUser } from "../../utils/Network";
 
 const FundraiserRequest = (props) => {
     const [fundraiser, setFundraiser] = useState([]);
@@ -16,6 +17,9 @@ const FundraiserRequest = (props) => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        if (!isAuthenticated()) {
+            redirectUser("/AdminLogin");
+        }
         if (props.all) {
             fetchAllFundraiser(id);
         } else {
@@ -26,7 +30,9 @@ const FundraiserRequest = (props) => {
     async function onApproveHandler() {
         if (window.confirm("Are you sure that you want to Approve?") === true) {
             await Axios.put(
-                "https://gracious-givers-backend.herokuapp.com/fundraiser/" + id + "/status/Active"
+                "https://gracious-givers-backend.herokuapp.com/fundraiser/" +
+                    id +
+                    "/status/Active"
             )
                 .then((response) => {
                     if (response.status === 200) {
@@ -39,7 +45,7 @@ const FundraiserRequest = (props) => {
                 });
         } else {
             window.alert("Action aborted!");
-        }   
+        }
     }
 
     async function onRejectHandler() {
@@ -49,7 +55,9 @@ const FundraiserRequest = (props) => {
             true
         ) {
             await Axios.put(
-                "https://gracious-givers-backend.herokuapp.com/fundraiser/" + id + "/status/Deactivated"
+                "https://gracious-givers-backend.herokuapp.com/fundraiser/" +
+                    id +
+                    "/status/Deactivated"
             )
                 .then((response) => {
                     if (response.status === 200) {
@@ -66,7 +74,9 @@ const FundraiserRequest = (props) => {
     }
 
     async function fetchPendingFundraiser(id) {
-        await Axios.get("https://gracious-givers-backend.herokuapp.com/fundraiser/" + id)
+        await Axios.get(
+            "https://gracious-givers-backend.herokuapp.com/fundraiser/" + id
+        )
             .then((response) => {
                 if (response.status === 200) {
                     // console.log(response.data);
@@ -79,7 +89,9 @@ const FundraiserRequest = (props) => {
     }
 
     async function fetchAllFundraiser(id) {
-        await Axios.get("https://gracious-givers-backend.herokuapp.com/fundraiser/" + id)
+        await Axios.get(
+            "https://gracious-givers-backend.herokuapp.com/fundraiser/" + id
+        )
             .then((response) => {
                 if (response.status === 200) {
                     // console.log(response.data);
@@ -153,7 +165,7 @@ const FundraiserRequest = (props) => {
                                         <button
                                             className={
                                                 classes[
-                                                "custom-logout-btn-header"
+                                                    "custom-logout-btn-header"
                                                 ]
                                             }
                                             onClick={onRejectHandler}
@@ -167,7 +179,7 @@ const FundraiserRequest = (props) => {
                                         <button
                                             className={
                                                 classes[
-                                                "custom-logout-btn-header"
+                                                    "custom-logout-btn-header"
                                                 ]
                                             }
                                             onClick={onRejectHandler}

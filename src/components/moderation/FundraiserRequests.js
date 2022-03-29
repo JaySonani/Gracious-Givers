@@ -8,11 +8,15 @@ import NGOList from "./NGOList";
 import classes from "./styles/FundraiserRequests.module.css";
 import { useEffect, useState } from "react";
 import Axios from "axios";
+import { isAuthenticated, redirectUser } from "../../utils/Network";
 
 const FundraiserRequests = (props) => {
     const [fundraisers, setFundraisers] = useState([]);
 
     useEffect(() => {
+        if (!isAuthenticated()) {
+            redirectUser("/AdminLogin");
+        }
         if (props.all) {
             fetchAllFundraisers();
         } else {
@@ -21,8 +25,6 @@ const FundraiserRequests = (props) => {
     }, [props.all]);
 
     async function fetchPendingFundraisers() {
-        // const getFundraisersByCauseUrl =
-        //     FundrasierConstants.apiBaseUrl + `/cause/${selectedCause}`;
         await Axios.get("https://gracious-givers-backend.herokuapp.com/fundraiser/pending")
             .then((response) => {
                 if (response.status === 200) {

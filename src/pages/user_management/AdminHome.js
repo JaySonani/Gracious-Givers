@@ -8,11 +8,15 @@ import NGOList from "../../components/moderation/NGOList";
 import classes from "./styles/AdminHome.module.css";
 import { useEffect, useState } from "react";
 import Axios from "axios";
+import { isAuthenticated, redirectUser } from "../../utils/Network";
 
 const AdminHome = (props) => {
     const [ngo, setNgo] = useState([]);
 
     useEffect(() => {
+        if (!isAuthenticated()) {
+            redirectUser("/AdminLogin");
+        }
         if (props.all) {
             fetchAllNgo();
         } else {
