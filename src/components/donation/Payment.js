@@ -7,7 +7,6 @@ import Footer from "../navbar/Footer";
 import Header from "../navbar/Header";
 var axios = require('axios');
 
-// import './styles/Payment.css';
 
 function Payment() {
 
@@ -104,7 +103,7 @@ function Payment() {
                 <br /><br />
 
                 <div className="btn">
-                    <Button className="donateButton" onClick={makePayment} >MAKE PAYMENT</Button>
+                    <Button className="donateButton" style={{ backgroundColor: "#057abe" }} onClick={makePayment} >MAKE PAYMENT</Button>
                 </div>
                 <br /><br />
 

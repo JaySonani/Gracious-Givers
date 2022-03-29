@@ -139,11 +139,11 @@ const DonationForm = () => {
                 </div>
 
                 <div className="rowForm">
-                    <Button className="btns" variant="primary" onClick={validateForm} >Donate</Button>
+                    <Button className="donateButton" variant="primary" onClick={validateForm} >Donate</Button>
                 </div>
 
                 <div className="rowForm">
-                    <Button className="btns" variant="outline-primary" onClick={resetForm} >Reset</Button>
+                    <Button className="resetButton" variant="outline-primary" onClick={resetForm} >Reset</Button>
                 </div>
 
             </div >
