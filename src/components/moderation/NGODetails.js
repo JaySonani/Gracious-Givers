@@ -1,3 +1,6 @@
+/*
+    Author: Jay Nimeshkumar Patel
+*/
 import Card from "./Card";
 import Footer from "../navbar/Footer";
 import Header from "../navbar/Header";
@@ -65,7 +68,7 @@ const NGODetails = (props) => {
         await Axios.get("https://gracious-givers-backend.herokuapp.com/ngo/" + id)
             .then((response) => {
                 if (response.status === 200) {
-                    console.log(response.data);
+                    // console.log(response.data);
                     setNgo(response.data);
                 }
             })
@@ -78,7 +81,7 @@ const NGODetails = (props) => {
         await Axios.get("https://gracious-givers-backend.herokuapp.com/ngo/" + id)
             .then((response) => {
                 if (response.status === 200) {
-                    console.log(response.data);
+                    // console.log(response.data);
                     setNgo(response.data);
                 }
             })
