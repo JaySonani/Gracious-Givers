@@ -6,8 +6,9 @@ import Footer from "../../components/navbar/Footer";
 import Header from "../../components/navbar/Header";
 import DonationCard from "../../components/donation/DonationCard";
 import './styles/AllDonations.css';
+import NoEventsFound from "../../components/donation/NoEventsFound";
+import { isAuthenticated, redirectUser } from "../../utils/Network";
 const axios = require('axios');
-
 
 function AllDonation() {
 
@@ -16,9 +17,10 @@ function AllDonation() {
     const [searchActive, setSearchActive] = useState(false);
     const [filteredDonations, setFilteredDonations] = useState(donations);
 
-
     useEffect(() => {
-
+        if (!isAuthenticated()) {
+            redirectUser("/");
+        }
         const retrieveAllDonations = () => {
             var config = {
                 method: 'get',
@@ -79,13 +81,14 @@ function AllDonation() {
 
                         searchActive ?
                             <> {
-                                filteredDonations.map((item, index) => {
-                                    // console.log(item);
-                                    return (
-                                        // <p>Hello</p>
-                                        <DonationCard key={index.toString()} amount={item.donation_amount} name={item.donor_firstname + ' ' + item.donor_lastname} email={item.donor_email} event_name={item.donation_event_name} time={item.createdAt.slice(0, 10)} />
-                                    )
-                                })
+                                filteredDonations.length === 0 ? <NoEventsFound /> :
+                                    filteredDonations.map((item, index) => {
+                                        // console.log(item);
+                                        return (
+                                            // <p>Hello</p>
+                                            <DonationCard key={index.toString()} amount={item.donation_amount} name={item.donor_firstname + ' ' + item.donor_lastname} email={item.donor_email} event_name={item.donation_event_name} time={item.createdAt.slice(0, 10)} />
+                                        )
+                                    })
                             }
                             </>
 

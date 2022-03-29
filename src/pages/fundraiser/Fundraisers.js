@@ -58,9 +58,7 @@ export default function FundRaisers() {
                         <div className='row' style={{ margin: '50px 0px' }}>
                             <div className='col-12'>
                                 <div className='support-now'>
-                                    <Button variant="primary" 
-                                            className="custom-btn" 
-                                            onClick={() => navigate("/donation", { state: { id: event._id, name: event.title }})}>
+                                    <Button variant="primary" className="custom-btn" onClick={() => navigate("/donation", { state: { id: event._id, name: event.title } })}>
                                         Donate Now
                                         <BiDonateHeart style={{ marginLeft: '10px', marginBottom: '7px' }} />
                                     </Button>
