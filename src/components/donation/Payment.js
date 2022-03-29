@@ -1,3 +1,5 @@
+// Author: Jay Bhagvanbhai Sonani (B00891984)
+
 import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -48,6 +50,7 @@ function Payment() {
     function storeData(state) {
         var data = JSON.stringify({
             "donation_event_id": state.id,
+            "donation_event_name": state.name,
             "donation_amount": state.amount,
             "donor_firstname": state.fname,
             "donor_lastname": state.lname,

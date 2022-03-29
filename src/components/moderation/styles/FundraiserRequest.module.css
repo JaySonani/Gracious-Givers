@@ -11,7 +11,7 @@ main {
 
 .content {
     display: flex;
-    justify-content: space-between;
+    justify-content: left;
 }
 
 .event h3 {

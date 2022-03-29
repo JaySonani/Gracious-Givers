@@ -1,3 +1,5 @@
+// Author: Jay Bhagvanbhai Sonani (B00891984)
+
 import { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -9,13 +11,15 @@ const DonationForm = () => {
 
 
     const { state } = useLocation();
-    const { id } = state;
+    const { id, name } = state;
 
     let validForm = true;
     let navigate = useNavigate();
 
     useEffect(() => {
-        // console.log(id);
+        console.log(id);
+        console.log(name);
+
     }, [id]);
 
 
@@ -82,7 +86,7 @@ const DonationForm = () => {
         }
 
         if (validForm) {
-            navigate("/payment", { state: { id, amount, fname, lname, email } });
+            navigate("/payment", { state: { id, name, amount, fname, lname, email } });
             console.log("Form validated");
         } else {
             if (errorText.length > 0) {

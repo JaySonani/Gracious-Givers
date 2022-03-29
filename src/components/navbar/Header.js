@@ -1,3 +1,5 @@
+// Author: Jay Bhagvanbhai Sonani (B00891984)
+
 import { useEffect, useState } from "react";
 import { Container, Navbar, Nav, Button, NavDropdown } from "react-bootstrap";
 import { isAuthenticated, setTokenOnLogOut } from "../../utils/Network";
@@ -62,7 +64,7 @@ function Header(props) {
                     </NavDropdown.Item>
                   </NavDropdown>
                 }
-                {<Label title="All Donations" path="./all_donations" />}
+                {<Label title="All Donations" path="/all_donations" />}
 
                 <Label title="About Us" path="./about_us" />
               </Nav>
@@ -128,7 +130,7 @@ function Header(props) {
                 <Label title="Home" path="/admin" />
                 <Label title="Active Fundraisers" path="/admin/activefundraisers" />
                 <NavDropdown
-                  title="Requests (logged in admin)"
+                  title="Requests"
                   id="basic-nav-dropdown"
                 >
                   <NavDropdown.Item href="/admin/ngorequests">

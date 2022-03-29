@@ -1,10 +1,12 @@
+// Author: Jay Bhagvanbhai Sonani (B00891984)
+
 import './styles/DonationCard.css';
 
 const DonationCard = (props) => {
     return (
         <div className='donationCard'>
             <div className='donationAmount'>
-                Amount: {props.amount}
+                {`Amount $${props.amount}`}
             </div>
             <div className='donationContent'>
                 By {props.name}

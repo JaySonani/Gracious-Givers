@@ -22,7 +22,7 @@ const NGODetails = (props) => {
     async function onApproveHandler() {
         if (window.confirm("Are you sure that you want to Approve?") === true) {
             await Axios.put(
-                "http://localhost:5000/ngo/" + id + "/status/Active"
+                "https://gracious-givers-backend.herokuapp.com/ngo/" + id + "/status/Active"
             )
                 .then((response) => {
                     if (response.status === 200) {
@@ -45,7 +45,7 @@ const NGODetails = (props) => {
             true
         ) {
             await Axios.put(
-                "http://localhost:5000/ngo/" + id + "/status/Deactivated"
+                "https://gracious-givers-backend.herokuapp.com/ngo/" + id + "/status/Deactivated"
             )
                 .then((response) => {
                     if (response.status === 200) {
@@ -62,7 +62,7 @@ const NGODetails = (props) => {
     }
 
     async function fetchActiveNgo(id) {
-        await Axios.get("http://localhost:5000/ngo/" + id)
+        await Axios.get("https://gracious-givers-backend.herokuapp.com/ngo/" + id)
             .then((response) => {
                 if (response.status === 200) {
                     console.log(response.data);
@@ -75,7 +75,7 @@ const NGODetails = (props) => {
     }
 
     async function fetchPendingNgo(id) {
-        await Axios.get("http://localhost:5000/ngo/" + id)
+        await Axios.get("https://gracious-givers-backend.herokuapp.com/ngo/" + id)
             .then((response) => {
                 if (response.status === 200) {
                     console.log(response.data);

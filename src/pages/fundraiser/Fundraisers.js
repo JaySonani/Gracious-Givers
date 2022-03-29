@@ -17,10 +17,12 @@ export default function FundRaisers() {
     const eventId = eventParam.id;
     const navigate = useNavigate();
     const [event, setEvent] = useState({});
-    // const [topDonors1, setTopDonors] = useState({});
+    const [topDonors, setTopDonors] = useState([]);
     const getFundraiserDetailsURI = FundraiserConstants.apiBaseUrl + `/${eventId}`;
-    // This is to be developed in the Donations feature 
-    // const getTopDonorsURI = FundraiserConstants.apiBaseUrl + `/donors/${eventId}`;
+    // const getTopDonorsURI = `https://gracious-givers-backend.herokuapp.com/donation/topdonors/${eventId}`;
+    const getTopDonorsURI = `https://gracious-givers-backend.herokuapp.com/donation/topdonors/${eventId}`;
+
+    console.log(getTopDonorsURI);
 
     useEffect(() => {
         console.log("The get URL is " + getFundraiserDetailsURI);
@@ -35,35 +37,19 @@ export default function FundRaisers() {
             });
 
         // This is to be developed in the Donations feature 
-        // Axios.get(getTopDonorsURI)
-        // .then((response) => {
-        //     if (response.status === 200 && response.data.status === true) {
-        //         setTopDonors(response.data.data);
-        //     }
-        // })
-        // .catch((error) => {
-        //     console.log('Error in getting details of the fundraiser :' + error);           
-        // });
+        Axios.get(getTopDonorsURI)
+            .then((response) => {
+                console.log(getTopDonorsURI);
+                if (response.status === 200 && response.data.success === true) {
+                    console.log(response.data.donations);
+                    setTopDonors(response.data.donations);
+                }
+            })
+            .catch((error) => {
+                console.log('Error in getting details of the fundraiser :' + error);
+            });
 
     }, []);
-
-    // This should be removed after the development of the Donation feature
-    const topDonors = [{
-        name: 'Alan',
-        amount: 145,
-        currency: 'CAD',
-    },
-    {
-        name: 'Monica',
-        amount: 100,
-        currency: 'CAD',
-    },
-    {
-        name: 'Marsie',
-        amount: 160,
-        currency: 'CAD',
-    }
-    ];
 
     return (
         <>
@@ -77,7 +63,7 @@ export default function FundRaisers() {
                         <div className='row' style={{ margin: '50px 0px' }}>
                             <div className='col-12'>
                                 <div className='support-now'>
-                                    <Button variant="primary" className="custom-btn" onClick={() => navigate("/donation", { state: { id: event._id } })}>
+                                    <Button variant="primary" className="custom-btn" onClick={() => navigate("/donation", { state: { id: event._id, name: event.title } })} f>
                                         Donate Now
                                         <BiDonateHeart style={{ marginLeft: '10px', marginBottom: '7px' }} />
                                     </Button>

@@ -23,7 +23,7 @@ const FundraiserRequest = (props) => {
     async function onApproveHandler() {
         if (window.confirm("Are you sure that you want to Approve?") === true) {
             await Axios.put(
-                "http://localhost:5000/fundraiser/" + id + "/status/Active"
+                "https://gracious-givers-backend.herokuapp.com/fundraiser/" + id + "/status/Active"
             )
                 .then((response) => {
                     if (response.status === 200) {
@@ -46,7 +46,7 @@ const FundraiserRequest = (props) => {
             true
         ) {
             await Axios.put(
-                "http://localhost:5000/fundraiser/" + id + "/status/Deactivated"
+                "https://gracious-givers-backend.herokuapp.com/fundraiser/" + id + "/status/Deactivated"
             )
                 .then((response) => {
                     if (response.status === 200) {
@@ -63,7 +63,7 @@ const FundraiserRequest = (props) => {
     }
 
     async function fetchPendingFundraiser(id) {
-        await Axios.get("http://localhost:5000/fundraiser/" + id)
+        await Axios.get("https://gracious-givers-backend.herokuapp.com/fundraiser/" + id)
             .then((response) => {
                 if (response.status === 200) {
                     console.log(response.data);
@@ -76,7 +76,7 @@ const FundraiserRequest = (props) => {
     }
 
     async function fetchAllFundraiser(id) {
-        await Axios.get("http://localhost:5000/fundraiser/" + id)
+        await Axios.get("https://gracious-givers-backend.herokuapp.com/fundraiser/" + id)
             .then((response) => {
                 if (response.status === 200) {
                     console.log(response.data);

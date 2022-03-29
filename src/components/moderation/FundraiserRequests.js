@@ -20,7 +20,7 @@ const FundraiserRequests = (props) => {
     async function fetchPendingFundraisers() {
         // const getFundraisersByCauseUrl =
         //     FundrasierConstants.apiBaseUrl + `/cause/${selectedCause}`;
-        await Axios.get("http://localhost:5000/fundraiser/pending")
+        await Axios.get("https://gracious-givers-backend.herokuapp.com/fundraiser/pending")
             .then((response) => {
                 if (response.status === 200) {
                     setFundraisers(response.data);
@@ -33,7 +33,7 @@ const FundraiserRequests = (props) => {
     }
 
     async function fetchAllFundraisers() {
-        await Axios.get("http://localhost:5000/fundraiser/cause/All")
+        await Axios.get("https://gracious-givers-backend.herokuapp.com/fundraiser/cause/All")
             .then((response) => {
                 if (response.status === 200) {
                     setFundraisers(response.data);
