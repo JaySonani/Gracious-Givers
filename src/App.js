@@ -25,6 +25,7 @@ import Register from "./pages/user_management/Register";
 import AdminLogin from "./pages/user_management/AdminLogin";
 import FundraiserRequest from './components/moderation/FundraiserRequest';
 import AllDonation from "./pages/donation/AllDonations";
+import EventsDonations from "./pages/donation/EventsDonations";
 import ForgotPassword from "./pages/user_management/ForgotPassword";
 import RecoverPassword from "./pages/user_management/RecoverPassword";
 
@@ -54,6 +55,8 @@ function App() {
           {/* All routes regarding donations */}
           <Route exact path="/donation" element={<DonationForm />} />
           <Route exact path="/all_donations" element={<AllDonation />} />
+          <Route exact path="/all_donations/:id" element={<EventsDonations />} />
+
           <Route exact path="/payment" element={<Payment />} />
           <Route exact path="/payment/success" element={<PaymentSuccess />} />
 

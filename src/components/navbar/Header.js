@@ -35,7 +35,7 @@ function Header(props) {
           id="header-nav-bar"
         >
           <Container>
-            <Navbar.Brand href="/home">
+            <Navbar.Brand href="/">
               <img
                 src={BrandLogo}
                 width="90rem"
@@ -67,7 +67,7 @@ function Header(props) {
                 }
                 {isLoggedIn && <Label title="All Donations" path="/all_donations" />}
 
-                <Label title="About Us" path="./about_us" />
+                {!isLoggedIn && <Label title="About Us" path="./about_us" />}
               </Nav>
               {!isLoggedIn && (
                 <Nav>
