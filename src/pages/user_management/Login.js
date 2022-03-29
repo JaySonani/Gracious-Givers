@@ -1,9 +1,6 @@
 import axios from "axios";
 import { React, Component } from "react";
 import { Row, Col, Form, Button, Container } from "react-bootstrap";
-import { ToastContainer, toast } from "react-toastify";
-import Footer from "../../components/navbar/Footer";
-import Header from "../../components/navbar/Header";
 import { authenticateUser, redirectUser } from "../../utils/Network";
 export default class Login extends Component {
   constructor(props) {

@@ -3,8 +3,6 @@ import { Row, Col, Form, Button, Container } from "react-bootstrap";
 import Header from "../../components/navbar/Header";
 import Footer from "../../components/navbar/Footer";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { authenticateUser, redirectUser } from "../../utils/Network";
 
 const ForgotPassword = () => {
   const [formField, setFormField] = useState({
@@ -54,7 +52,6 @@ const ForgotPassword = () => {
   const handleValueChange = (event) => {
     const field = event.target.name;
     const value = event.target.value;
-    const fields = { ...formField };
 
     setFormField({
       ...formField,
