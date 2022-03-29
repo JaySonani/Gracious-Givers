@@ -11,16 +11,19 @@
 }
 
 #ngo-fundraiser-card {
-    border-radius: 10px !important;
+    border-radius: 5px !important;
 }
 
 #ngo-fundraiser-card:hover {
-    box-shadow: 0 0 4px 4px  rgba(97, 97, 97, 0.2);
+    box-shadow: 0 0 5px 5px  rgba(97, 97, 97, 0.2);
 }
 
 #ngo-fundraiser-card .card-body-color .card-body {
     border-top-right-radius: 0px 0px !important;
     border-top-left-radius: 0px 0px !important;
+    border-bottom-left-radius: 5px 5px !important;
+    border-bottom-right-radius: 5px 5px !important;
+
     background-color: rgb(244, 246, 248) !important;
 }
 

@@ -14,6 +14,7 @@
     border-color: #057abe !important;
     border: 1px solid !important;
     color: #057abe !important;
+    width:8rem;
 }
 
 #button-cancel:hover {
@@ -25,6 +26,7 @@
 
 #button-confirm {
     background-color: #057abe !important;   
+    width:8rem;
 }
 
 #button-confirm:hover {

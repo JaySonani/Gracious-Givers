@@ -43,11 +43,12 @@ export const getNgoId = () => {
         return ngoUser._id;
     }
     else {
-        redirectUser("/");
+        redirectUser("/Login");
     }
 }
 
-export const maxGoalAmount = "1,000,000";
+export const maxGoalAmountFormatted = "1,000,000";
+export const maxGoalAmount = 1000000;
 
 export const currencyFormatting = (currency, amount, minimumFractionDigits) => {    
     currency = !currency ? defaultCurrency : currency;

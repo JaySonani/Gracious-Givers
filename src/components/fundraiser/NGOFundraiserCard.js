@@ -33,6 +33,7 @@ export default function NGOFundraiserCard(props) {
     const actionsUrl = {
         "update":`/ngo/fundraiser/update/${fundraiser._id}`,
         "donations":`/fundrasier/donations/${fundraiser._id}`,
+        "details":`/ngo/fundraiser/details/${fundraiser._id}`,
     }
     
     const handleFundraiserAction = (event) => {
@@ -94,7 +95,7 @@ export default function NGOFundraiserCard(props) {
 
     return (
         <Card id="ngo-fundraiser-card">
-            <Card.Header as="h5" style={{fontWeight: 600}}>{fundraiser.title}</Card.Header>
+            <Card.Header style={{fontWeight: 600,fontSize:'1.1rem'}}>{fundraiser.title}</Card.Header>
             <Card.Body id='ngo-fundraiser-card-body' className='card-body-color'>
                 <Row>
                     <Col xs={12} md={4}>
@@ -113,8 +114,7 @@ export default function NGOFundraiserCard(props) {
                             (period === 'ongoing' || period === 'past') &&
                             <Row>
                                 <Col xs={5} md={6} className="fundraiser-card-label">Amount Raised</Col>
-                                <Col xs={7} md={6}>{fundraiser.currency}&nbsp;{fundraiser.amountRaised}
-                                </Col>
+                                <Col xs={7} md={6}>{FundraiserConstants.currencyFormatting(fundraiser.currency,fundraiser.amountRaised, 2)}</Col>
                             </Row>
                         }
                         {
@@ -160,8 +160,7 @@ export default function NGOFundraiserCard(props) {
                                         }
                                         {     
                                             fundraiser.status  === 'Pending Admin Approval' &&
-                                            <Dropdown.Item name="delete" onClick={handleFundraiserAction} >Delete</Dropdown.Item>
-                                            
+                                            <Dropdown.Item name="delete" onClick={handleFundraiserAction} >Delete</Dropdown.Item>                                            
                                         }
                                         {
                                             fundraiser.status  === 'Active' &&
@@ -172,7 +171,8 @@ export default function NGOFundraiserCard(props) {
                                             fundraiser.status  === 'Completed' ||
                                             fundraiser.status  === 'Deactivated') &&
                                             <Dropdown.Item name="viewDonations" href={actionsUrl.donations}>View Donations</Dropdown.Item>
-                                        }                
+                                        } 
+                                        <Dropdown.Item name="viewDetails" href={actionsUrl.details}>View Details</Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>
                                 {showDelete && <FundrasierDeleteConfirmation fundraiser={fundraiser} 
@@ -190,6 +190,7 @@ export default function NGOFundraiserCard(props) {
                                                                         onHide={handleCloseDeleteSuccess}/>}
                                 {showDeactivateSuccess && <FundrasierResponseUp 
                                                                         show={true}
+                                                                        type="success"
                                                                         message="Fundraiser deactivated successfully"
                                                                         onHide={handleCloseDeactivateSuccess}/>}                                        
                             </Col>
