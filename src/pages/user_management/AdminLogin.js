@@ -84,7 +84,7 @@ const AdminLogin = () => {
       });
     }
     if (!formField.security_a1) {
-      message = "Security Answer1 is required";
+      message = "Security Answer is required";
       setFormErrors({
         ...formErrors,
         status: true,
@@ -92,7 +92,7 @@ const AdminLogin = () => {
       });
     }
     if (!formField.security_a2) {
-      message = "Security Answer2 is required";
+      message = "Security Answer is required";
       setFormErrors({
         ...formErrors,
         status: true,
@@ -203,10 +203,11 @@ const AdminLogin = () => {
               </Form.Control.Feedback>
             </Form.Group>
           </Row>
+          {showError()}
           <Button variant="primary" type="submit" className="custom-btn-header">
             Login
           </Button>
-          {showError()}
+       
             <Row className="mb-3" style={{height:'40px'}}>
               <Col>
                 
