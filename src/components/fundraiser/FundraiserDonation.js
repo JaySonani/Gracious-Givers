@@ -6,6 +6,7 @@ export default function FundraiserDonation(props) {
 
     const event = props.event;
     const progress = ((props.event.amountRaised) / (props.event.goalAmount)) * 100;
+    const isNgo = props.isNgo;
 
     // Need to cite this https://www.geeksforgeeks.org/how-to-calculate-the-number-of-days-between-two-dates-in-javascript/
     const getDaysRemaining = () => {
@@ -15,16 +16,31 @@ export default function FundraiserDonation(props) {
         return !daysRemaining ? 0 : daysRemaining; 
     }
 
+    const formatDate = (dateString) => {
+        const targetDate = new Date(dateString);
+        const months = ["January", "February", "March",
+                        "April", "May", "June",
+                        "July", "August", "September",
+                        "October", "November", "December"];
+        const formattedDate = months[targetDate.getMonth()]
+                                + " " + targetDate.getDate()
+                                + ", " + targetDate.getFullYear();
+        return formattedDate;
+    }
+
     return (
         <Card className='card-custom' id='fundraiser-donation-details'>
             <Card.Body className='card-body-color'>
-                <div id='createdDetails'>               
-                    <span style={{ fontWeight:600}}>
-                        <small>Created By</small>
-                    </span>
-                    <br/>
-                    <span>{event.createdBy}</span>                             
-                </div>
+                {   !isNgo && 
+                    <div id='createdDetails'>               
+                        <span style={{ fontWeight:600}}>
+                            <small>Created By</small>
+                        </span>
+                        <br/>
+                        <span>{event.createdBy}</span>                             
+                    </div>
+                }
+                
                 <div id='donationDetails'>                
                     <span style={{ fontWeight:600}}>
                         <small>Raised</small><br/>
@@ -41,14 +57,26 @@ export default function FundraiserDonation(props) {
                             <span style={{fontSize:'1.1rem', fontWeight:700}}>{event.donors}
                                 </span>&nbsp;
                                     supporters
+                        </span>
+                        <br/> 
+                        {   (!isNgo && event.status === FundraiserConstants.fundraiserStatus.deactivated)
+                            || !isNgo
+                            &&
+                            <span>                        
+                                <span style={{fontSize:'1.1rem', fontWeight:700}}>
+                                        {getDaysRemaining()}
                                 </span>
-                                <br/> 
-                        <span>
-                            <span style={{fontSize:'1.1rem', fontWeight:700}}>
-                                {getDaysRemaining()}
+                                &nbsp;days remaining                            
                             </span>
-                            &nbsp;days remaining                            
-                        </span>  
+                        } 
+                        {                            
+                            isNgo &&
+                            
+                            <div style={{marginTop:'0.8rem'}}>                                        
+                                <span style={{ fontWeight:600}}>Ended On </span>
+                                &nbsp;{formatDate(event.endDate)}
+                            </div>                                
+                        }                         
                     </div>
                 </div>
             </Card.Body>

@@ -19,13 +19,11 @@ export default function FundRaisers() {
     const [event, setEvent] = useState({});
     const [topDonors, setTopDonors] = useState([]);
     const getFundraiserDetailsURI = FundraiserConstants.apiBaseUrl + `/${eventId}`;
-    // const getTopDonorsURI = `https://gracious-givers-backend.herokuapp.com/donation/topdonors/${eventId}`;
     const getTopDonorsURI = `https://gracious-givers-backend.herokuapp.com/donation/topdonors/${eventId}`;
 
     console.log(getTopDonorsURI);
 
     useEffect(() => {
-        console.log("The get URL is " + getFundraiserDetailsURI);
         Axios.get(getFundraiserDetailsURI)
             .then((response) => {
                 if (response.status === 200) {
@@ -36,19 +34,16 @@ export default function FundRaisers() {
                 console.log('Error in getting details of the fundraiser :' + error);
             });
 
-        // This is to be developed in the Donations feature 
+        
         Axios.get(getTopDonorsURI)
             .then((response) => {
-                console.log(getTopDonorsURI);
                 if (response.status === 200 && response.data.success === true) {
-                    console.log(response.data.donations);
                     setTopDonors(response.data.donations);
                 }
             })
             .catch((error) => {
                 console.log('Error in getting details of the fundraiser :' + error);
             });
-
     }, []);
 
     return (
@@ -63,7 +58,9 @@ export default function FundRaisers() {
                         <div className='row' style={{ margin: '50px 0px' }}>
                             <div className='col-12'>
                                 <div className='support-now'>
-                                    <Button variant="primary" className="custom-btn" onClick={() => navigate("/donation", { state: { id: event._id, name: event.title } })} f>
+                                    <Button variant="primary" 
+                                            className="custom-btn" 
+                                            onClick={() => navigate("/donation", { state: { id: event._id, name: event.title }})}>
                                         Donate Now
                                         <BiDonateHeart style={{ marginLeft: '10px', marginBottom: '7px' }} />
                                     </Button>

@@ -13,6 +13,7 @@ export default function NGOFundraiserCard(props) {
     const fundraiser = props.details;
     const period = props.period;
     const onActionSuccess = props.onActionSuccess;
+    const onCardClick = props.onCardClick;
     const [showDeactivate, setShowDeactivate] = useState(false);
     const [showDelete, setShowDelete] = useState(false);
     const [showDeleteSuccess, setShowDeleteSuccess] = useState(false);
@@ -93,7 +94,7 @@ export default function NGOFundraiserCard(props) {
     }
 
     return (
-        <Card id="ngo-fundraiser-card">
+        <Card id="ngo-fundraiser-card" onClick={() => onCardClick(fundraiser._id)}>
             <Card.Header style={{fontWeight: 600,fontSize:'1.1rem'}}>{fundraiser.title}</Card.Header>
             <Card.Body id='ngo-fundraiser-card-body' className='card-body-color'>
                 <Row>

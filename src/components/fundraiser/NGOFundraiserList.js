@@ -12,8 +12,6 @@ export default function NGOFundraiserList(props) {
     const navigate = useNavigate();
 
     useEffect(() => {
-
-
         fetchFundrasiers();
     }, []);
 
@@ -31,8 +29,8 @@ export default function NGOFundraiserList(props) {
             });
     }
 
-    const onCardClickHandler = (id) => {
-        navigate(`/ngo/fundraiser/${id}`);
+    const onCardClick = (id) => {     
+        navigate(`/ngo/fundraiser/details/${id}`)
     };
 
     return (
@@ -58,7 +56,7 @@ export default function NGOFundraiserList(props) {
                         <NGOFundraiserCard 
                             details={fundraiser}
                             period={period}
-                            onCardClick={onCardClickHandler}
+                            onCardClick={onCardClick}
                             onActionSuccess={fetchFundrasiers}
                         />
                     </Col>
