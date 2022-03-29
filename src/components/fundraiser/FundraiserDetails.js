@@ -16,8 +16,8 @@ export default class FundraiserDetails extends React.Component {
                 <div className='row'>
                     <div className='col-12' style={{margin:'10px 0px', textAlign:'center'}}>
                     <img src={event.image}
-                            height="350rem"
-                            width="580rem"
+                            height="330rem"
+                            width="560rem"
                             className="img-fluid fundraiser-image rounded" 
                             alt={event.title} />
                     </div>

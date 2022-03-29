@@ -17,22 +17,22 @@ export default function FundraiserCard(props) {
 
     return (
 
-        <Card id='donor-fundraiser-card' className='card-custom' onClick={() => onCardClick(fundraiser.eventId)}>
+        <Card id='donor-fundraiser-card' onClick={() => onCardClick(fundraiser.eventId)}>
             <Card.Img variant="top" src={fundraiser.image} />
             <Card.Body>
-                <Card.Title style={{ textAlign: 'center'}}>{fundraiser.title}</Card.Title>
-                <Card.Text>
-                    <div id='createdDetails'>
+                <Card.Title style={{ textAlign: 'center', fontWeight:'600'}}>{fundraiser.title}</Card.Title>
+                
+                <div id='createdDetails'>
                         <div>
-                            <span style={{ fontWeight: '600' }}>
-                                <small>Created By</small>
+                            <span>
+                                <small style={{ fontWeight:'600'}}>Created By</small>
                             </span>
                         </div>
                         <div><span>{fundraiser.createdBy}</span></div>
                     </div>
                     <div id='donationDetails'>
                         <div>
-                            <span>Raised</span>
+                            <span><small style={{ fontWeight:'600'}}>Raised</small></span>
                             <div>
                                 <span style={{ fontWeight: '800', color: 'rgb(3, 106, 166, 1)' }}>
                                     {FundraiserConstants.currencyFormatting(fundraiser.currency,fundraiser.amountRaised, 0)}                            
@@ -54,7 +54,8 @@ export default function FundraiserCard(props) {
                             </span>
                         </div>
                     </div>
-                </Card.Text>
+                    
+                
             </Card.Body>
         </Card>
     );

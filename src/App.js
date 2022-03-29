@@ -13,6 +13,7 @@ import AboutUs from "./pages/AboutUs";
 import FundraiserList from "./pages/fundraiser/FundraiserList";
 import NGOAllFundraisers from "./pages/fundraiser/NGOAllFundraisers";
 import CreatUpdateFundraiser from "./pages/fundraiser/CreateUpdateFundraiser";
+import NGOFundraiser from "./pages/fundraiser/NGOFundraiser"
 import AdminHome from "./pages/user_management/AdminHome";
 import DonationForm from "./components/donation/DonationForm";
 import Payment from "./components/donation/Payment";
@@ -45,7 +46,7 @@ function App() {
           <Route exact path="/ngo/fundraiser" element={<NGOAllFundraisers />} />
           <Route exact path="/ngo/fundraiser/create" element={<CreatUpdateFundraiser />} />
           <Route exact path="/ngo/fundraiser/update/:id" element={<CreatUpdateFundraiser />} />
-
+          <Route exact path="/ngo/fundraiser/details/:id" element={<NGOFundraiser />} />
 
           {/* All routes regarding donations */}
           <Route exact path="/donation" element={<DonationForm />} />

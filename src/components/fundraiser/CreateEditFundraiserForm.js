@@ -338,7 +338,7 @@ export default class CreateEditFundraiserForm extends Component {
                                                     </Col>
                                                     <Col style={{textAlign:'right'}}>
                                                         <span>
-                                                            <small>{maxGoalAmount} {FundraiserConstants.defaultCurrency}</small>
+                                                            <small>{FundraiserConstants.maxGoalAmountFormatted} {FundraiserConstants.defaultCurrency}</small>
                                                         </span>
                                                     </Col>
                                                 </Row>
