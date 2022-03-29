@@ -1,3 +1,5 @@
+// Author: Akanksha Singh (B00892887)
+
 import { Tabs, Tab, Container, Row, Col } from 'react-bootstrap';
 import Footer from '../../components/navbar/Footer';
 import NGOFundraiserList from "../../components/fundraiser/NGOFundraiserList";

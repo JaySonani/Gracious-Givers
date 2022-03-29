@@ -1,3 +1,5 @@
+// Author: Akanksha Singh (B00892887)
+
 import { isAuthenticated, redirectUser } from "../../utils/Network";
 
 export const period = {

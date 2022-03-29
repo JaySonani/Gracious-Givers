@@ -1,3 +1,5 @@
+// Author: Akanksha Singh (B00892887)
+
 import { Card, Row, Col, Dropdown } from "react-bootstrap";
 import './styles/ngoFundraiserCard.css';
 import FundraiserStatus from './FundraiserStatus';
