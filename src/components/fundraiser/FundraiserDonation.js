@@ -70,8 +70,8 @@ export default function FundraiserDonation(props) {
                             </span>
                         } 
                         {                            
-                            isNgo &&
-                            
+                            isNgo && ( event.status === FundraiserConstants.fundraiserStatus.deactivated 
+                            || event.status === FundraiserConstants.fundraiserStatus.deactivated ) &&
                             <div style={{marginTop:'0.8rem'}}>                                        
                                 <span style={{ fontWeight:600}}>Ended On </span>
                                 &nbsp;{formatDate(event.endDate)}
