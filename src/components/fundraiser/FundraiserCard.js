@@ -17,7 +17,7 @@ export default function FundraiserCard(props) {
 
     return (
 
-        <Card id='donor-fundraiser-card' className='card-custom' onClick={() => onCardClick(fundraiser.eventId)}>
+        <Card id='donor-fundraiser-card' onClick={() => onCardClick(fundraiser.eventId)}>
             <Card.Img variant="top" src={fundraiser.image} />
             <Card.Body>
                 <Card.Title style={{ textAlign: 'center', fontWeight:'600'}}>{fundraiser.title}</Card.Title>

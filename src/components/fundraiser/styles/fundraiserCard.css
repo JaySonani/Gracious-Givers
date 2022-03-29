@@ -10,14 +10,13 @@
     border-radius: 19.5px;
     background-color: #057abe;
 }
-     
-#donor-fundraiser-card .card-custom  {
-    box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.5), 0 6px 6px 0 rgba(0, 0, 0, 0.19);
-    border-radius: 10px !important;    
+
+#donor-fundraiser-card {
+    border-radius: 5px !important;
+    background-color: rgb(244, 246, 248);
 }
 
-.card-body-color {
-    border-radius: 10px !important;
-    background-color: rgb(244, 246, 248);
+#donor-fundraiser-card:hover {
+    box-shadow: 0 0 4px 4px  rgba(41, 40, 40, 0.2);
 }
 

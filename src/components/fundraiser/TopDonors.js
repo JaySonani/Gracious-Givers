@@ -5,7 +5,7 @@ import * as FundraiserConstants from "../../components/fundraiser/FundraiserCons
 
 
 export default function TopDonors(props) {
-    { console.log(props.donors); }
+  
 
     const topDonors = props.donors.map((donor, index) =>
         <tr key={index}>
@@ -15,7 +15,7 @@ export default function TopDonors(props) {
     );
 
     return (
-        <Card className='card-custom'>
+        <Card id="top-donors" className='card-custom'>
             <Card.Body className='card-body-color'>
                 <Card.Title className='top-donors-title'>
                     Top Donors
@@ -23,12 +23,12 @@ export default function TopDonors(props) {
                         <FaDonate size='20px' style={{ color: "black" }} />
                     </div>
                 </Card.Title>
-                <Card.Body>
+                <Card.Body>                   
                     <Table responsive>
                         <tbody>
                             {topDonors}
                         </tbody>
-                    </Table>
+                    </Table>                        
                 </Card.Body>
             </Card.Body>
         </Card>

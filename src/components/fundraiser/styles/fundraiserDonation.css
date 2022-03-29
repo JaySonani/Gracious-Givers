@@ -16,7 +16,7 @@
     border-radius: 10px !important;
 }
 
-.card-body-color {
+#fundraiser-donation-details .card-body-color {
     border-radius: 10px !important;
     background-color: rgb(244, 246, 248);
 }
