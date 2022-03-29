@@ -14,9 +14,9 @@ export default function FundrasierDeleteConfirmation(props) {
                 <Modal.Title style={{fontSize:'1.4rem'}}>Confirm delete</Modal.Title>              
             </Modal.Header>
             <Modal.Body>                
-                Clicking <strong>“Delete”</strong> will permanently delete your fundraiser <strong>"{fundraiser.title}"</strong>.
+                Clicking <em style={{fontWeight:'600'}}>“Delete”</em> will permanently delete your fundraiser <em style={{fontWeight:'600'}}>"{fundraiser.title}"</em>.
                 <br/><br/>
-                Are you should you want to delete the fundraiser?
+                Are you should you want to proceed?
             </Modal.Body>
             <Modal.Footer>
                 <Container className='text-center'>

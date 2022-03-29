@@ -13,6 +13,7 @@ import AboutUs from "./pages/AboutUs";
 import FundraiserList from "./pages/fundraiser/FundraiserList";
 import NGOAllFundraisers from "./pages/fundraiser/NGOAllFundraisers";
 import CreatUpdateFundraiser from "./pages/fundraiser/CreateUpdateFundraiser";
+import NGOFundraiser from "./pages/fundraiser/NGOFundraiser"
 import AdminHome from "./pages/user_management/AdminHome";
 import DonationForm from "./components/donation/DonationForm";
 import Payment from "./components/donation/Payment";
@@ -24,6 +25,8 @@ import Register from "./pages/user_management/Register";
 import AdminLogin from "./pages/user_management/AdminLogin";
 import FundraiserRequest from './components/moderation/FundraiserRequest';
 import AllDonation from "./pages/donation/AllDonations";
+import ForgotPassword from "./pages/user_management/ForgotPassword";
+import RecoverPassword from "./pages/user_management/RecoverPassword";
 
 function App() {
   return (
@@ -36,6 +39,7 @@ function App() {
           <Route exact path="/Register" element={<Register />} />
           <Route exact path="/Login" element={<Login />} />
           <Route exact path="/AdminLogin" element={<AdminLogin />} />
+          <Route exact path="/ForgotPassword" element={<ForgotPassword />} />
 
           {/* All routes regarding fundraisers */}
           <Route exact path="/fundraiser">
@@ -45,7 +49,7 @@ function App() {
           <Route exact path="/ngo/fundraiser" element={<NGOAllFundraisers />} />
           <Route exact path="/ngo/fundraiser/create" element={<CreatUpdateFundraiser />} />
           <Route exact path="/ngo/fundraiser/update/:id" element={<CreatUpdateFundraiser />} />
-
+          <Route exact path="/ngo/fundraiser/details/:id" element={<NGOFundraiser />} />
 
           {/* All routes regarding donations */}
           <Route exact path="/donation" element={<DonationForm />} />
@@ -64,6 +68,7 @@ function App() {
           <Route exact path="/admin/fundraiserrequests/:id" element={<FundraiserRequest />} />
 
           {/* Add pages as needed */}
+          <Route exact path="/RecoverPassword/:email" element={<RecoverPassword />} />
         </Routes>
       </BrowserRouter>
     </div>

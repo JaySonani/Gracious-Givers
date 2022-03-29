@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Container, Navbar, Nav, Button, NavDropdown } from "react-bootstrap";
 import { isAuthenticated, setTokenOnLogOut } from "../../utils/Network";
+import LoginModal from "./LoginModal";
 
 import BrandLogo from "./../../assets/GraciousGivers.png";
 import Label from "./Label";
@@ -70,21 +71,10 @@ function Header(props) {
               </Nav>
               {!isLoggedIn && (
                 <Nav>
+                  <LoginModal />
+
                   <Button
-                    variant="primary"
-                    className="custom-btn-header"
-                    href="/Login"
-                  >
-                    NGO Login
-                  </Button>
-                  <Button
-                    variant="primary"
-                    className="custom-btn-header"
-                    href="/Register"
-                  >
-                    NGO Register
-                  </Button>
-                  <Button
+                    type="button"
                     variant="primary"
                     className="custom-btn-header"
                     href="/AdminLogin"
@@ -128,11 +118,11 @@ function Header(props) {
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
                 <Label title="Home" path="/admin" />
-                <Label title="Active Fundraisers" path="/admin/activefundraisers" />
-                <NavDropdown
-                  title="Requests"
-                  id="basic-nav-dropdown"
-                >
+                <Label
+                  title="Active Fundraisers"
+                  path="/admin/activefundraisers"
+                />
+                <NavDropdown title="Requests" id="basic-nav-dropdown">
                   <NavDropdown.Item href="/admin/ngorequests">
                     Signup Requests
                   </NavDropdown.Item>
@@ -142,7 +132,11 @@ function Header(props) {
                 </NavDropdown>
               </Nav>
               <Nav>
-                <Button variant="danger" className="custom-logout-btn-header" onClick={() => setTokenOnLogOut()}>
+                <Button
+                  variant="danger"
+                  className="custom-logout-btn-header"
+                  onClick={() => setTokenOnLogOut()}
+                >
                   Logout
                 </Button>
               </Nav>

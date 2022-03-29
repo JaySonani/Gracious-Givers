@@ -1,6 +1,7 @@
 import axios from "axios";
 import { React, Component } from "react";
 import { Row, Col, Form, Button, Container } from "react-bootstrap";
+import { ToastContainer, toast } from "react-toastify";
 import Footer from "../../components/navbar/Footer";
 import Header from "../../components/navbar/Header";
 import { authenticateUser, redirectUser } from "../../utils/Network";
@@ -11,6 +12,7 @@ export default class Login extends Component {
       formField: {
         email: "",
         password: "",
+        apiresponses: "",
       },
       formErrors: {
         email: "",
@@ -39,7 +41,7 @@ export default class Login extends Component {
   };
 
   showError = () => {
-    if (this.state.formErrors.email) {
+    if (this.state.formErrors.apiresponses) {
       return (
         <div>
           <div
@@ -47,7 +49,7 @@ export default class Login extends Component {
             class="alert alert-danger"
             role="alert"
           >
-            {this.state.formErrors.email}
+            {this.state.formErrors.apiresponses}
           </div>
         </div>
       );
@@ -57,6 +59,7 @@ export default class Login extends Component {
   validateForm = () => {
     console.log("Validating the form");
   };
+
   handleUserLogin = (event) => {
     event.preventDefault();
     this.validateForm();
@@ -86,12 +89,21 @@ export default class Login extends Component {
         .then(function (response) {
           console.log(response);
             authenticateUser(response);
-            redirectUser("/");
+            redirectUser("/ngo/fundraiser");
           })
         .catch(function (error) {
           console.log("Catch block");
-          if (error.response.status === 401) {
-            alert("Invalid credentials");
+          console.log(error);
+          if (error.response.data) {
+            console.log(error.response.data.message);
+            this.setState({
+              formErrors: {
+                ...this.state.formErrors,
+                apiresponses: error.response.data.message,
+              },
+            });
+          } else {
+            console.log(error);
           }
         });
     }
@@ -102,19 +114,7 @@ export default class Login extends Component {
     const formError = this.state.formErrors;
     return (
       <>
-        <Header />
         <Container className="mb-5" id="login-ngo-form">
-          <Row>
-            <Col xs={0} md={3}></Col>
-            <Col xs={12} md={6}>
-              <Row className="mb-3">
-                <Col>
-                  <h4 id="create-update-form-label">Login as NGO User</h4>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-
           <Form noValidate onSubmit={this.handleUserLogin}>
             <Row className="mb-3">
               <Form.Group as={Col} xs="5" md="5" controlId="validationCustom01">
@@ -123,6 +123,7 @@ export default class Login extends Component {
                   required
                   name="email"
                   type="email"
+                  style={{ width: "300" + "px" }}
                   placeholder="Please enter the email"
                   value={formField.email}
                   onChange={this.handleValueChange}
@@ -140,6 +141,7 @@ export default class Login extends Component {
                   required
                   name="password"
                   type="password"
+                  style={{ width: "300" + "px" }}
                   placeholder="Please enter the password"
                   value={formField.password}
                   onChange={this.handleValueChange}
@@ -150,6 +152,7 @@ export default class Login extends Component {
                 </Form.Control.Feedback>
               </Form.Group>
             </Row>
+            {this.showError()}
             <Button
               variant="primary"
               className="custom-btn-header"
@@ -159,7 +162,6 @@ export default class Login extends Component {
             </Button>
           </Form>
         </Container>
-        <Footer />
       </>
     );
   }
