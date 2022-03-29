@@ -1,3 +1,5 @@
+// Author: Akanksha Singh (B00892887)
+
 import { Modal, Button, Row, Col, Container } from "react-bootstrap";
 
 export default function FundrasierDeactivateConfirmation(props) {

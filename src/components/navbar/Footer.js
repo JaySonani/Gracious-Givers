@@ -1,4 +1,5 @@
 // Author: Jay Bhagvanbhai Sonani (B00891984)
+// Author: Akanksha Singh (B00892887)
 
 import './styles/Footer.css';
 

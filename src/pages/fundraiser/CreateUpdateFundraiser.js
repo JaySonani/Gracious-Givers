@@ -1,3 +1,5 @@
+// Author: Akanksha Singh (B00892887)
+
 import Footer from "../../components/navbar/Footer";
 import Header from "../../components/navbar/Header";
 import CreateEditFundraiserForm from "../../components/fundraiser/CreateEditFundraiserForm";

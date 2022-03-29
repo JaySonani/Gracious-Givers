@@ -1,3 +1,5 @@
+// Author: Akanksha Singh (B00892887)
+
 import { Card, ProgressBar } from "react-bootstrap";
 import * as FundraiserConstants from './FundraiserConstants';
 import "./styles/fundraiserCard.css";

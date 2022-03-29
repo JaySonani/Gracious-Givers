@@ -1,3 +1,5 @@
+// Author: Akanksha Singh (B00892887)
+
 import * as FundraiserConstants from './FundraiserConstants';
 
 export default function FundraiserStatus(props) {
