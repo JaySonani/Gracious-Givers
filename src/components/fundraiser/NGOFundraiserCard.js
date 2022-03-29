@@ -13,7 +13,6 @@ export default function NGOFundraiserCard(props) {
     const fundraiser = props.details;
     const period = props.period;
     const onActionSuccess = props.onActionSuccess;
-    const onCardClick = props.onCardClick;
     const [showDeactivate, setShowDeactivate] = useState(false);
     const [showDelete, setShowDelete] = useState(false);
     const [showDeleteSuccess, setShowDeleteSuccess] = useState(false);
@@ -34,6 +33,7 @@ export default function NGOFundraiserCard(props) {
     const actionsUrl = {
         "update":`/ngo/fundraiser/update/${fundraiser._id}`,
         "donations":`/fundrasier/donations/${fundraiser._id}`,
+        "details":`/ngo/fundraiser/details/${fundraiser._id}`,
     }
     
     const handleFundraiserAction = (event) => {
@@ -94,7 +94,7 @@ export default function NGOFundraiserCard(props) {
     }
 
     return (
-        <Card id="ngo-fundraiser-card" onClick={() => onCardClick(fundraiser._id)}>
+        <Card id="ngo-fundraiser-card">
             <Card.Header style={{fontWeight: 600,fontSize:'1.1rem'}}>{fundraiser.title}</Card.Header>
             <Card.Body id='ngo-fundraiser-card-body' className='card-body-color'>
                 <Row>
@@ -171,7 +171,8 @@ export default function NGOFundraiserCard(props) {
                                             fundraiser.status  === 'Completed' ||
                                             fundraiser.status  === 'Deactivated') &&
                                             <Dropdown.Item name="viewDonations" href={actionsUrl.donations}>View Donations</Dropdown.Item>
-                                        }                
+                                        } 
+                                        <Dropdown.Item name="viewDetails" href={actionsUrl.details}>View Details</Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>
                                 {showDelete && <FundrasierDeleteConfirmation fundraiser={fundraiser} 
