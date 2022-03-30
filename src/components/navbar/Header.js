@@ -3,7 +3,7 @@
 
 import { useEffect, useState } from "react";
 import { Container, Navbar, Nav, Button, NavDropdown } from "react-bootstrap";
-import { isAuthenticated, setTokenOnLogOut } from "../../utils/Network";
+import { isAuthenticated, redirectUser, setTokenOnLogOut } from "../../utils/Network";
 import LoginModal from "./LoginModal";
 
 import BrandLogo from "./../../assets/GraciousGivers.png";
@@ -78,7 +78,8 @@ function Header(props) {
                     type="button"
                     variant="primary"
                     className="custom-btn-header"
-                    href="/AdminLogin"
+                    id="admin-login-btn"
+                    onClick={() => redirectUser("/AdminLogin")}
                   >
                     Admin Login
                   </Button>
