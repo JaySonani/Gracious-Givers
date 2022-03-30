@@ -1,3 +1,6 @@
+/**
+ * Author: Venkata Saikiran Kattekola (B00857007)
+ */
 import { useState } from "react";
 import { Button, Col, Modal, Row } from "react-bootstrap";
 import Login from "../../pages/user_management/Login";

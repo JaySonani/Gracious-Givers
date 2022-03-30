@@ -1,3 +1,6 @@
+/**
+ * Author: Venkata Saikiran Kattekola (B00857007)
+ */
 import { React, Component } from "react";
 import { Row, Col, Form, Button, Container } from "react-bootstrap";
 import Footer from "../../components/navbar/Footer";
