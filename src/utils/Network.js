@@ -1,3 +1,6 @@
+/**
+ * Author: Venkata Saikiran Kattekola (B00857007)
+ */
 function authenticateUser(response) {
   localStorage.setItem("token", JSON.stringify(response));
 }
