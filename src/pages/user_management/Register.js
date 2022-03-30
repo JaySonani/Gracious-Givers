@@ -157,6 +157,7 @@ export default class Register extends Component {
         })
         .then(function (response) {
           console.log(response);
+          alert("User Registered Successfully");
           redirectUser("/");
         })
         .catch((error) => {
