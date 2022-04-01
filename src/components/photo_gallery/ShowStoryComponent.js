@@ -17,15 +17,7 @@ export default function ShowImage() {
     }
     function ImageElement() {
 
-        //const data = {}
-        //const [images, setImages] = useState("")
-        // const url = useStorage(setSelectedFile)
-        // console.log(url)
-        // const form = new FormData()
-        // form.append("NGOStory", selectedFile)
-        // form.append("desc", desc)
-
-        axios.get('http://localhost:5000/showImages')////backend
+        axios.get('http://localhost:5000/showImages')//backend
             .then(function (response) {
 
                 console.log(response);
@@ -66,22 +58,3 @@ export default function ShowImage() {
         </Grid >
     )
 }
-
-/* <ImageList sx={{ width: 500, height: 200 }}>
-    {images.map((item) => (
-        <ImageListItem key={item.img}>
-            <img
-                src={item.image}
-                // srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                alt={item.title}
-                loading="lazy"
-            />
-            <ImageListItemBar
-                title={item.description}
-                //subtitle={<span>by: {item.author}</span>}
-                position="below"
-            />
-        </ImageListItem>
-    ))}
-</ImageList > */
-//}
