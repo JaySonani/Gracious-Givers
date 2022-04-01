@@ -4,6 +4,7 @@ import Footer from "../../components/navbar/Footer";
 import Header from "../../components/navbar/Header";
 import FundraiserDetails from '../../components/fundraiser/FundraiserDetails';
 import FundraiserDonation from '../../components/fundraiser/FundraiserDonation';
+import ShareOnFacebook from '../../components/socialMediaShare/ShareOnFacebook';
 import TopDonors from '../../components/fundraiser/TopDonors';
 import { Button } from 'react-bootstrap';
 import { BiDonateHeart } from "react-icons/bi";
@@ -57,10 +58,12 @@ export default function FundRaisers() {
                         <FundraiserDetails event={event} />
                     </div>
                     <div className='col-md-4'>
-                        <div className='row' style={{ margin: '50px 0px' }}>
+                        <div className='row' style={{ margin: '50px  30px 0px 0px' }}>
                             <div className='col-12'>
                                 <div className='support-now'>
-                                    <Button variant="primary" className="custom-btn" onClick={() => navigate("/donation", { state: { id: event._id, name: event.title } })}>
+                                    <Button variant="primary" 
+                                            className="custom-btn" 
+                                            onClick={() => navigate("/donation", { state: { id: event._id, name: event.title } })}>
                                         Donate Now
                                         <BiDonateHeart style={{ marginLeft: '10px', marginBottom: '7px' }} />
                                     </Button>
@@ -68,8 +71,11 @@ export default function FundRaisers() {
                                 <FundraiserDonation event={event} />
                             </div>
                         </div>
-                        <div className='row' style={{ margin: '50px 0' }}>
-                            <div className='col-12'>
+                        <div className='row' style={{ margin: '10px 0' }}>
+                            <div className='col-12' style={{textAlign:'center', margin:'20px'}}>
+                                <ShareOnFacebook event={event} />                                
+                            </div>
+                            <div className='col-12'>                                
                                 <TopDonors donors={topDonors} />
                             </div>
                         </div>
