@@ -17,7 +17,7 @@ export default function ShowImage() {
     }
     function ImageElement() {
 
-        axios.get('http://localhost:5000/showImages')//backend
+        axios.get('https://gracious-givers-backend.herokuapp.com/showImages')//backend
             .then(function (response) {
 
                 console.log(response);

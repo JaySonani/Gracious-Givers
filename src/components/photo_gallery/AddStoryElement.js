@@ -26,7 +26,7 @@ function ImageElement() {
             form.append("NGOStory", selectedFile)
             form.append("desc", desc)
 
-            axios.post('http://localhost:5000/uploadmultiple', form)//backend
+            axios.post('https://gracious-givers-backend.herokuapp.com/uploadmultiple', form)//backend
                 .then(function (response) {
                     console.log(response);
                 })
@@ -38,11 +38,6 @@ function ImageElement() {
     const handleChange = (event) => {
 
         setDesc(event.target.value)
-        // if (event.target.value)
-        //   setDesc(event.target.value.length > 0)
-        // else {
-
-        // }
     };
 
     const handleCapture = (event) => {
