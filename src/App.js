@@ -29,6 +29,9 @@ import AllDonation from "./pages/donation/AllDonations";
 import EventsDonations from "./pages/donation/EventsDonations";
 import ForgotPassword from "./pages/user_management/ForgotPassword";
 import RecoverPassword from "./pages/user_management/RecoverPassword";
+import AddStoryPage from "./pages/photo_gallery/AddStoryPage"
+import ShowStoryPage from "./pages/photo_gallery/ShowStoryPage"
+import EditStoryPage from "./pages/photo_gallery/EditStoryPage"
 
 function App() {
   return (
@@ -60,6 +63,12 @@ function App() {
 
           <Route exact path="/payment" element={<Payment />} />
           <Route exact path="/payment/success" element={<PaymentSuccess />} />
+
+          {/* All routes regarding photo gallery */}
+          <Route exact path="/addImage" element={<AddStoryPage />} />
+          <Route exact path="/showImage" element={<ShowStoryPage />} />
+          <Route exact path="/editImage" element={<EditStoryPage />} />
+          {/* <Route exact path="/about_us" element={<AboutUs />} /> */}
 
           {/* All routes regarding moderation */}
           <Route exact path="/admin" element={<AdminHome all={true} />} />
