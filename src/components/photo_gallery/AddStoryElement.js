@@ -13,10 +13,10 @@ function ImageElement() {
     const [missingDoc, setMissingDoc] = useState("");
     const handleSubmit = () => {
 
-        console.log(desc)
-        console.log(selectedFile)
-        console.log(desc.length)
-        console.log(selectedFile)
+        // console.log(desc)
+        // console.log(selectedFile)
+        // console.log(desc.length)
+        // console.log(selectedFile)
         if (desc.length == 0 || selectedFile == '') {
             setMissingDoc('Please add content or image')
         }
@@ -26,7 +26,14 @@ function ImageElement() {
             form.append("NGOStory", selectedFile)
             form.append("desc", desc)
 
-            axios.post('https://gracious-givers-backend.herokuapp.com/uploadmultiple', form)//backend
+            console.log('=====================')
+            console.log(form)
+            console.log('=====================')
+            console.log(selectedFile)
+            console.log('=====================')
+            console.log(desc)
+
+            axios.post('http://localhost:5000/photoGallery/addFundraiserStory', form)//backend
                 .then(function (response) {
                     console.log(response);
                 })
@@ -90,9 +97,6 @@ function ImageElement() {
                 <a href='http://localhost:3000/showImage'>Submit</a>
                 {/* frontend */}
             </Button><br />
-            {/* {images.length > 0 && images.map((image) => (
-        <img src={image.image} alt={image.description} />
-      ))} */}
         </div>
     )
 }

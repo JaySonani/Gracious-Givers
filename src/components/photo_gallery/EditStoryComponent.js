@@ -32,7 +32,7 @@ export default function ShowImage() {
         // console.log(form)
         //setImageId(id);
         // axios.post('http://localhost:5000/deleteImages', form)
-        axios.post('https://gracious-givers-backend.herokuapp.com/deleteImages', form) //backend
+        axios.post('http://localhost:5000/photoGallery/deleteFundraiserStory', form) //backend
             .then(function (response) {
                 console.log(response);
             })
@@ -42,7 +42,7 @@ export default function ShowImage() {
     }
     function editImageElement() {
 
-        axios.get('https://gracious-givers-backend.herokuapp.com/editImages') //backend
+        axios.get('http://localhost:5000/photoGallery/updateFundraiserStory') //backend
             .then(function (response) {
                 console.log(response);
                 setImages(response.data)
