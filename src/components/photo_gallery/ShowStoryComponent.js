@@ -1,11 +1,15 @@
+// Author: Viraj Jigar Shah (B00879448)
+
 import * as React from 'react';
 import { useState, useEffect } from 'react'
 import { Button, Grid } from '@mui/material';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 export default function ShowImage() {
 
     const [images, setImages] = useState([])
+    const navigate = useNavigate();
 
     useEffect(() => {
         // Update the document title using the browser API
@@ -29,6 +33,9 @@ export default function ShowImage() {
             });
     }
 
+    const onCardClickHandler = (id) => {
+        navigate(`/addImage`);
+    };
     // const Input = styled('input')({
     //     display: 'none',
     // });
@@ -52,9 +59,10 @@ export default function ShowImage() {
             }
             <br /><br /><br />
             {/* onClick={handleSubmit} */}
-            <Button variant="contained" component="span" margin='20px' >
-                <a href='http://localhost:3000/editImage'>Ngo Activity</a>
+            <Button variant="contained" component="span" margin='20px' onClick={onCardClickHandler}>
+                {/* <a href='http://localhost:3000/editImage'>Ngo Activity</a> */}
                 {/* https://gracious-givers-frontend-web.herokuapp.com/ frontend */}
+                Ngo Activity
             </Button><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
         </Grid >
     )
