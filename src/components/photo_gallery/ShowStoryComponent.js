@@ -32,13 +32,12 @@ export default function ShowImage() {
                 console.log(error);
             });
     }
-
-    const onCardClickHandler = (id) => {
+    const onAddClickHandler = (id) => {
         navigate(`/addImage`);
     };
-    // const Input = styled('input')({
-    //     display: 'none',
-    // });
+    const onEditClickHandler = (id) => {
+        navigate(`/editImage`);
+    };
     return (
         <Grid container justifyContent="center" alignItems={'center'} >
             {
@@ -59,11 +58,16 @@ export default function ShowImage() {
             }
             <br /><br /><br />
             {/* onClick={handleSubmit} */}
-            <Button variant="contained" component="span" margin='20px' onClick={onCardClickHandler}>
+            <Button variant="contained" component="span" margin='20px' onClick={onAddClickHandler}>
                 {/* <a href='http://localhost:3000/editImage'>Ngo Activity</a> */}
                 {/* https://gracious-givers-frontend-web.herokuapp.com/ frontend */}
-                Ngo Activity
-            </Button><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+                Add Image
+            </Button><br /><br />
+            <Button variant="contained" component="span" margin='20px' onClick={onEditClickHandler}>
+                {/* <a href='http://localhost:3000/editImage'>Ngo Activity</a> */}
+                {/* https://gracious-givers-frontend-web.herokuapp.com/ frontend */}
+                Edit Image
+            </Button><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
         </Grid >
     )
 }

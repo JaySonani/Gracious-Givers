@@ -5,6 +5,7 @@ import { Button, CardActionArea, CardActions } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 function ImageElement() {
     var target = new Array();
@@ -42,6 +43,9 @@ function ImageElement() {
                 });
         }
     }
+    const onClickHandler = (id) => {
+        navigate(`/editImage`);
+    };
     const handleChange = (event) => {
 
         setDesc(event.target.value)
