@@ -58,7 +58,7 @@ export default function FundRaisers() {
                         <FundraiserDetails event={event} />
                     </div>
                     <div className='col-md-4'>
-                        <div className='row' style={{ margin: '50px  30px 0px 0px' }}>
+                        <div className='row' style={{ margin: '22px 0px' }}>
                             <div className='col-12'>
                                 <div className='support-now'>
                                     <Button variant="primary" 
@@ -72,8 +72,13 @@ export default function FundRaisers() {
                             </div>
                         </div>
                         <div className='row' style={{ margin: '10px 0' }}>
-                            <div className='col-12' style={{textAlign:'center', margin:'20px'}}>
-                                <ShareOnFacebook event={event} />                                
+                            <div className='col-12' id='social-media-share' style={{paddingBottom:'15px'}}>
+                                <div>
+                                    <span style={{ fontWeight: 600, paddingRight: '1rem' }}>
+                                        <small>Share this fundraiser on</small>
+                                    </span>
+									<ShareOnFacebook event={event} />                                
+								</div>
                             </div>
                             <div className='col-12'>                                
                                 <TopDonors donors={topDonors} />
