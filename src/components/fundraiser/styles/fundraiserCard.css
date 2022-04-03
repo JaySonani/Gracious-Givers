@@ -18,6 +18,10 @@
     background-color: rgb(244, 246, 248);
 }
 
+#donor-fundraiser-card img { 
+    height: 12rem !important;
+}
+
 #donor-fundraiser-card:hover {
     box-shadow: 0 0 4px 4px  rgba(41, 40, 40, 0.2);
 }

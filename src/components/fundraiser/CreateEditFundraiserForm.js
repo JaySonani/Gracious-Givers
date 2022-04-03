@@ -84,9 +84,9 @@ export default class CreateEditFundraiserForm extends Component {
                     formErrors: { ...this.state.formErrors, image: "Allowed image types are .jpg, .jpeg, .png, .bmp" }
                 })
             }
-            else if (image.size > 51200) {
+            else if (image.size > 1000000) {
                 this.setState({
-                    formErrors: { ...this.state.formErrors, image: "Maximum size of the image should be 50 KB" }
+                    formErrors: { ...this.state.formErrors, image: "Maximum size of the image should be 1 MB" }
                 })
             }
             else {
