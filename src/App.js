@@ -56,6 +56,12 @@ function App() {
           <Route exact path="/ngo/fundraiser/update/:id" element={<CreatUpdateFundraiser />} />
           <Route exact path="/ngo/fundraiser/details/:id" element={<NGOFundraiser />} />
 
+          {/* All routes regarding photo gallery */}
+          <Route exact path="/addImage" element={<AddStoryPage />} />
+          <Route exact path="/showImage" element={<ShowStoryPage />} />
+          <Route exact path="/editImage" element={<EditStoryPage />} />
+          {/* <Route exact path="/about_us" element={<AboutUs />} /> */}
+
           {/* All routes regarding donations */}
           <Route exact path="/donation" element={<DonationForm />} />
           <Route exact path="/all_donations" element={<AllDonation />} />
@@ -63,12 +69,6 @@ function App() {
 
           <Route exact path="/payment" element={<Payment />} />
           <Route exact path="/payment/success" element={<PaymentSuccess />} />
-
-          {/* All routes regarding photo gallery */}
-          <Route exact path="/addImage" element={<AddStoryPage />} />
-          <Route exact path="/showImage" element={<ShowStoryPage />} />
-          <Route exact path="/editImage" element={<EditStoryPage />} />
-          {/* <Route exact path="/about_us" element={<AboutUs />} /> */}
 
           {/* All routes regarding moderation */}
           <Route exact path="/admin" element={<AdminHome all={true} />} />

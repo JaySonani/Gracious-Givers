@@ -49,16 +49,6 @@ export const getNgoId = () => {
     }
 }
 
-export const getAuthNgoId = () => {
-    const ngoUser = isAuthenticated();
-    if (ngoUser) {
-        return ngoUser._id;
-    }
-    else {
-        return '';
-    }
-}
-
 export const maxGoalAmountFormatted = "1,000,000";
 export const maxGoalAmount = 1000000;
 
