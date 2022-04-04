@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 function ImageElement() {
     var target = new Array();
+    const navigate = useNavigate();
     const [selectedFile, setSelectedFile] = useState("");
     const [desc, setDesc] = useState("");
     const [missingDoc, setMissingDoc] = useState("");

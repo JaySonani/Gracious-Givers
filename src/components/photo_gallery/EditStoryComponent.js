@@ -13,22 +13,19 @@ export default function ShowImage() {
     const [id, setID] = useState('')
     const navigate = useNavigate();
 
-
     useEffect(() => {
         editImageElement();
-        //console.log('in use effect !!')
+        console.log('in use effect !!')
     }, []);
-
-    const onAddClickHandler = (id) => {
-        navigate(`/editImage`);
-    };
 
     function handleSubmit(event) {
 
-        console.log('================================================')
-        console.log(event)
+        navigate(`/editImage`);
+
+        //console.log('================================================')
+        //console.log(event)
         //console.log(event._id)
-        console.log('================================================')
+        //console.log('================================================')
         // //setID(id);
         // const data = {
         //     id: id
@@ -49,6 +46,7 @@ export default function ShowImage() {
             .catch(function (error) {
                 console.log(error);
             });
+
     }
     function editImageElement() {
 
@@ -81,20 +79,21 @@ export default function ShowImage() {
                             <h3> {item.description} </h3>
                         </Grid>
                         <Grid item md={8} sm={12}>
-                            <Button variant="contained" component="span" onClick={() => { handleSubmit(item._id); }}>
+                            <Button variant="contained" component="span" onClick={() => { handleSubmit(item._id) }}>
                                 Delete{/* <a href='http://localhost:3000/editImage'>Delete</a> */}
                                 {/* frontend */}
                             </Button>
                         </Grid>
-                        <Grid item md={8} sm={12}>
+                        {/* <Grid item md={8} sm={12}>
                             <Button variant="contained" component="span" onClick={() => { handleSubmit(item._id) }}>
                                 Home Page
                                 {/* frontend */}
-                            </Button>
-                        </Grid>
+                        {/* </Button>
+                        </Grid> */}
                     </>
-                ))}
+                ))
+                }
             </Grid >
-        </Box>
+        </Box >
     )
 }

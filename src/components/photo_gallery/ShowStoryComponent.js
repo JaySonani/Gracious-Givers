@@ -21,8 +21,8 @@ export default function ShowImage() {
 
     function ImageElement() {
 
-        const ngoAuth = StoryContant.getNgoId();
-        setNgoAuth = ngoAuth;
+        // const ngoAuth = StoryContant.getNgoId();
+        // const setNgoAuth = ngoAuth;
         //http://localhost:5000
         //https://gracious-givers-backend.herokuapp.com
         axios.get('http://localhost:5000/photoGallery/getFundraiserStory')//backend
