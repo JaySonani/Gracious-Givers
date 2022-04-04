@@ -5,7 +5,8 @@ import Header from "../../components/navbar/Header";
 import FundraiserDetails from '../../components/fundraiser/FundraiserDetails';
 import FundraiserDonation from '../../components/fundraiser/FundraiserDonation';
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import ShareOnFacebook from '../../components/socialMediaShare/ShareOnFacebook';
 import * as FundraiserConstants from "../../components/fundraiser/FundraiserConstants";
 import Axios from "axios";
 import './styles/fundraisers.css';
@@ -50,10 +51,23 @@ export default function NGOFundraiser() {
                                         </Col>
                                     </Row>
                                     <Row>
-                                        <Col>
+                                        <Col xs={12} md={12}>
                                         {   
                                             event.status !== 'Pending Admin Approval' &&
                                             <FundraiserDonation event={event} isNgo="true" />
+                                        }
+                                        </Col>
+                                        <Col xs={12} md={12} style={{margin: '1.5rem 0'}}>
+                                        {   
+                                            event.status === 'Active' &&
+                                            <div className='col-12' id='social-media-share' style={{paddingBottom:'15px'}}>
+                                                <div>
+                                                    <span style={{ fontWeight: 600, paddingRight: '1rem' }}>
+                                                        <small>Share this fundraiser on</small>
+                                                    </span>
+                                                    <ShareOnFacebook event={event} />                                
+                                                </div>
+                                            </div>                                     
                                         }
                                         </Col>
                                     </Row>

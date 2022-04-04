@@ -48,7 +48,10 @@ function App() {
             <Route path=":id" element={<FundRaiser />} />
             <Route index element={<FundraiserList />} />
           </Route>
-          <Route exact path="/ngo/fundraiser" element={<NGOAllFundraisers />} />
+          <Route exact path="/ngo/fundraiser">
+            <Route path=":period" element={<NGOAllFundraisers />} />
+            <Route index element={<NGOAllFundraisers />} />
+          </Route>         
           <Route exact path="/ngo/fundraiser/create" element={<CreatUpdateFundraiser />} />
           <Route exact path="/ngo/fundraiser/update/:id" element={<CreatUpdateFundraiser />} />
           <Route exact path="/ngo/fundraiser/details/:id" element={<NGOFundraiser />} />
