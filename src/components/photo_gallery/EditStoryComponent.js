@@ -1,18 +1,27 @@
+// Author: Viraj Jigar Shah (B00879448)
+
 import * as React from 'react';
 import { useState, useEffect } from 'react'
 import { Button, Grid } from '@mui/material';
 import axios from 'axios';
 import { Box } from '@mui/system';
+import { useNavigate } from "react-router-dom";
 
 export default function ShowImage() {
 
     const [images, setImages] = useState([])
     const [id, setID] = useState('')
+    const navigate = useNavigate();
+
 
     useEffect(() => {
         editImageElement();
         //console.log('in use effect !!')
     }, []);
+
+    const onAddClickHandler = (id) => {
+        navigate(`/editImage`);
+    };
 
     function handleSubmit(event) {
 
@@ -43,7 +52,7 @@ export default function ShowImage() {
     }
     function editImageElement() {
 
-        axios.get('http://localhost:5000/photoGallery/updateFundraiserStory') //backend
+        axios.get('http://localhost:5000/photoGallery/getFundraiserStory') //backend
             .then(function (response) {
                 console.log(response);
                 setImages(response.data)
@@ -72,8 +81,14 @@ export default function ShowImage() {
                             <h3> {item.description} </h3>
                         </Grid>
                         <Grid item md={8} sm={12}>
+                            <Button variant="contained" component="span" onClick={() => { handleSubmit(item._id); }}>
+                                Delete{/* <a href='http://localhost:3000/editImage'>Delete</a> */}
+                                {/* frontend */}
+                            </Button>
+                        </Grid>
+                        <Grid item md={8} sm={12}>
                             <Button variant="contained" component="span" onClick={() => { handleSubmit(item._id) }}>
-                                <a href='http://localhost:3000/editImage'>Delete</a>
+                                Home Page
                                 {/* frontend */}
                             </Button>
                         </Grid>

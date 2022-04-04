@@ -11,14 +11,13 @@ export default function ShowImage() {
     const [images, setImages] = useState([])
     const navigate = useNavigate();
 
+
+
     useEffect(() => {
         // Update the document title using the browser API
         ImageElement();
     }, []);
 
-    function handleSubmit() {
-
-    }
     function ImageElement() {
         //http://localhost:5000
         //https://gracious-givers-backend.herokuapp.com
