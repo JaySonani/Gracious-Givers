@@ -5,20 +5,24 @@ import { useState, useEffect } from 'react'
 import { Button, Grid } from '@mui/material';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import * as StoryContant from "./StoryConstant.js"
 
 export default function ShowImage() {
 
     const [images, setImages] = useState([])
+    const [ngoAuth, setNgoAuth] = useState("")
     const navigate = useNavigate();
-
-
 
     useEffect(() => {
         // Update the document title using the browser API
         ImageElement();
+
     }, []);
 
     function ImageElement() {
+
+        const ngoAuth = StoryContant.getNgoId();
+        setNgoAuth = ngoAuth;
         //http://localhost:5000
         //https://gracious-givers-backend.herokuapp.com
         axios.get('http://localhost:5000/photoGallery/getFundraiserStory')//backend
