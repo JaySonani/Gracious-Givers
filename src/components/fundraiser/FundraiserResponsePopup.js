@@ -3,7 +3,6 @@
 import { Modal, Button } from "react-bootstrap";
 import "./styles/popupDialog.css";
 import { FaCheckCircle } from "react-icons/fa";
-// FaExclamationCircle
 
 export default function FundrasierResponseUp(props) {
 

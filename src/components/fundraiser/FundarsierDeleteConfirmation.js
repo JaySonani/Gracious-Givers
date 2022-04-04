@@ -1,6 +1,7 @@
 // Author: Akanksha Singh (B00892887)
 
 import { Modal, Button, Row, Col, Container } from "react-bootstrap";
+import { FaExclamationCircle } from "react-icons/fa";
 
 export default function FundrasierDeleteConfirmation(props) {
 
@@ -13,6 +14,10 @@ export default function FundrasierDeleteConfirmation(props) {
 
         <Modal show={show} onHide={handleHide}>
             <Modal.Header closeButton>
+                <FaExclamationCircle size={35} 
+                                    color={"orange"}
+                                    style={{ marginLeft: '7px', marginRight: '15px'}}
+                />
                 <Modal.Title style={{fontSize:'1.4rem'}}>Confirm delete</Modal.Title>              
             </Modal.Header>
             <Modal.Body>                
