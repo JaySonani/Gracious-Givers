@@ -29,6 +29,7 @@ import AllDonation from "./pages/donation/AllDonations";
 import EventsDonations from "./pages/donation/EventsDonations";
 import ForgotPassword from "./pages/user_management/ForgotPassword";
 import RecoverPassword from "./pages/user_management/RecoverPassword";
+import ContactUs from "./pages/ContactUs";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           {/* All routes from NavBar */}
           <Route exact path="/" element={<HomePage />} />
           <Route exact path="/about_us" element={<AboutUs />} />
+          <Route exact path="/contact_us" element={<ContactUs />} />
           <Route exact path="/Register" element={<Register />} />
           <Route exact path="/Login" element={<Login />} />
           <Route exact path="/AdminLogin" element={<AdminLogin />} />
