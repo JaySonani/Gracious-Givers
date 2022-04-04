@@ -35,10 +35,11 @@ export default function ShowImage() {
                 console.log(error);
             });
     }
-    const onAddClickHandler = (id) => {
+    const onAddClickHandler = () => {
+        console.log('incdsc')
         navigate(`/addImage`);
     };
-    const onEditClickHandler = (id) => {
+    const onEditClickHandler = () => {
         navigate(`/editImage`);
     };
     return (

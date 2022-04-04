@@ -14,17 +14,26 @@ export default function ShowImage() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        editImageElement();
         console.log('in use effect !!')
+        editImageElement();
     }, []);
 
     function handleSubmit(event) {
 
-        navigate(`/editImage`);
+        var str = String(window.location.href);
+        // //navigate(`/editImage`);
+        if (str.includes('/editImage')) {
+            window.location.reload(true)
+        }
+        else {
+            navigate(`/editImage`);
+        }
 
+        console.log(window.location)
+        //window.location.reload(true)
         //console.log('================================================')
-        //console.log(event)
-        //console.log(event._id)
+        console.log('event ========== ' + event)
+        console.log('id ============' + event._id)
         //console.log('================================================')
         // //setID(id);
         // const data = {
@@ -79,8 +88,11 @@ export default function ShowImage() {
                             <h3> {item.description} </h3>
                         </Grid>
                         <Grid item md={8} sm={12}>
+                            {/* <Button variant="contained" component="span" margin='20px' onClick={handleSubmit(item._id)}>
+                                Delete Story
+                            </Button> */}
                             <Button variant="contained" component="span" onClick={() => { handleSubmit(item._id) }}>
-                                Delete{/* <a href='http://localhost:3000/editImage'>Delete</a> */}
+                                Delete<a href='http://localhost:3000/editImage'></a>
                                 {/* frontend */}
                             </Button>
                         </Grid>
