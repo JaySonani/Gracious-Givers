@@ -2,13 +2,13 @@
     display: flex;
     justify-content: center;
 }
-    
-svg {
+
+.svg {
     width: 65rem;
     height: 80%;
 }
 
-svg text {
+.svg text {
     animation: stroke 5s infinite alternate;
     stroke-width: 8;
     stroke: #057abe;
@@ -41,7 +41,7 @@ svg text {
     }
 }
 
-p {
+.p {
     padding-left: 2rem;
     padding-right: 2rem;
     font-weight: 100 !important;
@@ -51,7 +51,7 @@ p {
     justify-content: center;
 }
 
-section {
+.section {
     display: block;
     padding: 40px calc((100% - 1024px) / 2);
     line-height: 25px;
@@ -76,7 +76,7 @@ section {
     margin-right: auto;
 }
 
-ul {
+.ul {
     padding-left: 2rem;
     padding-right: 2rem;
     display: flex;
@@ -89,7 +89,7 @@ ul {
     font-weight: 100;
 }
 
-h3 {
+.h3 {
     padding-left: 2rem;
     padding-right: 2rem;
     padding-top: 1rem;
