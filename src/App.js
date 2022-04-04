@@ -32,6 +32,7 @@ import RecoverPassword from "./pages/user_management/RecoverPassword";
 import AddStoryPage from "./pages/photo_gallery/AddStoryPage"
 import ShowStoryPage from "./pages/photo_gallery/ShowStoryPage"
 import EditStoryPage from "./pages/photo_gallery/EditStoryPage"
+import ContactUs from "./pages/ContactUs";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
           {/* All routes from NavBar */}
           <Route exact path="/" element={<HomePage />} />
           <Route exact path="/about_us" element={<AboutUs />} />
+          <Route exact path="/contact_us" element={<ContactUs />} />
           <Route exact path="/Register" element={<Register />} />
           <Route exact path="/Login" element={<Login />} />
           <Route exact path="/AdminLogin" element={<AdminLogin />} />
@@ -51,7 +53,10 @@ function App() {
             <Route path=":id" element={<FundRaiser />} />
             <Route index element={<FundraiserList />} />
           </Route>
-          <Route exact path="/ngo/fundraiser" element={<NGOAllFundraisers />} />
+          <Route exact path="/ngo/fundraiser">
+            <Route path=":period" element={<NGOAllFundraisers />} />
+            <Route index element={<NGOAllFundraisers />} />
+          </Route>
           <Route exact path="/ngo/fundraiser/create" element={<CreatUpdateFundraiser />} />
           <Route exact path="/ngo/fundraiser/update/:id" element={<CreatUpdateFundraiser />} />
           <Route exact path="/ngo/fundraiser/details/:id" element={<NGOFundraiser />} />

@@ -6,10 +6,23 @@ import NGOFundraiserList from "../../components/fundraiser/NGOFundraiserList";
 import Header from '../../components/navbar/Header';
 import './styles/allFundraisers.css';
 import * as FundraiserConstants from "../../components/fundraiser/FundraiserConstants";
+import { useParams } from 'react-router-dom';
 
 export default function NGOAllFundraisers() {
 
+    const periodParam = useParams();
+    
     const period = FundraiserConstants.period;
+    
+    const getDefaultPeriod = () => {
+        const defaultPeriod = periodParam.period;
+        if (Object.values(period).includes(defaultPeriod)) {            
+            return defaultPeriod;
+        }
+        else {
+            return period.ongoing;
+        }        
+    }
 
     return (
         <>
@@ -18,7 +31,7 @@ export default function NGOAllFundraisers() {
                 <Row>
                     <Col xs={0} md={1}></Col>
                     <Col xs={12} md={10}>
-                        <Tabs defaultActiveKey="ongoing" fill>
+                        <Tabs defaultActiveKey={getDefaultPeriod()} fill>
                             <Tab eventKey="past" title="Past">
                                 <NGOFundraiserList period={period.past} />
                             </Tab>

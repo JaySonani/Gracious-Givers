@@ -68,7 +68,7 @@ function Header(props) {
                   </NavDropdown>
                 }
                 {isLoggedIn && <Label title="All Donations" path="/all_donations" />}
-
+                {isLoggedIn && <Label title="Contact us" path="/contact_us" />}
                 {!isLoggedIn && <Label title="About Us" path="./about_us" />}
               </Nav>
               {!isLoggedIn && (

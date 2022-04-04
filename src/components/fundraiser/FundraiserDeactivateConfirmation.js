@@ -1,6 +1,7 @@
 // Author: Akanksha Singh (B00892887)
 
 import { Modal, Button, Row, Col, Container } from "react-bootstrap";
+import { FaExclamationCircle } from "react-icons/fa";
 
 export default function FundrasierDeactivateConfirmation(props) {
 
@@ -13,7 +14,11 @@ export default function FundrasierDeactivateConfirmation(props) {
 
         <Modal show={show} onHide={handleHide}>
             <Modal.Header closeButton>
-            <Modal.Title style={{fontSize:'1.4rem'}}>Confirm deactivation</Modal.Title>
+                <FaExclamationCircle size={35} 
+                                    color={"orange"}
+                                    style={{ marginLeft: '7px', marginRight: '15px'}}
+                />
+                <Modal.Title style={{fontSize:'1.4rem'}}>Confirm deactivation</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 Are you should you want to deactivate the fundraiser <em style={{fontWeight:'600'}}>"{fundraiser.title}"</em>&nbsp;?

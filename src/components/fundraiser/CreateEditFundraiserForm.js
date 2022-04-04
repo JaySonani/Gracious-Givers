@@ -41,8 +41,7 @@ export default class CreateEditFundraiserForm extends Component {
         const action = this.props.action;
         const fundraiserId = this.props.fundraiserId;
         if (action === 'update') {
-            const getFundraiserDetailsURI = FundraiserConstants.apiBaseUrl + `/${fundraiserId}`;
-            console.log("The getFundraiserDetailsURI is " + getFundraiserDetailsURI);
+            const getFundraiserDetailsURI = FundraiserConstants.apiBaseUrl + `/${fundraiserId}`;            
             Axios.get(getFundraiserDetailsURI)
                 .then((response) => {
                     if (response.status === 200) {
@@ -84,9 +83,9 @@ export default class CreateEditFundraiserForm extends Component {
                     formErrors: { ...this.state.formErrors, image: "Allowed image types are .jpg, .jpeg, .png, .bmp" }
                 })
             }
-            else if (image.size > 51200) {
+            else if (image.size > 1000000) {
                 this.setState({
-                    formErrors: { ...this.state.formErrors, image: "Maximum size of the image should be 50 KB" }
+                    formErrors: { ...this.state.formErrors, image: "Maximum size of the image should be 1 MB" }
                 })
             }
             else {
@@ -179,12 +178,11 @@ export default class CreateEditFundraiserForm extends Component {
         Axios
             .put(updateFundraiserUrl, editedFundraiser)
             .then((response) => {
-                if (response.status === 200) {
-                    console.log("Fundraiser updated successfully : ", formField);
+                if (response.status === 200) {                    
                     this.setState({ showUpdateSuccess: true })
                 }
             })
-            .catch((error) => alert("Error in update fundraiser"));
+            .catch((error) => alert("Error in updating fundraiser"));
     }
 
     createFundraiser = () => {
@@ -223,7 +221,7 @@ export default class CreateEditFundraiserForm extends Component {
 
     handleCloseUpdateSuccess = () => {
         this.setState({ showUpdateSuccess: false })
-        this.props.onUpdateSuccess(this.state.formField._id);
+        this.props.onUpdateSuccess(this.state.formField);
     }
 
     render() {
