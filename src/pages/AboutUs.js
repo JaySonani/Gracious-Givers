@@ -9,7 +9,6 @@ import { CardActionArea } from '@mui/material';
 import fund from './Fund.png'
 import ListGroupItem from "react-bootstrap/ListGroupItem";
 import ListGroup from "react-bootstrap/ListGroup";
-// import img from "./"
 
 const AboutUs = () => {
     return (
