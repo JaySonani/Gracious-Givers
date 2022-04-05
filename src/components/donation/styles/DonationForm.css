@@ -1,6 +1,24 @@
 /* Author: Jay Bhagvanbhai Sonani (B00891984) */
 
+.formBg {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  background-size: cover;
+  /* filter: blur(1px); */
+  /* -webkit-filter: blur(3px); */
+  /* opacity: 0.5; */
+  /* z-index: -1; */
+}
+
+.blur-form-bg {
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 100%;
+  height: 85%;
+}
+
 .form {
+  /* z-index: -1 !important; */
   width: 40%;
   text-align: center;
   position: absolute;
@@ -11,6 +29,7 @@
   background-color: white;
   box-shadow: 6px 6px 16px 0 grey;
   border-radius: 15px;
+  opacity: 1 !important;
 }
 
 .labels {
