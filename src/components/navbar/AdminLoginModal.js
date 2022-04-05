@@ -3,10 +3,10 @@
  */
 import { useState } from "react";
 import { Button, Col, Modal, Row } from "react-bootstrap";
+import AdminLogin from "../../pages/user_management/AdminLogin";
 import Login from "../../pages/user_management/Login";
-import RegisterModal from "./RegisterModal";
 
-export default function LoginModal() {
+export default function AdminLoginModal() {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -15,29 +15,25 @@ export default function LoginModal() {
   return (
     <>
       <Button
+        type="button"
         variant="primary"
         className="custom-btn-header"
-        id="login-btn"
-        style={{marginRight: "10px", maxWidth: "200px"}}
+        id="admin-login-btn"
         onClick={handleShow}
+        style={{ marginRight: "10px", maxWidth: "200px" }}
       >
-        NGO Login
+        Admin Login
       </Button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Login As NGO</Modal.Title>
+          <Modal.Title>Login as Admin User</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Login />
+          <AdminLogin />
           <a variant="primary" className="" href="/ForgotPassword">
             Forgot Password
           </a>
-          <Row className="mb-3">
-            <Col className="mb-2" style={{ "margin-top": 10 + "px" }}>
-              <RegisterModal />
-            </Col>
-          </Row>
         </Modal.Body>
       </Modal>
     </>

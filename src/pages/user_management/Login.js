@@ -117,7 +117,7 @@ export default class Login extends Component {
         <Container className="mb-5" id="login-ngo-form">
           <Form noValidate onSubmit={this.handleUserLogin}>
             <Row className="mb-3">
-              <Form.Group as={Col} xs="5" md="5" controlId="validationCustom01">
+              <Form.Group as={Col} controlId="validationCustom01">
                 <Form.Label>Email</Form.Label>
                 <Form.Control
                   required
@@ -135,7 +135,7 @@ export default class Login extends Component {
               </Form.Group>
             </Row>
             <Row className="mb-3">
-              <Form.Group as={Col} xs="5" md="5" controlId="validationCustom02">
+              <Form.Group as={Col} controlId="validationCustom02">
                 <Form.Label>Password</Form.Label>
                 <Form.Control
                   required

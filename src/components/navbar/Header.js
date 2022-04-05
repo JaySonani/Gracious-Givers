@@ -11,6 +11,7 @@ import BrandLogo from "./../../assets/GraciousGivers.png";
 import Label from "./Label";
 
 import "./styles/Header.css";
+import AdminLoginModal from "./AdminLoginModal";
 
 function Header(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -74,16 +75,7 @@ function Header(props) {
               {!isLoggedIn && (
                 <Nav>
                   <LoginModal />
-
-                  <Button
-                    type="button"
-                    variant="primary"
-                    className="custom-btn-header"
-                    id="admin-login-btn"
-                    onClick={() => redirectUser("/AdminLogin")}
-                  >
-                    Admin Login
-                  </Button>
+                  <AdminLoginModal />
                 </Nav>
               )}
               {isLoggedIn && (
