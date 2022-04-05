@@ -52,43 +52,45 @@ export default function ShowImage() {
         // <Grid container justifyContent="center" alignItems={'center'} >
         <Container>
             <Row className='justify-content-center'>
-                <Col md={5}>
-                    {
-                        images.map((item, key) => (
-                            <Row>
-                                <img className='imageStyle'
-                                    // style={width = '33.33%'; height= '33.33%';}
-                                    src={item.image}
-                                    // srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                                    alt={item.title}
-                                    loading="lazy"
-                                />
-                                <h3> {item.description} </h3>
-                            </Row>
-                        ))
-                    }
+                <Col md={6}>
+                    <ul className='uuid'>
+                        {
+                            images.map((item, key) => (
+                                <li key={key} className='text-center'>
+                                    <img className='imageStyle'
+                                        // style={width = '33.33%'; height= '33.33%';}
+                                        src={item.image}
+                                        // srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                                        alt={item.title}
+                                        loading="lazy"
+                                    />
+                                    <h3 className='text-center'> {item.description} </h3>
+                                </li>
+                            ))
+                        }
+                    </ul>
                     {images && images.length === 0 &&
                         <p className='text-danger' > <b>No stories added </b> </p>
                     }
+
+                    {/* onClick={handleSubmit} */}
+                    <Row>
+                        <Col>
+                            <Button variant="contained" onClick={onAddClickHandler}>
+                                Add Image
+                            </Button>
+                        </Col>
+                        <Col className='edit-btn'>
+                            <Button variant="contained" onClick={onEditClickHandler}>
+                                Edit Image
+                            </Button>
+                            <br /><br /><br /><br /><br /><br /><br />
+                        </Col>
+                    </Row>
+                    {/* </Grid> */}
                 </Col>
             </Row>
-            {/* onClick={handleSubmit} */}
-            <Row>
-                <Col>
-                    <Button variant="contained" onClick={onAddClickHandler}>
-                        {/* <a href='http://localhost:3000/editImage'>Ngo Activity</a> */}
-                        {/* https://gracious-givers-frontend-web.herokuapp.com/ frontend */}
-                        Add Image
-                    </Button>
-                </Col>
-                <Col className='text-right'>
-                    <Button variant="contained" onClick={onEditClickHandler}>
-                        {/* <a href='http://localhost:3000/editImage'>Ngo Activity</a> */}
-                        {/* https://gracious-givers-frontend-web.herokuapp.com/ frontend */}
-                        Edit Image
-                    </Button>
-                </Col>
-            </Row>
-        </Container >
+
+        </Container>
     )
 }

@@ -4,6 +4,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react'
 import { Button, Grid } from '@mui/material';
 import axios from 'axios';
+import { Row, Container, Col } from 'react-bootstrap';
 import { Box } from '@mui/system';
 import { useNavigate } from "react-router-dom";
 
@@ -69,43 +70,33 @@ export default function ShowImage() {
             });
     }
     return (
-        <Box
-            sx={{ display: "inline-flex", bgcolor: "Background.paper" }}>
-            <Grid container justifyContent={'center'} alignItems={'center'} sx={{ m: 3 }} >
-                {images.map((item) => (
-                    <>
-                        <Grid item md={12} sm={12}>
-                            <img
-                                style={{ width: '35%', height: '35%', margin: '25px' }}
-                                // style={width = '33.33%'; height= '33.33%';}
-                                src={item.image}
-                                // srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                                alt={item.title}
-                                loading="lazy"
-                            />
-                        </Grid>
-                        <Grid item md={8} sm={12}>
-                            <h3> {item.description} </h3>
-                        </Grid>
-                        <Grid item md={8} sm={12}>
-                            {/* <Button variant="contained" component="span" margin='20px' onClick={handleSubmit(item._id)}>
-                                Delete Story
-                            </Button> */}
-                            <Button variant="contained" component="span" onClick={() => { handleSubmit(item._id) }}>
-                                Delete<a href='http://localhost:3000/editImage'></a>
-                                {/* frontend */}
-                            </Button>
-                        </Grid>
-                        {/* <Grid item md={8} sm={12}>
-                            <Button variant="contained" component="span" onClick={() => { handleSubmit(item._id) }}>
-                                Home Page
-                                {/* frontend */}
-                        {/* </Button>
-                        </Grid> */}
-                    </>
-                ))
-                }
-            </Grid >
-        </Box >
+        <Container>
+            <Row className='justify-content-center'>
+                <Col md={6}>
+                    <ul className='uuid'>
+                        {
+                            images.map((item, key) => (
+                                <li key={key} className='text-center'>
+                                    <img className='imageStyle'
+                                        // style={width = '33.33%'; height= '33.33%';}
+                                        src={item.image}
+                                        // srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                                        alt={item.title}
+                                        loading="lazy"
+                                    />
+                                    <h3 className='text-center'> {item.description} </h3>
+                                    <Button variant="contained" onClick={handleSubmit}>
+                                        Delete Story
+                                    </Button>
+                                </li>
+                            ))
+                        }
+                    </ul>
+                    {images && images.length === 0 &&
+                        <p className='text-danger' > <b>No stories added </b> </p>
+                    }
+                </Col>
+            </Row>
+        </Container>
     )
 }

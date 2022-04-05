@@ -6,6 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
+import fund from './Fund.png'
 import ListGroupItem from "react-bootstrap/ListGroupItem";
 import ListGroup from "react-bootstrap/ListGroup";
 // import img from "./"
@@ -19,7 +20,7 @@ const AboutUs = () => {
                     <CardMedia
                         component="img"
                         height="140"
-                        image="/Fund.png"
+                        image={fund}
                         alt="green iguana"
                     />
                     <CardContent>

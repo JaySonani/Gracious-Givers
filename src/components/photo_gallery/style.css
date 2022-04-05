@@ -1,6 +1,18 @@
 .imageStyle {
-    width: 39%;
+    height: 12rem;
+    /* width: 39%;
     background-size: cover;
     background-position: center;
-    position: absolute;
+    position: absolute; */
+}
+
+.uuid {
+    display: inline;
+    flex-direction: row;
+    list-style-type: none;
+    flex-wrap: wrap;
+}
+
+.edit-btn {
+    text-align: right !important;
 }
