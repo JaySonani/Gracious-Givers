@@ -1,5 +1,3 @@
-// Author: Akanksha Singh (B00892887)
-
 import Footer from "../../components/navbar/Footer";
 import Header from "../../components/navbar/Header";
 import FundraiserDetails from '../../components/fundraiser/FundraiserDetails';
@@ -13,6 +11,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import * as FundraiserConstants from "../../components/fundraiser/FundraiserConstants";
 import Axios from "axios";
 import './styles/fundraisers.css';
+import ShareOnTwitter from "../../components/socialMediaShare/ShareOnTwitter";
 
 export default function FundRaisers() {
 
@@ -78,6 +77,7 @@ export default function FundRaisers() {
                                         <small>Share this fundraiser on</small>
                                     </span>
                                     <ShareOnFacebook event={event} />
+                                    <ShareOnTwitter event={event} />
                                 </div>
                             </div>
                             <div className='col-12'>
@@ -91,6 +91,3 @@ export default function FundRaisers() {
         </>
     );
 }
-
-
-

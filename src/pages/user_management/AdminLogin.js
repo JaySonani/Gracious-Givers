@@ -117,22 +117,10 @@ const AdminLogin = () => {
 
   return (
     <>
-      <Header />
       <Container className="mb-5" id="login-admin-form">
-        <Row>
-          <Col xs={0} md={3}></Col>
-          <Col xs={12} md={6}>
-            <Row className="mb-3">
-              <Col>
-                <h4 id="create-update-form-label">Login as Admin User</h4>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-
         <Form noValidate onSubmit={handleAdminLogin}>
           <Row className="mb-3">
-            <Form.Group as={Col} xs="5" md="5" controlId="validationCustom01">
+            <Form.Group as={Col} controlId="validationCustom01">
               <Form.Label>User name</Form.Label>
               <Form.Control
                 required
@@ -149,7 +137,7 @@ const AdminLogin = () => {
             </Form.Group>
           </Row>
           <Row className="mb-3">
-            <Form.Group as={Col} xs="5" md="5" controlId="validationCustom02">
+            <Form.Group as={Col} controlId="validationCustom02">
               <Form.Label>Password</Form.Label>
               <Form.Control
                 required
@@ -167,7 +155,7 @@ const AdminLogin = () => {
           </Row>
 
           <Row className="mb-3">
-            <Form.Group as={Col} xs="5" md="5" controlId="validationCustom03">
+            <Form.Group as={Col} controlId="validationCustom03">
               <Form.Label>What is your favorite color?</Form.Label>
               <Form.Control
                 required
@@ -184,7 +172,7 @@ const AdminLogin = () => {
             </Form.Group>
           </Row>
           <Row className="mb-3">
-            <Form.Group as={Col} xs="5" md="5" controlId="validationCustom04">
+            <Form.Group as={Col} controlId="validationCustom04">
               <Form.Label>What is your favorite food?</Form.Label>
               <Form.Control
                 required
@@ -204,15 +192,12 @@ const AdminLogin = () => {
           <Button variant="primary" type="submit" className="custom-btn-header">
             Login
           </Button>
-       
-            <Row className="mb-3" style={{height:'40px'}}>
-              <Col>
-                
-              </Col>
-            </Row>
+
+          <Row className="mb-3" style={{ height: "40px" }}>
+            <Col></Col>
+          </Row>
         </Form>
       </Container>
-      <Footer />
     </>
   );
 };

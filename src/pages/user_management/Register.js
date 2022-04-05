@@ -190,21 +190,10 @@ export default class Register extends Component {
 
     return (
       <>
-        <Header />
         <Container className="mb-5" id="create-ngo-form">
-          <Row>
-            <Col xs={0} md={3}></Col>
-            <Col xs={12} md={6}>
-              <Row className="mb-3">
-                <Col>
-                  <h4 id="create-update-form-label">Register NGO User</h4>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
           <Form noValidate onSubmit={this.handleSubmit}>
             <Row className="mb-3">
-              <Form.Group as={Col} xs="5" md="5" controlId="validationCustom01">
+              <Form.Group as={Col} controlId="validationCustom01">
                 <Form.Label>User ID</Form.Label>
                 <Form.Control
                   required
@@ -221,7 +210,7 @@ export default class Register extends Component {
               </Form.Group>
             </Row>
             <Row className="mb-3">
-              <Form.Group as={Col} xs="5" md="5" controlId="validationCustom02">
+              <Form.Group as={Col} controlId="validationCustom02">
                 <Form.Label>Email</Form.Label>
                 <Form.Control
                   required
@@ -238,7 +227,7 @@ export default class Register extends Component {
               </Form.Group>
             </Row>
             <Row className="mb-3">
-              <Form.Group as={Col} xs="5" md="5" controlId="validationCustom03">
+              <Form.Group as={Col} controlId="validationCustom03">
                 <Form.Label>Password</Form.Label>
                 <Form.Control
                   required
@@ -255,7 +244,7 @@ export default class Register extends Component {
               </Form.Group>
             </Row>
             <Row className="mb-3">
-              <Form.Group as={Col} xs="5" md="5" controlId="validationCustom04">
+              <Form.Group as={Col} controlId="validationCustom04">
                 <Form.Label>Confirm the Password</Form.Label>
                 <Form.Control
                   required
@@ -272,7 +261,7 @@ export default class Register extends Component {
               </Form.Group>
             </Row>
             <Row className="mb-3">
-              <Form.Group as={Col} xs="5" md="5" controlId="validationCustom05">
+              <Form.Group as={Col} controlId="validationCustom05">
                 <Form.Label>NGO name</Form.Label>
                 <Form.Control
                   required
@@ -290,7 +279,7 @@ export default class Register extends Component {
               </Form.Group>
             </Row>
             <Row className="mb-3">
-              <Form.Group as={Col} xs="5" md="5" controlId="validationCustom06">
+              <Form.Group as={Col} controlId="validationCustom06">
                 <Form.Label>Description</Form.Label>
                 <Form.Control
                   required
@@ -308,7 +297,7 @@ export default class Register extends Component {
               </Form.Group>
             </Row>
             <Row className="mb-3">
-              <Form.Group as={Col} xs="5" md="5" controlId="validationCustom07">
+              <Form.Group as={Col} controlId="validationCustom07">
                 <Form.Label>Target Group</Form.Label>
                 <Form.Control
                   required
@@ -339,7 +328,6 @@ export default class Register extends Component {
             </Row>
           </Form>
         </Container>
-        <Footer />
       </>
     );
   }
