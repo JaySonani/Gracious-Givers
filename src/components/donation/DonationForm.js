@@ -84,6 +84,11 @@ const DonationForm = () => {
             errorText += "\nAmount must be greater than 0.";
             validForm = false;
         }
+        if (parseInt(amount) > 10000) {
+            setAmountError(true);
+            errorText += "\nAmount cannot exceed 10000.";
+            validForm = false;
+        }
 
         if (validForm) {
             navigate("/payment", { state: { id, name, amount, fname, lname, email } });

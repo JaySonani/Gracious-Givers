@@ -103,42 +103,42 @@ export default class Register extends Component {
           email: "Please enter a valid email address",
         },
       });
-    } else if (email.length == 0) {
+    } else if (email.length === 0) {
       this.setState({
         formErrors: {
           ...this.state.formErrors,
           email: "Please enter an email address",
         },
       });
-    } else if (password.length == 0) {
+    } else if (password.length === 0) {
       this.setState({
         formErrors: {
           ...this.state.formErrors,
           password: "Please enter a password",
         },
       });
-    } else if (password != this.state.formField.cpassword) {
+    } else if (password !== this.state.formField.cpassword) {
       this.setState({
         formErrors: {
           ...this.state.formErrors,
           cpassword: "Password and confirm password does not match",
         },
       });
-    } else if (this.state.formField.ngo_name.length == 0) {
+    } else if (this.state.formField.ngo_name.length === 0) {
       this.setState({
         formErrors: {
           ...this.state.formErrors,
           ngo_name: "Please enter all the ngo name",
         },
       });
-    } else if (this.state.formField.target_group.length == 0) {
+    } else if (this.state.formField.target_group.length === 0) {
       this.setState({
         formErrors: {
           ...this.state.formErrors,
           target_group: "Please enter all the target group",
         },
       });
-    } else if (this.state.formField.description.length == 0) {
+    } else if (this.state.formField.description.length === 0) {
       this.setState({
         formErrors: {
           ...this.state.formErrors,
