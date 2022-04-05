@@ -37,7 +37,7 @@ export default function FundRaisers() {
                 console.log('Error in getting details of the fundraiser :' + error);
             });
 
-        
+
         Axios.get(getTopDonorsURI)
             .then((response) => {
                 if (response.status === 200 && response.data.success === true) {
@@ -61,9 +61,9 @@ export default function FundRaisers() {
                         <div className='row' style={{ margin: '22px 0px' }}>
                             <div className='col-12'>
                                 <div className='support-now'>
-                                    <Button variant="primary" 
-                                            className="custom-btn" 
-                                            onClick={() => navigate("/donation", { state: { id: event._id, name: event.title } })}>
+                                    <Button variant="primary"
+                                        className="custom-btn"
+                                        onClick={() => navigate("/donation", { state: { id: event._id, name: event.title, image: event.image } })}>
                                         Donate Now
                                         <BiDonateHeart style={{ marginLeft: '10px', marginBottom: '7px' }} />
                                     </Button>
@@ -72,15 +72,15 @@ export default function FundRaisers() {
                             </div>
                         </div>
                         <div className='row' style={{ margin: '10px 0' }}>
-                            <div className='col-12' id='social-media-share' style={{paddingBottom:'15px'}}>
+                            <div className='col-12' id='social-media-share' style={{ paddingBottom: '15px' }}>
                                 <div>
                                     <span style={{ fontWeight: 600, paddingRight: '1rem' }}>
                                         <small>Share this fundraiser on</small>
                                     </span>
-									<ShareOnFacebook event={event} />                                
-								</div>
+                                    <ShareOnFacebook event={event} />
+                                </div>
                             </div>
-                            <div className='col-12'>                                
+                            <div className='col-12'>
                                 <TopDonors donors={topDonors} />
                             </div>
                         </div>
