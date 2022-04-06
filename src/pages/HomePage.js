@@ -1,8 +1,20 @@
+import { useEffect } from "react";
 import Footer from "../components/navbar/Footer";
 import Header from "../components/navbar/Header";
+import { useNavigate } from "react-router-dom";
+import { isAuthenticated } from "../utils/Network";
 import classes from "./HomePage.module.css";
 
 const HomePage = () => {
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (isAuthenticated()) {
+            navigate("/ngo/fundraiser");
+        }
+    }, [navigate]);
+
     return (
         <div>
             <Header />
@@ -12,7 +24,7 @@ const HomePage = () => {
             </p>
             <div className={classes.logo}>
                 <svg className={classes.svg} viewBox="0 0 1320 300">
-                    <text x="50%" y="50%" dy=".35em" text-anchor="middle">
+                    <text x="50%" y="50%" dy=".35em" textAnchor="middle">
                         Gracious Givers
                     </text>
                 </svg>
