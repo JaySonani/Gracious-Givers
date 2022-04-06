@@ -1,3 +1,5 @@
+// Author: Viraj Jigar Shah (B00879448)
+
 import Footer from "../components/navbar/Footer";
 import Header from "../components/navbar/Header";
 import "./about.css"
@@ -27,7 +29,7 @@ const AboutUs = () => {
             <Header />
             <div className="BGImage" style={{ backgroundImage: `url(${fund})` }} />
             <div className="content">
-                <p><br />
+                <p>
                     <h3 style={{ textAlign: "center" }}>"Purpose"</h3>
                     There are many interested people out there who want to donate something towards a good cause.
                     Non-profit organizations are best option to help the needful people. NGOs organize various kinds of
@@ -49,12 +51,12 @@ const AboutUs = () => {
                 </p>
             </div>
 
-            <div>
+            {/* <div>
                 <h1 style={{ textAlign: "center" }}>Our Developers</h1>
-            </div>
-            <div>
+            </div> */}
+            {/* <div> */}
 
-                {/* <div style={{ height: 300, width: 350, padding: 20, display: "flex" }}>
+            {/* <div style={{ height: 300, width: 350, padding: 20, display: "flex" }}>
                     <Image
                         src=
                         {`${viraj}`}
@@ -65,7 +67,7 @@ const AboutUs = () => {
         
                 </div> */}
 
-                {/* <Image
+            {/* <Image
                         src=
                         {`${viraj}`}
                         roundedCircle
@@ -85,8 +87,8 @@ const AboutUs = () => {
                         {`${viraj}`}
                         roundedCircle
                     /> */}
-                {/* </div> */}
-                {/* <ImageList sx={{ width: 300, height: 200, alignContent: "center" }}>
+            {/* </div> */}
+            {/* <ImageList sx={{ width: 300, height: 200, alignContent: "center" }}>
                     <ImageListItem>
                         <img
                             src={`${viraj}`}
@@ -112,7 +114,7 @@ const AboutUs = () => {
                 </ImageList> */}
 
 
-                {/* <Card sx={{ maxWidth: 220, display: "flex" }}>
+            {/* <Card sx={{ maxWidth: 220, display: "flex" }}>
                     <CardActionArea>
                         <CardMedia
                             component="img"
@@ -140,8 +142,8 @@ const AboutUs = () => {
                         </CardContent>  
                     </CardActionArea>
                 </Card> */}
-                <br /><br /><br />
-            </div>
+            {/* <br /><br /><br />
+            </div> */}
             <Footer />
         </div >
     );
