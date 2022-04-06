@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
 import { Button, Grid } from '@mui/material';
 import axios from 'axios';
 import { Row, Container, Col } from 'react-bootstrap';
-import { Box } from '@mui/system';
+import { Box, textAlign } from '@mui/system';
 import { useNavigate } from "react-router-dom";
 
 export default function ShowImage() {
@@ -22,7 +22,7 @@ export default function ShowImage() {
     function handleSubmit(event) {
 
         var str = String(window.location.href);
-        // //navigate(`/editImage`);
+        //navigate(`/editImage`);
         if (str.includes('/editImage')) {
             window.location.reload(true)
         }
@@ -30,10 +30,10 @@ export default function ShowImage() {
             navigate(`/editImage`);
         }
 
-        console.log(window.location)
+        //console.log(window.location)
         //window.location.reload(true)
         //console.log('================================================')
-        console.log('event ========== ' + event)
+        //console.log('event ========== ' + event)
         console.log('id ============' + event._id)
         //console.log('================================================')
         // //setID(id);
@@ -85,18 +85,18 @@ export default function ShowImage() {
                                         loading="lazy"
                                     />
                                     <h3 className='text-center'> {item.description} </h3>
-                                    <Button variant="contained" onClick={handleSubmit}>
-                                        Delete Story
+                                    <Button variant="contained" component="span" onClick={() => { handleSubmit(item._id) }}> {/*onClick={handleSubmit(item._id)} */}
+                                        Delete Story {/* <a href='http://localhost:3000/editImage'></a> */}
                                     </Button>
                                 </li>
                             ))
                         }
                     </ul>
                     {images && images.length === 0 &&
-                        <p className='text-danger' > <b>No stories added </b> </p>
+                        <p className='text-danger' style={{ textAlign: "center" }}> <h2><b>No stories Updated </b> </h2> </p>
                     }
                 </Col>
             </Row>
-        </Container>
+        </Container >
     )
 }

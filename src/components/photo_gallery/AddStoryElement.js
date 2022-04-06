@@ -15,6 +15,7 @@ function ImageElement() {
     const [selectedFile, setSelectedFile] = useState("");
     const [desc, setDesc] = useState("");
     const [missingDoc, setMissingDoc] = useState("");
+    const [uploadMsg, setUploadMsg] = useState("");
     const handleSubmit = () => {
 
         // console.log(desc)
@@ -25,7 +26,7 @@ function ImageElement() {
             setMissingDoc('Please add content or image')
         }
         else {
-
+            setUploadMsg("Story added")
             const form = new FormData()
             form.append("NGOStory", selectedFile)
             form.append("desc", desc)
@@ -46,8 +47,8 @@ function ImageElement() {
                 });
         }
     }
-    const onClickHandler = (id) => {
-        navigate(`/editImage`);
+    const onClickHandler = () => {
+        navigate(`/showImage`);
     };
     const handleChange = (event) => {
 
@@ -99,9 +100,12 @@ function ImageElement() {
                 <CardActions style={{ justifyContent: "center", color: 'red', fontWeight: 'bold' }}>
                     <p><h3>{missingDoc}</h3></p>
                 </CardActions>
-            </Card><br /><br /><br />
-            <Button variant="contained" component="span">
-                <a href='http://localhost:3000/showImage'>Submit</a>
+                <CardActions style={{ justifyContent: "center", color: 'green', fontWeight: 'bold' }}>
+                    <p><h4>{uploadMsg}</h4></p>
+                </CardActions>
+            </Card><br />
+            <Button variant="contained" component="span" onClick={onClickHandler}>
+                Submit
                 {/* frontend */}
             </Button><br />
         </div>

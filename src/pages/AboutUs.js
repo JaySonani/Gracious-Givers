@@ -27,7 +27,7 @@ const AboutUs = () => {
             <Header />
             <div className="BGImage" style={{ backgroundImage: `url(${fund})` }} />
             <div className="content">
-                <p>
+                <p><br />
                     <h3 style={{ textAlign: "center" }}>"Purpose"</h3>
                     There are many interested people out there who want to donate something towards a good cause.
                     Non-profit organizations are best option to help the needful people. NGOs organize various kinds of
@@ -137,7 +137,7 @@ const AboutUs = () => {
                             <Typography gutterBottom variant="h5" component="div">
                                 Viraj Jigar Shah
                             </Typography>
-                        </CardContent>
+                        </CardContent>  
                     </CardActionArea>
                 </Card> */}
                 <br /><br /><br />
