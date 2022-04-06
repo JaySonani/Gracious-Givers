@@ -69,6 +69,10 @@ function Header(props) {
                 }
                 {isLoggedIn && <Label title="All Donations" path="/all_donations" />}
 
+                {(isLoggedIn && props.admin !== 'admin') && <Label title="Notifications" path="/Notification" />}
+                
+                {isLoggedIn && <Label title="Notifications" path="/Notification" />}
+
                 {!isLoggedIn && <Label title="About Us" path="./about_us" />}
               </Nav>
               {!isLoggedIn && (

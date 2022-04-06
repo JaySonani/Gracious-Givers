@@ -29,6 +29,7 @@ import AllDonation from "./pages/donation/AllDonations";
 import EventsDonations from "./pages/donation/EventsDonations";
 import ForgotPassword from "./pages/user_management/ForgotPassword";
 import RecoverPassword from "./pages/user_management/RecoverPassword";
+import Notification from "./components/notification/Notification";
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
           <Route exact path="/Login" element={<Login />} />
           <Route exact path="/AdminLogin" element={<AdminLogin />} />
           <Route exact path="/ForgotPassword" element={<ForgotPassword />} />
+          <Route exact path="/Notification" element={<Notification />} />
 
           {/* All routes regarding fundraisers */}
           <Route exact path="/fundraiser">
