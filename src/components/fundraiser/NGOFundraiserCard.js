@@ -51,8 +51,7 @@ export default function NGOFundraiserCard(props) {
     const handleDelete = (fundrasier) => {
         const id = fundrasier._id;
         const ngoId = fundraiser.ngoId;
-        const deleteUrl = FundraiserConstants.apiBaseUrl + `/${id}/ngo/${ngoId}`;
-        console.log("Delete URL is :" + deleteUrl);
+        const deleteUrl = FundraiserConstants.apiBaseUrl + `/${id}/ngo/${ngoId}`;        
         Axios.delete(deleteUrl)
             .then((response) => {
                 if (response.status === 200) {
@@ -65,8 +64,7 @@ export default function NGOFundraiserCard(props) {
             });
     }
 
-    const handleDeactivate = (fundrasier) => {
-        console.log("Deactivating fundraiser with ID :" + fundrasier._id);
+    const handleDeactivate = (fundrasier) => {        
         const id = fundrasier._id;
         const deactivateUrl = FundraiserConstants.apiBaseUrl + `/${id}/status/${FundraiserConstants.fundraiserStatus.deactivated}`;
         Axios.put(deactivateUrl)

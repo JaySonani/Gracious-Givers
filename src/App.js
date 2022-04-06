@@ -25,11 +25,12 @@ import Login from "./pages/user_management/Login";
 import Register from "./pages/user_management/Register";
 import AdminLogin from "./pages/user_management/AdminLogin";
 import FundraiserRequest from './components/moderation/FundraiserRequest';
+import Notification from "./components/notification/Notification";
 import AllDonation from "./pages/donation/AllDonations";
 import EventsDonations from "./pages/donation/EventsDonations";
 import ForgotPassword from "./pages/user_management/ForgotPassword";
 import RecoverPassword from "./pages/user_management/RecoverPassword";
-import Notification from "./components/notification/Notification";
+import ContactUs from "./pages/ContactUs";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
           {/* All routes from NavBar */}
           <Route exact path="/" element={<HomePage />} />
           <Route exact path="/about_us" element={<AboutUs />} />
+          <Route exact path="/contact_us" element={<ContactUs />} />
           <Route exact path="/Register" element={<Register />} />
           <Route exact path="/Login" element={<Login />} />
           <Route exact path="/AdminLogin" element={<AdminLogin />} />
@@ -50,7 +52,10 @@ function App() {
             <Route path=":id" element={<FundRaiser />} />
             <Route index element={<FundraiserList />} />
           </Route>
-          <Route exact path="/ngo/fundraiser" element={<NGOAllFundraisers />} />
+          <Route exact path="/ngo/fundraiser">
+            <Route path=":period" element={<NGOAllFundraisers />} />
+            <Route index element={<NGOAllFundraisers />} />
+          </Route>         
           <Route exact path="/ngo/fundraiser/create" element={<CreatUpdateFundraiser />} />
           <Route exact path="/ngo/fundraiser/update/:id" element={<CreatUpdateFundraiser />} />
           <Route exact path="/ngo/fundraiser/details/:id" element={<NGOFundraiser />} />

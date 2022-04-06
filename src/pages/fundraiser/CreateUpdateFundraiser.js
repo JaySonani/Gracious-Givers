@@ -3,6 +3,7 @@
 import Footer from "../../components/navbar/Footer";
 import Header from "../../components/navbar/Header";
 import CreateEditFundraiserForm from "../../components/fundraiser/CreateEditFundraiserForm";
+import * as FundraiserConstants from "../../components/fundraiser/FundraiserConstants";
 import { useParams, useNavigate } from "react-router-dom";
 
 export default function CreatUpdateFundraiser() {
@@ -20,11 +21,26 @@ export default function CreatUpdateFundraiser() {
     }
 
     const onCreateSuccess = (fundraiserId) => {
-        navigate("/ngo/fundraiser");
+        navigate("/ngo/fundraiser/future");
     }
 
-    const onUpdateSuccess = (fundraiserId) => {
-        navigate("/ngo/fundraiser");
+    const onUpdateSuccess = (fundraiser) => {
+        const status = FundraiserConstants.fundraiserStatus;
+        if (!fundraiser) {
+            navigate("/ngo/fundraiser");
+        }
+        else if (fundraiser.status === status.active)
+        {
+            navigate("/ngo/fundraiser/ongoing");
+        }
+        else if (fundraiser.status === status.pendingApproval) 
+        {
+            navigate("/ngo/fundraiser/future");
+        }
+        else 
+        {
+            navigate("/ngo/fundraiser");
+        }        
     }
 
     return (

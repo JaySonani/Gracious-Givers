@@ -11,7 +11,7 @@ const DonationForm = () => {
 
 
     const { state } = useLocation();
-    const { id, name } = state;
+    const { id, name, image } = state;
 
     let validForm = true;
     let navigate = useNavigate();
@@ -84,6 +84,11 @@ const DonationForm = () => {
             errorText += "\nAmount must be greater than 0.";
             validForm = false;
         }
+        if (parseInt(amount) > 10000) {
+            setAmountError(true);
+            errorText += "\nAmount cannot exceed 10000.";
+            validForm = false;
+        }
 
         if (validForm) {
             navigate("/payment", { state: { id, name, amount, fname, lname, email } });
@@ -110,43 +115,45 @@ const DonationForm = () => {
     }
 
     return (
-        <div>
+        <div style={{ backgroundImage: `url(${image})` }} className="formBg">
             <Header />
-            <div className="form">
-                <div className="title">
-                    Enter details for your donation
-                </div>
-                <br /><br />
+            <div className="blur-form-bg">
+                <div className="form">
+                    <div className="title">
+                        Enter details for your donation
+                    </div>
+                    <br /><br />
 
-                <div className="rowForm">
-                    <div className="labels">Donor's first name:</div>
-                    <Form.Control required className={fnameError && "redError"} placeholder={fnameError ? fnameErrorText : "Enter your first name"} value={fname} type="text" onChange={e => setFname(e.target.value)} />
-                </div>
+                    <div className="rowForm">
+                        <div className="labels">Donor's first name:</div>
+                        <Form.Control required className={fnameError && "redError"} placeholder={fnameError ? fnameErrorText : "Enter your first name"} value={fname} type="text" onChange={e => setFname(e.target.value)} />
+                    </div>
 
-                <div className="rowForm">
-                    <div className="labels">Donor's last name:</div>
-                    <Form.Control required className={lnameError && "redError"} placeholder={lnameError ? lnameErrorText : "Enter your last name"} value={lname} type="text" onChange={e => setLname(e.target.value)} />
-                </div>
+                    <div className="rowForm">
+                        <div className="labels">Donor's last name:</div>
+                        <Form.Control required className={lnameError && "redError"} placeholder={lnameError ? lnameErrorText : "Enter your last name"} value={lname} type="text" onChange={e => setLname(e.target.value)} />
+                    </div>
 
-                <div className="rowForm">
-                    <div className="labels">Donor's email:</div>
-                    <Form.Control required className={emailError && "redError"} placeholder={emailError ? emailErrorText : "Enter your email address"} value={email} type="text" onChange={e => setEmail(e.target.value)} />
-                </div>
+                    <div className="rowForm">
+                        <div className="labels">Donor's email:</div>
+                        <Form.Control required className={emailError && "redError"} placeholder={emailError ? emailErrorText : "Enter your email address"} value={email} type="text" onChange={e => setEmail(e.target.value)} />
+                    </div>
 
-                <div className="rowForm">
-                    <div className="labels">Donation amount:</div>
-                    <Form.Control required className={amountError && "redError"} placeholder={amountError ? amountErrorText : "Enter the amount"} value={amount} type="text" onChange={e => setAmount(e.target.value)} />
-                </div>
+                    <div className="rowForm">
+                        <div className="labels">Donation amount:</div>
+                        <Form.Control required className={amountError && "redError"} placeholder={amountError ? amountErrorText : "Enter the amount"} value={amount} type="text" onChange={e => setAmount(e.target.value)} />
+                    </div>
 
-                <div className="rowForm">
-                    <Button className="donateButton" variant="primary" onClick={validateForm} >Donate</Button>
-                </div>
+                    <div className="rowForm">
+                        <Button className="donateButton" variant="primary" onClick={validateForm} >Donate</Button>
+                    </div>
 
-                <div className="rowForm">
-                    <Button className="resetButton" variant="outline-primary" onClick={resetForm} >Reset</Button>
-                </div>
+                    <div className="rowForm">
+                        <Button className="resetButton" variant="outline-primary" onClick={resetForm} >Reset</Button>
+                    </div>
 
-            </div >
+                </div >
+            </div>
             <Footer />
         </div>
     );

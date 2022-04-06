@@ -11,6 +11,7 @@ import BrandLogo from "./../../assets/GraciousGivers.png";
 import Label from "./Label";
 
 import "./styles/Header.css";
+import AdminLoginModal from "./AdminLoginModal";
 
 function Header(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -68,26 +69,14 @@ function Header(props) {
                   </NavDropdown>
                 }
                 {isLoggedIn && <Label title="All Donations" path="/all_donations" />}
-
-                {(isLoggedIn && props.admin !== 'admin') && <Label title="Notifications" path="/Notification" />}
-                
-                {isLoggedIn && <Label title="Notifications" path="/Notification" />}
-
+                {isLoggedIn && <Label title="Contact us" path="/contact_us" />}
+                {(isLoggedIn && props.admin === 'admin') && <Label title="Notification" path="/Notification" />}
                 {!isLoggedIn && <Label title="About Us" path="./about_us" />}
               </Nav>
               {!isLoggedIn && (
                 <Nav>
                   <LoginModal />
-
-                  <Button
-                    type="button"
-                    variant="primary"
-                    className="custom-btn-header"
-                    id="admin-login-btn"
-                    onClick={() => redirectUser("/AdminLogin")}
-                  >
-                    Admin Login
-                  </Button>
+                  <AdminLoginModal />
                 </Nav>
               )}
               {isLoggedIn && (
