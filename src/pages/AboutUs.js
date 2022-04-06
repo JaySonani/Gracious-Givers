@@ -3,6 +3,7 @@ import Header from "../components/navbar/Header";
 import "./about.css"
 import "./author.css"
 import * as React from 'react';
+import Image from "react-bootstrap/Image";
 import Card from '@mui/material/Card';
 // import classes from "./HomePage.module.css";
 // import { Container, Row, Col, Dropdown, DropdownButton } from "react-bootstrap";
@@ -24,10 +25,7 @@ const AboutUs = () => {
     return (
         <div className="about">
             <Header />
-            <div
-                className="BGImage"
-                style={{ backgroundImage: `url(${fund})` }}>
-            </div>
+            <div className="BGImage" style={{ backgroundImage: `url(${fund})` }} />
             <div className="content">
                 <p>
                     <h3 style={{ textAlign: "center" }}>"Purpose"</h3>
@@ -51,9 +49,43 @@ const AboutUs = () => {
                 </p>
             </div>
 
-            <div className="menu">
-                <h1 style={{ textAlign: "center" }}>Our Developers</h1><br /><br />
+            <div>
+                <h1 style={{ textAlign: "center" }}>Our Developers</h1>
+            </div>
+            <div>
 
+                {/* <div style={{ height: 300, width: 350, padding: 20, display: "flex" }}>
+                    <Image
+                        src=
+                        {`${viraj}`}
+                        roundedCircle
+                        style={{ margin: 20 }}
+                    >
+                    </Image>
+        
+                </div> */}
+
+                {/* <Image
+                        src=
+                        {`${viraj}`}
+                        roundedCircle
+                    />
+                    <Image
+                        src=
+                        {`${viraj}`}
+                        roundedCircle
+                    />
+                    <Image
+                        src=
+                        {`${viraj}`}
+                        roundedCircle
+                    />
+                    <Image
+                        src=
+                        {`${viraj}`}
+                        roundedCircle
+                    /> */}
+                {/* </div> */}
                 {/* <ImageList sx={{ width: 300, height: 200, alignContent: "center" }}>
                     <ImageListItem>
                         <img
@@ -111,7 +143,7 @@ const AboutUs = () => {
                 <br /><br /><br />
             </div>
             <Footer />
-        </div>
+        </div >
     );
 }
 
