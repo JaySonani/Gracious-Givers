@@ -162,12 +162,12 @@ const ContactUs = () => {
 
                 <div className="rowForm">
                     <div className="labels">Subject:</div>
-                    <Form.Control required className={subjectError && "redError"} placeholder={subjectError ? subjectErrorText : "Enter the amount"} value={subject} type="text" onChange={e => setSubject(e.target.value)} />
+                    <Form.Control required className={subjectError && "redError"} placeholder={subjectError ? subjectErrorText : "Enter the subject"} value={subject} type="text" onChange={e => setSubject(e.target.value)} />
                 </div>
 
                 <div className="rowForm">
                     <div className="labels">Description:</div>
-                    <Form.Control required className={descriptionError && "redError"} placeholder={descriptionError ? descriptionErrorText : "Enter the amount"} value={description} type="text" onChange={e => setDescription(e.target.value)} />
+                    <Form.Control required className={descriptionError && "redError"} placeholder={descriptionError ? descriptionErrorText : "Enter the description"} value={description} type="text" onChange={e => setDescription(e.target.value)} />
                 </div>
 
                 <div className="rowForm">
