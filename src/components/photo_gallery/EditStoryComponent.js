@@ -49,7 +49,7 @@ export default function ShowImage() {
         // console.log(form)
         //setImageId(id);
         // axios.post('http://localhost:5000/deleteImages', form)
-        axios.post('http://localhost:5000/photoGallery/deleteFundraiserStory', form) //backend
+        axios.post('https://gracious-givers-backend.herokuapp.com/photoGallery/deleteFundraiserStory', form) //backend http://localhost:5000/photoGallery/deleteFundraiserStory
             .then(function (response) {
                 console.log(response);
             })
@@ -60,7 +60,9 @@ export default function ShowImage() {
     }
     function editImageElement() {
 
-        axios.get('http://localhost:5000/photoGallery/getFundraiserStory') //backend
+        axios.get('https://gracious-givers-backend.herokuapp.com/photoGallery/getFundraiserStory') //backend   http://localhost:5000/photoGallery/getFundraiserStory
+
+
             .then(function (response) {
                 console.log(response);
                 setImages(response.data)

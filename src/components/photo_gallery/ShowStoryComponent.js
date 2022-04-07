@@ -25,7 +25,7 @@ export default function ShowImage() {
 
     function ImageElement() {
 
-        axios.get('http://localhost:5000/photoGallery/getFundraiserStory')//backend
+        axios.get('https://gracious-givers-backend.herokuapp.com/photoGallery/getFundraiserStory')//backend
             .then(function (response) {
 
                 console.log(response);

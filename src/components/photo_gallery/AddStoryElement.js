@@ -46,7 +46,7 @@ function ImageElement() {
             console.log('=====================')
             console.log(desc)
 
-            axios.post('http://localhost:5000/photoGallery/addFundraiserStory', form)//backend
+            axios.post('https://gracious-givers-backend.herokuapp.com/photoGallery/addFundraiserStory', form)//backend
                 .then(function (response) {
                     console.log(response);
                 })

@@ -31,7 +31,7 @@ export default function ShowImage() {
         // const FEvent = props._id;
         //http://localhost:5000
         //https://gracious-givers-backend.herokuapp.com
-        axios.get('http://localhost:5000/photoGallery/getFundraiserStory')//backend
+        axios.get('https://gracious-givers-backend.herokuapp.com/photoGallery/getFundraiserStory')//backend
             .then(function (response) {
 
                 console.log(response);
