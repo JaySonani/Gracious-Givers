@@ -17,13 +17,17 @@ const FundraiserRequest = (props) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (!isAuthenticated()) {
-            redirectUser("/AdminLogin");
-        }
-        if (props.all) {
-            fetchAllFundraiser(id);
+        if (
+            isAuthenticated() &&
+            JSON.parse(localStorage.getItem("token")).data.isAdmin
+        ) {
+            if (props.all) {
+                fetchAllFundraiser(id);
+            } else {
+                fetchPendingFundraiser(id);
+            }
         } else {
-            fetchPendingFundraiser(id);
+            redirectUser("/");
         }
     }, [id, props.all]);
 
