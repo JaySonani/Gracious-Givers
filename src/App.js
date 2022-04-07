@@ -25,6 +25,7 @@ import Login from "./pages/user_management/Login";
 import Register from "./pages/user_management/Register";
 import AdminLogin from "./pages/user_management/AdminLogin";
 import FundraiserRequest from './components/moderation/FundraiserRequest';
+import Notification from "./components/notification/Notification";
 import AllDonation from "./pages/donation/AllDonations";
 import EventsDonations from "./pages/donation/EventsDonations";
 import ForgotPassword from "./pages/user_management/ForgotPassword";
@@ -44,6 +45,7 @@ function App() {
           <Route exact path="/Login" element={<Login />} />
           <Route exact path="/AdminLogin" element={<AdminLogin />} />
           <Route exact path="/ForgotPassword" element={<ForgotPassword />} />
+          <Route exact path="/Notification" element={<Notification />} />
 
           {/* All routes regarding fundraisers */}
           <Route exact path="/fundraiser">
