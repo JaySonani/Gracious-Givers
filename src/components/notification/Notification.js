@@ -35,7 +35,7 @@ const Notification = () => {
 
     return (
         <div className="parentDiv">
-            <Header />
+            {isNgo ? <Header/> : <Header  admin={true}/>}
             <Container>
                 <h1>{isNgo ? <Badge bg="secondary">Event Notifications </Badge> : <Badge bg="secondary">Events pending for Approval </Badge>}
 
