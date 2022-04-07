@@ -45,7 +45,7 @@ export const getNgoId = () => {
         return ngoUser._id;
     }
     else {
-        redirectUser("/Login");
+        redirectUser("/");
     }
 }
 
