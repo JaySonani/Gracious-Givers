@@ -14,13 +14,17 @@ const AdminHome = (props) => {
     const [ngo, setNgo] = useState([]);
 
     useEffect(() => {
-        if (!isAuthenticated()) {
-            redirectUser("/AdminLogin");
-        }
-        if (props.all) {
-            fetchAllNgo();
+        if (
+            isAuthenticated() &&
+            JSON.parse(localStorage.getItem("token")).data.isAdmin
+        ) {
+            if (props.all) {
+                fetchAllNgo();
+            } else {
+                fetchPendingNgo();
+            }
         } else {
-            fetchPendingNgo();
+            redirectUser("/");
         }
     }, [props.all]);
 
