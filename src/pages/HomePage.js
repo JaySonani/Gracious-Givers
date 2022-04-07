@@ -1,16 +1,22 @@
+/*
+    Author: Jay Nimeshkumar Patel (B00885078)
+*/
 import { useEffect } from "react";
 import Footer from "../components/navbar/Footer";
 import Header from "../components/navbar/Header";
 import { useNavigate } from "react-router-dom";
 import { isAuthenticated } from "../utils/Network";
-import classes from "./HomePage.module.css";
+import classes from "./styles/HomePage.module.css";
 
 const HomePage = () => {
 
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (isAuthenticated()) {
+        if (isAuthenticated() && JSON.parse(localStorage.getItem("token")).data.isAdmin) {
+            navigate("/admin");
+        }
+        else if(isAuthenticated() && JSON.parse(localStorage.getItem("token")).data.isNgo) {
             navigate("/ngo/fundraiser");
         }
     }, [navigate]);

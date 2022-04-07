@@ -16,13 +16,17 @@ const NGODetails = (props) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (!isAuthenticated()) {
-            redirectUser("/AdminLogin");
-        }
-        if (props.all) {
-            fetchActiveNgo(id);
+        if (
+            isAuthenticated() &&
+            JSON.parse(localStorage.getItem("token")).data.isAdmin
+        ) {
+            if (props.all) {
+                fetchActiveNgo(id);
+            } else {
+                fetchPendingNgo(id);
+            }
         } else {
-            fetchPendingNgo(id);
+            redirectUser("/");
         }
     }, [id, props.all]);
 
