@@ -74,7 +74,7 @@ function Header(props) {
                 {isLoggedIn && <Label title="All Donations" path="/all_donations" />}
                 {isLoggedIn && <Label title="Notification" path="/Notification" />}
                 <Label title="Contact us" path="/contact_us" />
-                {!isLoggedIn && <Label title="About Us" path="./about_us" />}
+                {!isLoggedIn && <Label title="About us" path="./about_us" />}
               </Nav>
               {!isLoggedIn && (
                 <Nav>

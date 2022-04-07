@@ -10,6 +10,7 @@ export default function ShareOnTwitter(props) {
       url={url}
       quote={fundraiser.title}
       hashtag="#GraciousGivers"
+      style={{ marginLeft: "10px" }}
     >
       <TwitterIcon size={40} round={true} />
     </TwitterShareButton>

@@ -35,8 +35,9 @@ const Notification = () => {
 
     return (
         <div className="parentDiv">
-            <Header />
+            {isNgo ? <Header/> : <Header  admin={true}/>}
             <Container>
+            <br/>
                 <h1>{isNgo ? <Badge bg="secondary">Event Notifications </Badge> : <Badge bg="secondary">Events pending for Approval </Badge>}
 
                 </h1>
@@ -73,6 +74,9 @@ const Notification = () => {
                     </Accordion> : ""} 
                 })}
             </Container>
+            <br/>
+            <br/>
+            <br/>
             <Footer />
 
         </div>

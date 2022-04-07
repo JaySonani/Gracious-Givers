@@ -21,6 +21,7 @@
 .form {
   /* z-index: -1 !important; */
   width: 40%;
+  height: 500px;
   text-align: center;
   position: absolute;
   left: 50%;
@@ -45,9 +46,6 @@
   color: white !important;
   width: 100px;
   background-color: #057abe !important;
-}
-
-.abc {
 }
 
 .resetButton {
