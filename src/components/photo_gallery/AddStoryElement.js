@@ -77,7 +77,7 @@ function ImageElement() {
                 <CardActionArea>
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="div">
-                            " Helping stray souls in need "
+                            Adding Picture Gallery for Fundraiser
                         </Typography>
                         <TextField
                             id="standard-multiline-static"
