@@ -30,6 +30,9 @@ import AllDonation from "./pages/donation/AllDonations";
 import EventsDonations from "./pages/donation/EventsDonations";
 import ForgotPassword from "./pages/user_management/ForgotPassword";
 import RecoverPassword from "./pages/user_management/RecoverPassword";
+import AddStoryPage from "./pages/photo_gallery/AddStoryPage"
+import ShowStoryPage from "./pages/photo_gallery/ShowStoryPage"
+import EditStoryPage from "./pages/photo_gallery/EditStoryPage"
 import ContactUs from "./pages/ContactUs";
 
 function App() {
@@ -55,7 +58,7 @@ function App() {
           <Route exact path="/ngo/fundraiser">
             <Route path=":period" element={<NGOAllFundraisers />} />
             <Route index element={<NGOAllFundraisers />} />
-          </Route>         
+          </Route>
           <Route exact path="/ngo/fundraiser/create" element={<CreatUpdateFundraiser />} />
           <Route exact path="/ngo/fundraiser/update/:id" element={<CreatUpdateFundraiser />} />
           <Route exact path="/ngo/fundraiser/details/:id" element={<NGOFundraiser />} />
@@ -67,6 +70,10 @@ function App() {
 
           <Route exact path="/payment" element={<Payment />} />
           <Route exact path="/payment/success" element={<PaymentSuccess />} />
+
+          <Route exact path="/addImage" element={<AddStoryPage />} />
+          <Route exact path="/showImage" element={<ShowStoryPage />} />
+          <Route exact path="/editImage" element={<EditStoryPage />} />
 
           {/* All routes regarding moderation */}
           <Route exact path="/admin" element={<AdminHome all={true} />} />
