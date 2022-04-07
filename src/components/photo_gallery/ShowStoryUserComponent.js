@@ -13,6 +13,11 @@ export default function ShowImage(props) {
     //    const [ngoAuth, setNgoAuth] = useState("")
     const navigate = useNavigate();
 
+    console.log("+++++++++++++++++++++++++++++++++++++++++")
+    console.log(props.event)
+    console.log("+++++++++++++++++++++++++++++++++++++++++  ")
+    console.log(props.event._id)
+
     useEffect(() => {
         // Update the document title using the browser API
         ImageElement();
@@ -69,9 +74,9 @@ export default function ShowImage(props) {
                 <p className='text-danger' > <b>No stories added </b> </p>
             }
 
-            <Grid item md={6} sx={{ ml: 30 }}>
+            <Grid item md={12} sx={{ ml: 25 }}>
                 <Button variant="contained" sx={{ m: 1 }} onClick={onClickHandler}>
-                    Home Image
+                    Home Page
                 </Button>
             </Grid>
         </Grid>

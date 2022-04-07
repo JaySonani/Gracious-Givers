@@ -9,11 +9,17 @@ import * as StoryContant from "./StoryConstant.js"
 import { Row, Container, Col } from 'react-bootstrap';
 import './style.css';
 
-export default function ShowImage() {
+export default function ShowImage(props) {
 
     const [images, setImages] = useState([])
     const [ngoAuth, setNgoAuth] = useState("")
     const navigate = useNavigate();
+
+    console.log("++++++++++++++++++++++++++++++++++++++++++++++")
+    console.log(props.event)
+    console.log("++++++++++++++++++++++++++++++++++++++++++++++")
+    console.log(props.event._id)
+
     //const history = useHistory();
 
 
@@ -41,11 +47,11 @@ export default function ShowImage() {
     }
     const onAddClickHandler = () => {
         console.log('incdsc')
-        navigate(`/addImage`);
+        navigate(`/addImage`, props.event);
         //history.push('/addImage')
     };
     const onEditClickHandler = () => {
-        navigate(`/editImage`);
+        navigate(`/editImage`, props.event);
         //  history.push('/editImage')
     };
     return (
@@ -85,12 +91,12 @@ export default function ShowImage() {
                 {/* <Row>
                     <Col> */}
                 <Button variant="contained" sx={{ m: 1 }} onClick={onAddClickHandler}>
-                    Add Image
+                    Add Story
                 </Button>
                 {/* </Col>
                     <Col className='edit-btn'> */}
                 <Button variant="contained" sx={{ m: 1, color: 'white' }} onClick={onEditClickHandler}>
-                    Edit Image
+                    Edit Story
                 </Button>
             </Grid>
 
