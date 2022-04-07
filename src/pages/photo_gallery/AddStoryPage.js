@@ -6,7 +6,6 @@ import AddStoryComponent from "../../components/photo_gallery/AddStoryComponent"
 
 const AddStoryPage = () => {
 
-
     return (
         <div>
             <Header />
