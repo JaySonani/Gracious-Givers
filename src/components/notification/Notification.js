@@ -57,20 +57,20 @@ const Notification = () => {
                 </h1>
 
                 
-                {notification.map((value, index) => {
-                    return <Accordion defaultActiveKey="0" >
+                {isNgo && notification.map((value, index) => {
+                    {return value.event_donations.length > 0 ?  <Accordion defaultActiveKey="0" >
                         <Accordion.Item eventKey="0">
                             <Accordion.Header>{value.title}</Accordion.Header>
                             <Accordion.Body>
-                            {
-                            value.event_donations.map((value, index) => {
+                            {value.event_donations.length > 0 &&
+                            value?.event_donations?.map((value, index) => {
                                 return <div>{value.donation_amount} CAD donated by {value.donor_firstname +" "+ value.donor_lastname}</div>
                             })
                         }
 
                             </Accordion.Body>
                         </Accordion.Item>
-                    </Accordion>
+                    </Accordion> : ""} 
                 })}
             </Container>
             <Footer />
