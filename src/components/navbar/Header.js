@@ -4,7 +4,7 @@
 
 import { useEffect, useState } from "react";
 import { Container, Navbar, Nav, Button, NavDropdown } from "react-bootstrap";
-import { isAuthenticated, redirectUser, setTokenOnLogOut } from "../../utils/Network";
+import { isAuthenticated, setTokenOnLogOut } from "../../utils/Network";
 import LoginModal from "./LoginModal";
 
 import BrandLogo from "./../../assets/GraciousGivers.png";
@@ -50,7 +50,10 @@ function Header(props) {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
-                <Label title="Home" path="/" />
+                {
+                  !isLoggedIn &&
+                  <Label title="Home" path="/" />
+                }
                 {
                   !isLoggedIn &&
                   <Label title="Fundraiser" path="/fundraiser" />
@@ -69,8 +72,8 @@ function Header(props) {
                   </NavDropdown>
                 }
                 {isLoggedIn && <Label title="All Donations" path="/all_donations" />}
-                {isLoggedIn && <Label title="Contact us" path="/contact_us" />}
                 {(isLoggedIn && props.admin !== 'admin') && <Label title="Notification" path="/Notification" />}
+                <Label title="Contact us" path="/contact_us" />
                 {!isLoggedIn && <Label title="About Us" path="./about_us" />}
               </Nav>
               {!isLoggedIn && (
