@@ -70,7 +70,7 @@ function Header(props) {
                 }
                 {isLoggedIn && <Label title="All Donations" path="/all_donations" />}
                 {isLoggedIn && <Label title="Contact us" path="/contact_us" />}
-                {(isLoggedIn && props.admin === 'admin') && <Label title="Notification" path="/Notification" />}
+                {(isLoggedIn && props.admin !== 'admin') && <Label title="Notification" path="/Notification" />}
                 {!isLoggedIn && <Label title="About Us" path="./about_us" />}
               </Nav>
               {!isLoggedIn && (
