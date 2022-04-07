@@ -3,8 +3,6 @@
  */
 import { React, useState } from "react";
 import { Row, Col, Form, Button, Container } from "react-bootstrap";
-import Header from "../../components/navbar/Header";
-import Footer from "../../components/navbar/Footer";
 import axios from "axios";
 import { authenticateUser, redirectUser } from "../../utils/Network";
 

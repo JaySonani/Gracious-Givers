@@ -7,6 +7,11 @@
   background-size: cover;
 }
 
+.paymentTitle {
+  font-size: 30px;
+  font-weight: bold;
+}
+
 .blur-form-bg {
   background-color: rgba(0, 0, 0, 0.3);
   width: 100%;
@@ -30,7 +35,7 @@
 
 .labels {
   width: 70%;
-  justify-content: flex-end;
+  /* justify-content: flex-end; */
   align-items: center;
   display: flex;
   margin-right: 10px;
@@ -38,28 +43,37 @@
 
 .donateButton {
   color: white !important;
-  width: 100%;
+  width: 100px;
   background-color: #057abe !important;
+}
+
+.abc {
 }
 
 .resetButton {
   color: #057abe !important;
   background-color: white !important;
-  width: 100%;
+  width: 100px;
   border: 1px solid #057abe;
+  margin-right: 20px;
 }
 
 .rowForm {
   flex-direction: row;
   display: flex;
   margin: 10px;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: flex-end;
+  /* align-items: right; */
   /* text-align: left; */
 }
 
-.title {
+.heading {
   font-size: 20px;
+}
+
+.title {
+  font-size: 25px !important;
+  font-weight: bold;
 }
 
 .redError::placeholder {

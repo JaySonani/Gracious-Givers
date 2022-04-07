@@ -1,7 +1,7 @@
 /* Author: Jay Bhagvanbhai Sonani (B00891984) */
 
 .donationCard {
-  width: 300px;
+  width: 320px;
   /* height: 50px; */
   border-radius: 5px;
   box-shadow: 3px 3px 8px 0 grey;
@@ -14,6 +14,7 @@
 .donationAmount {
   font-size: 20px;
   height: 40px;
+  font-weight: bold;
   background-color: #057abe;
   display: flex;
   align-items: center;

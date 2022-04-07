@@ -13,12 +13,14 @@ const DonationCard = (props) => {
                 <br />
                 Email: {props.email}
                 <br />
+                <br />
 
-                <div className='donationDetails'>
-                    {props.event_name}
-                    <br />
-                    Donated on: {props.time}
-                </div>
+                {/* <div className='donationContent'> */}
+                Donated on: {props.time}
+                <br />
+                {props.event_name}
+                <br />
+                {/* </div> */}
 
             </div>
         </div>

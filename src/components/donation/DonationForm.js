@@ -20,7 +20,7 @@ const DonationForm = () => {
         console.log(id);
         console.log(name);
 
-    }, [id]);
+    });
 
 
     const [fname, setFname] = useState("");
@@ -119,10 +119,16 @@ const DonationForm = () => {
             <Header />
             <div className="blur-form-bg">
                 <div className="form">
+
                     <div className="title">
+                        Donation for "{name}"
+                    </div>
+                    <br />
+
+                    <div className="heading">
                         Enter details for your donation
                     </div>
-                    <br /><br />
+                    <br />
 
                     <div className="rowForm">
                         <div className="labels">Donor's first name:</div>
@@ -143,13 +149,14 @@ const DonationForm = () => {
                         <div className="labels">Donation amount:</div>
                         <Form.Control required className={amountError && "redError"} placeholder={amountError ? amountErrorText : "Enter the amount"} value={amount} type="text" onChange={e => setAmount(e.target.value)} />
                     </div>
+                    <br />
 
-                    <div className="rowForm">
+                    <div className="abc">
+                        <Button className="resetButton" variant="outline-primary" onClick={resetForm} >Reset</Button>
                         <Button className="donateButton" variant="primary" onClick={validateForm} >Donate</Button>
                     </div>
 
                     <div className="rowForm">
-                        <Button className="resetButton" variant="outline-primary" onClick={resetForm} >Reset</Button>
                     </div>
 
                 </div >
