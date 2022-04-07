@@ -1,11 +1,13 @@
 // Author: Jay Bhagvanbhai Sonani (B00891984)
 
+import './styles/DonationForm.css';
 import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Footer from "../navbar/Footer";
 import Header from "../navbar/Header";
 var axios = require('axios');
+
 
 
 function Payment() {
@@ -95,7 +97,10 @@ function Payment() {
             <Header />
             <div className="form">
                 <br /><br />
-                Payment for $ {state.amount}
+                <div className='paymentTitle'>
+                    Payment for $ {state.amount}
+
+                </div>
                 <br /><br />
 
                 <Form.Control required className={error && "redError"} placeholder={error ? errorHelperText : "Enter card number"} value={cardNumber} type="text" onChange={(e) => acceptInput(e.target.value)} />
@@ -103,7 +108,7 @@ function Payment() {
                 <br /><br />
 
                 <div className="btn">
-                    <Button className="donateButton" style={{ backgroundColor: "#057abe" }} onClick={makePayment} >MAKE PAYMENT</Button>
+                    <Button className="paymentButton" style={{ backgroundColor: "#057abe" }} onClick={makePayment} >MAKE PAYMENT</Button>
                 </div>
                 <br /><br />
 

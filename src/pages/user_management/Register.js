@@ -3,8 +3,6 @@
  */
 import { React, Component } from "react";
 import { Row, Col, Form, Button, Container } from "react-bootstrap";
-import Footer from "../../components/navbar/Footer";
-import Header from "../../components/navbar/Header";
 import axios from "axios";
 import { redirectUser } from "../../utils/Network";
 export default class Register extends Component {

@@ -63,6 +63,8 @@ function AllDonation() {
                             const filtered = donations.filter((item) => {
                                 if (item.donation_event_name.toLowerCase().includes(e.target.value.toLowerCase())) {
                                     return item;
+                                } else {
+                                    return null;
                                 }
                             })
                             setFilteredDonations(filtered);
