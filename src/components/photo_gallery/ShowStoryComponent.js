@@ -50,47 +50,58 @@ export default function ShowImage() {
     };
     return (
         // <Grid container justifyContent="center" alignItems={'center'} >
-        <Container>
-            <Row className='justify-content-center'>
-                <Col md={6}>
-                    <ul className='uuid'>
-                        {
-                            images.map((item, key) => (
-                                <li key={key} className='text-center'>
+        // <Container>
+        //     <Row>  {/*className='justify-content-center' */}
+        <Grid container alignItems={'center'} justifyContent={'center'}>
+            {/* <Col sx={{}} md={6}> */}
+            <ul className='uuid'>
+
+                {
+                    images.map((item, key) => (
+                        <li key={key} className='text-center'>
+                            <div >
+                                <Grid item>
                                     <img className='imageStyle'
                                         // style={width = '33.33%'; height= '33.33%';}
                                         src={item.image}
                                         // srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
                                         alt={item.title}
                                         loading="lazy"
-                                    />
-                                    <h3 className='text-center'> {item.description} </h3>
-                                </li>
-                            ))
-                        }
-                    </ul>
-                    {images && images.length === 0 &&
-                        <p className='text-danger' > <b>No stories added </b> </p>
-                    }
+                                    /></Grid>
 
-                    {/* onClick={handleSubmit} */}
-                    <Row>
-                        <Col>
-                            <Button variant="contained" onClick={onAddClickHandler}>
-                                Add Image
-                            </Button>
-                        </Col>
-                        <Col className='edit-btn'>
-                            <Button variant="contained" onClick={onEditClickHandler}>
-                                Edit Image
-                            </Button>
-                            <br /><br /><br /><br /><br /><br /><br />
-                        </Col>
-                    </Row>
-                    {/* </Grid> */}
-                </Col>
-            </Row>
+                            </div>
+                            <Grid item>
+                                <h3 className='text-center'> {item.description} </h3>
+                            </Grid>
+                        </li>
+                    ))
+                }
+            </ul>
+            {images && images.length === 0 &&
+                <p className='text-danger' > <b>No stories added </b> </p>
+            }
 
-        </Container>
+            <Grid item>            {/* onClick={handleSubmit} */}
+                {/* <Row>
+                    <Col> */}
+                <Button variant="contained" sx={{ m: 1 }} onClick={onAddClickHandler}>
+                    Add Image
+                </Button>
+                {/* </Col>
+                    <Col className='edit-btn'> */}
+                <Button variant="contained" sx={{ m: 1, color: 'white' }} onClick={onEditClickHandler}>
+                    Edit Image
+                </Button>
+            </Grid>
+
+            {/* </Col>
+                </Row> */}
+            {/* </Grid> */}
+            {/* </Col> */}
+        </Grid>
+
     )
 }
+{/* </Row>
+
+        </Container> */}

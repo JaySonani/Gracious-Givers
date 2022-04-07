@@ -7,7 +7,7 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import * as StoryContant from "./StoryConstant.js"
 
-export default function ShowImage() {
+export default function ShowImage(props) {
 
     const [images, setImages] = useState([])
     //    const [ngoAuth, setNgoAuth] = useState("")
@@ -23,6 +23,7 @@ export default function ShowImage() {
 
         const ngoAuth = StoryContant.getNgoId();
         const setNgoAuth = ngoAuth;
+        const FEvent = props._id;
         //http://localhost:5000
         //https://gracious-givers-backend.herokuapp.com
         axios.get('http://localhost:5000/photoGallery/getFundraiserStory')//backend
@@ -39,30 +40,66 @@ export default function ShowImage() {
         navigate(`/`);
     };
     return (
-        <Grid container justifyContent="center" alignItems={'center'} >
-            {
-                images.map((item, key) => (
-                    <div>
-                        <img
-                            style={{ width: '35%', height: '35%', margin: '20px' }}
-                            // style={width = '33.33%'; height= '33.33%';}
-                            src={item.image}
-                            // srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                            alt={item.title}
-                            loading="lazy"
-                        />
-                        <h3> {item.description} </h3>
-                        <br /><br />
-                    </div>
-                ))
+        <Grid container alignItems={'center'} justifyContent={'center'}>
+            {/* <Col sx={{}} md={6}> */}
+            <ul className='uuid'>
+
+                {
+                    images.map((item, key) => (
+                        <li key={key} className='text-center'>
+                            <div >
+                                <Grid item>
+                                    <img className='imageStyle'
+                                        // style={width = '33.33%'; height= '33.33%';}
+                                        src={item.image}
+                                        // srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                                        alt={item.title}
+                                        loading="lazy"
+                                    /></Grid>
+
+                            </div>
+                            <Grid item>
+                                <h3 className='text-center'> {item.description} </h3>
+                            </Grid>
+                        </li>
+                    ))
+                }
+            </ul>
+            {images && images.length === 0 &&
+                <p className='text-danger' > <b>No stories added </b> </p>
             }
-            <br /><br /><br />
-            {/* onClick={handleSubmit} */}
-            <Button variant="contained" component="span" margin='20px' onClick={onClickHandler}>
-                {/* <a href='http://localhost:3000/editImage'>Ngo Activity</a> */}
-                {/* https://gracious-givers-frontend-web.herokuapp.com/ frontend */}
-                Home Page
-            </Button><br /><br />
-        </Grid >
+
+            <Grid item md={6} sx={{ ml: 30 }}>
+                <Button variant="contained" sx={{ m: 1 }} onClick={onClickHandler}>
+                    Home Image
+                </Button>
+            </Grid>
+        </Grid>
+
+        // <Grid container justifyContent="center" alignItems={'center'} >
+        //     {    
+        //         images.map((item, key) => (
+        //             <div>   
+        //                 <img
+        //                     style={{ width: '35%', height: '35%', margin: '20px' }}
+        //                     // style={width = '33.33%'; height= '33.33%';}
+        //                     src={item.image}
+        //                     // srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+        //                     alt={item.title}
+        //                     loading="lazy"
+        //                 />
+        //                 <h3> {item.description} </h3>
+        //                 <br /><br />
+        //             </div>
+        //         ))
+        //     }
+        //     <br /><br /><br />
+        //     {/* onClick={handleSubmit} */}
+        //     <Button variant="contained" component="span" margin='20px' onClick={onClickHandler}>
+        //         {/* <a href='http://localhost:3000/editImage'>Ngo Activity</a> */}
+        //         {/* https://gracious-givers-frontend-web.herokuapp.com/ frontend */}
+        //         Home Page
+        //     </Button><br /><br />
+        // </Grid >
     )
 }

@@ -3,9 +3,8 @@
 import React from 'react';
 import { Tabs, Tab } from 'react-bootstrap';
 import PictureGallery from './PictureGallery';
-import ShowStoryComponent from "../../components/photo_gallery/ShowStoryComponent";
-import ShowStoryUserComponent from "../../components/photo_gallery/ShowStoryUserComponent";
-import './styles/fundraiserDetails.css';
+
+import './styles/fundraiserDetails.css'
 
 export default class FundraiserDetails extends React.Component {
     render() {
@@ -36,7 +35,6 @@ export default class FundraiserDetails extends React.Component {
                                 </Tab>
                                 <Tab eventKey="updates" title="Updates">
                                     <PictureGallery event={event} />
-                                    {/* {event._id > 0 ? <ShowStoryComponent /> : <ShowStoryUserComponent />} */}
                                 </Tab>
                             </Tabs>
                         </div>
