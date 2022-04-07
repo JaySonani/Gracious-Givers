@@ -33,8 +33,9 @@ const AboutUs = () => {
 
 
             </p>
-
-
+            <br />
+            <br />
+            <br />
 
             <Footer />
         </div>
