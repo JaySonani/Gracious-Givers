@@ -12,7 +12,7 @@
 }
 
 .svg text {
-    animation: stroke 5s infinite alternate;
+    animation: stroke 2s infinite alternate;
     stroke-width: 8;
     stroke: #057abe;
     font-size: 100px;
