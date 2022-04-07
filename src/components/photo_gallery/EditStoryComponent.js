@@ -74,7 +74,6 @@ export default function ShowImage() {
     return (
         <Container>
             <Row className='justify-content-center'>
-                <h2 className='text-center'> <b>Helping stray souls in need</b></h2>
                 <h2 className='text-center'> Delete stories from here </h2>
                 <Col md={6}>
                     <ul className='uuid'>
