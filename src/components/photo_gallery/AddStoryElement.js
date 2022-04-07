@@ -7,10 +7,18 @@ import { Button, CardActionArea, CardActions } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import PictureGallery from '../fundraiser/PictureGallery';
 
 function ImageElement() {
     var target = new Array();
+    // const event = this.props.event;
+    // console.log(event)
+
+    // const eventName = event.title;
+
+    const location = useLocation();
+    console.log(location)
     const navigate = useNavigate();
     const [selectedFile, setSelectedFile] = useState("");
     const [desc, setDesc] = useState("");
@@ -48,7 +56,7 @@ function ImageElement() {
         }
     }
     const onClickHandler = () => {
-        navigate(`/showImage`);
+        navigate(`/ngo/fundraiser/details`);
     };
     const handleChange = (event) => {
 
@@ -64,14 +72,12 @@ function ImageElement() {
 
     return (
         <div align="center">
+            {/* <h2> {eventName}</h2> */}
             <Card sx={{ width: "60%", height: "40%" }}>
                 <CardActionArea>
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="div">
-                            NGO_NAME
-                        </Typography>
-                        <Typography sx={{ p: 1 }} variant="body2" color="text.secondary">
-                            Fund Raiser Event
+                            " Helping stray souls in need "
                         </Typography>
                         <TextField
                             id="standard-multiline-static"

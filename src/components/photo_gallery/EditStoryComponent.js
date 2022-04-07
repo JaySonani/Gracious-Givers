@@ -72,6 +72,8 @@ export default function ShowImage() {
     return (
         <Container>
             <Row className='justify-content-center'>
+                <h2 className='text-center'> <b>Helping stray souls in need</b></h2>
+                <h2 className='text-center'> Delete stories from here </h2>
                 <Col md={6}>
                     <ul className='uuid'>
                         {
@@ -88,6 +90,7 @@ export default function ShowImage() {
                                     <Button variant="contained" component="span" onClick={() => { handleSubmit(item._id) }}> {/*onClick={handleSubmit(item._id)} */}
                                         Delete Story {/* <a href='http://localhost:3000/editImage'></a> */}
                                     </Button>
+                                    <br /><br />
                                 </li>
                             ))
                         }
@@ -96,7 +99,9 @@ export default function ShowImage() {
                         <p className='text-danger' style={{ textAlign: "center" }}> <h2><b>No stories Updated </b> </h2> </p>
                     }
                 </Col>
+                <br /><br /><br />
             </Row>
+            <br /><br />
         </Container >
     )
 }

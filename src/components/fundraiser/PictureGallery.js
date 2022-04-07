@@ -8,7 +8,7 @@ export default function PictureGallery(props) {
 
     const ngoID = props.event.ngoId;
     const event = props.event;
-    //console.log(props.event)
+    console.log(event)
     //const id = event._id;
 
     const ngoAuth = StoryConstant.getNgoId();

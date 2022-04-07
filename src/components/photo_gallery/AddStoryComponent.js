@@ -5,7 +5,9 @@ import Grid from '@mui/material/Grid';
 import { styled } from '@mui/material/styles';
 import ImageElement from './AddStoryElement';
 
-export default function AddImage() {
+export default function AddImage(props) {
+
+    // const event = props.event;
     const Input = styled('input')({
         display: 'none',
     });

@@ -7,16 +7,16 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import * as StoryContant from "./StoryConstant.js"
 
-export default function ShowImage(props) {
+export default function ShowImage() {
 
     const [images, setImages] = useState([])
     //    const [ngoAuth, setNgoAuth] = useState("")
     const navigate = useNavigate();
 
-    console.log("+++++++++++++++++++++++++++++++++++++++++")
-    console.log(props.event)
-    console.log("+++++++++++++++++++++++++++++++++++++++++  ")
-    console.log(props.event._id)
+    // console.log("+++++++++++++++++++++++++++++++++++++++++")
+    // console.log(props.event)
+    // console.log("+++++++++++++++++++++++++++++++++++++++++  ")
+    // console.log(props.event._id)
 
     useEffect(() => {
         // Update the document title using the browser API
@@ -28,7 +28,7 @@ export default function ShowImage(props) {
 
         const ngoAuth = StoryContant.getNgoId();
         const setNgoAuth = ngoAuth;
-        const FEvent = props._id;
+        // const FEvent = props._id;
         //http://localhost:5000
         //https://gracious-givers-backend.herokuapp.com
         axios.get('http://localhost:5000/photoGallery/getFundraiserStory')//backend
@@ -74,11 +74,11 @@ export default function ShowImage(props) {
                 <p className='text-danger' > <b>No stories added </b> </p>
             }
 
-            <Grid item md={12} sx={{ ml: 25 }}>
+            {/* <Grid item md={8}>
                 <Button variant="contained" sx={{ m: 1 }} onClick={onClickHandler}>
                     Home Page
                 </Button>
-            </Grid>
+            </Grid> */}
         </Grid>
 
         // <Grid container justifyContent="center" alignItems={'center'} >
