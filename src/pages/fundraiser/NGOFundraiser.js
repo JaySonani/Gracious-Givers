@@ -12,6 +12,7 @@ import Axios from "axios";
 import './styles/fundraisers.css';
 import FundraiserStatus from "../../components/fundraiser/FundraiserStatus";
 import { Col, Container, Row } from "react-bootstrap";
+import ShareOnTwitter from "../../components/socialMediaShare/ShareOnTwitter";
 
 export default function NGOFundraiser() {
 
@@ -65,7 +66,8 @@ export default function NGOFundraiser() {
                                                     <span style={{ fontWeight: 600, paddingRight: '1rem' }}>
                                                         <small>Share this fundraiser on</small>
                                                     </span>
-                                                    <ShareOnFacebook event={event} />                                
+                                                    <ShareOnFacebook event={event} /> 
+                                                    <ShareOnTwitter event={event} />                               
                                                 </div>
                                             </div>                                     
                                         }
