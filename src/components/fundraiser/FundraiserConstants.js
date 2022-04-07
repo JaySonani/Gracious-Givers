@@ -3,16 +3,16 @@
 import { isAuthenticated, redirectUser } from "../../utils/Network";
 
 export const period = {
-    past: "past",
-    ongoing: "ongoing",
-    future: "future"
+    past : "past",
+    ongoing : "ongoing",
+    future : "future"
 }
 
 export const fundraiserStatus = {
-    draft: 'Draft',
-    active: 'Active',
-    deactivated: 'Deactivated',
-    completed: 'Completed',
+    draft:'Draft', 
+    active: 'Active', 
+    deactivated: 'Deactivated', 
+    completed: 'Completed', 
     pendingApproval: 'Pending Admin Approval'
 }
 
@@ -24,7 +24,7 @@ export const causes = [
 ];
 
 // export const apiBaseUrl = "http://localhost:5000/fundraiser"; 
-export const apiBaseUrl = "https://gracious-givers-backend.herokuapp.com/fundraiser";
+export const apiBaseUrl = "https://gracious-givers-backend.herokuapp.com/fundraiser"; 
 
 export const defaultCurrency = "CAD";
 
@@ -41,7 +41,7 @@ export const allowedImageType = [
 
 export const getNgoId = () => {
     const ngoUser = isAuthenticated();
-    if (ngoUser) {
+    if(ngoUser) {
         return ngoUser._id;
     }
     else {
@@ -52,7 +52,7 @@ export const getNgoId = () => {
 export const maxGoalAmountFormatted = "1,000,000";
 export const maxGoalAmount = 1000000;
 
-export const currencyFormatting = (currency, amount, minimumFractionDigits) => {
+export const currencyFormatting = (currency, amount, minimumFractionDigits) => {    
     currency = !currency ? defaultCurrency : currency;
     amount = !amount ? 0 : amount;
     return new Intl.NumberFormat(`en-US`, {
