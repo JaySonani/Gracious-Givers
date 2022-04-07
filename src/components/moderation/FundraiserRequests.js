@@ -14,18 +14,24 @@ const FundraiserRequests = (props) => {
     const [fundraisers, setFundraisers] = useState([]);
 
     useEffect(() => {
-        if (!isAuthenticated()) {
-            redirectUser("/AdminLogin");
-        }
-        if (props.all) {
-            fetchAllFundraisers();
+        if (
+            isAuthenticated() &&
+            JSON.parse(localStorage.getItem("token")).data.isAdmin
+        ) {
+            if (props.all) {
+                fetchAllFundraisers();
+            } else {
+                fetchPendingFundraisers();
+            }
         } else {
-            fetchPendingFundraisers();
+            redirectUser("/");
         }
     }, [props.all]);
 
     async function fetchPendingFundraisers() {
-        await Axios.get("https://gracious-givers-backend.herokuapp.com/fundraiser/pending")
+        await Axios.get(
+            "https://gracious-givers-backend.herokuapp.com/fundraiser/pending"
+        )
             .then((response) => {
                 if (response.status === 200) {
                     setFundraisers(response.data);
@@ -38,7 +44,9 @@ const FundraiserRequests = (props) => {
     }
 
     async function fetchAllFundraisers() {
-        await Axios.get("https://gracious-givers-backend.herokuapp.com/fundraiser/cause/All")
+        await Axios.get(
+            "https://gracious-givers-backend.herokuapp.com/fundraiser/cause/All"
+        )
             .then((response) => {
                 if (response.status === 200) {
                     setFundraisers(response.data);
