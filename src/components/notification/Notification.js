@@ -20,9 +20,11 @@ const Notification = () => {
     useEffect(() => {
         axios.get(notificationURL).then((response) => {
             if (isNgo) {
+
                 const notificationData = response.data.filter((notification) => {
                     return notification.ngoId === ngoID;
                 });
+                console.log(notificationData);
                 setNotification(notificationData);
             } else {
                 setNotification(response.data);
@@ -35,7 +37,7 @@ const Notification = () => {
         <div className="parentDiv">
             <Header />
             <Container>
-                <h1>{isNgo ? <Badge bg="secondary">Notifications </Badge> : <Badge bg="secondary">Events pending for Approval </Badge>}
+                <h1>{isNgo ? <Badge bg="secondary">Event Notifications </Badge> : <Badge bg="secondary">Events pending for Approval </Badge>}
 
                 </h1>
 
@@ -45,6 +47,27 @@ const Notification = () => {
                             <Accordion.Header>{value.title}</Accordion.Header>
                             <Accordion.Body>
                                 {value.description}
+
+                            </Accordion.Body>
+                        </Accordion.Item>
+                    </Accordion>
+                })}
+                <h1>{isNgo ? <Badge bg="secondary">Donations </Badge> : ""}
+
+                </h1>
+
+                
+                {notification.map((value, index) => {
+                    return <Accordion defaultActiveKey="0" >
+                        <Accordion.Item eventKey="0">
+                            <Accordion.Header>{value.title}</Accordion.Header>
+                            <Accordion.Body>
+                            {
+                            value.event_donations.map((value, index) => {
+                                return <div>{value.donation_amount} CAD donated by {value.donor_firstname +" "+ value.donor_lastname}</div>
+                            })
+                        }
+
                             </Accordion.Body>
                         </Accordion.Item>
                     </Accordion>
