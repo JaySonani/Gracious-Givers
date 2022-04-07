@@ -6,25 +6,37 @@ import Footer from "../navbar/Footer";
 import { Accordion, Badge, Container } from "react-bootstrap";
 
 
-const notificationURL = "https://gracious-givers-backend.herokuapp.com/notification/adminNotification";
+
 
 const Notification = () => {
+    const baseURL = "https://gracious-givers-backend.herokuapp.com/notification/";
+    // adminNotification";
+    const ngoID = isAuthenticated()._id;
+    const data = JSON.parse(localStorage.getItem("token"));
+    const isNgo = data.data.isNgo
+    const notificationURL = isNgo ? baseURL + "ngoNotification" : baseURL + "adminNotification";
     const [notification, setNotification] = useState([]);
 
     useEffect(() => {
         axios.get(notificationURL).then((response) => {
-            setNotification(response.data);
+            if (isNgo) {
+                const notificationData = response.data.filter((notification) => {
+                    return notification.ngoId === ngoID;
+                });
+                setNotification(notificationData);
+            } else {
+                setNotification(response.data);
+            }
+
         })
     }, []);
-
-    const ngoID = isAuthenticated().user_id;
 
     return (
         <div className="parentDiv">
             <Header />
             <Container>
-                <h1>
-                    <Badge bg="secondary">Events pending for Approval </Badge>
+                <h1>{isNgo ? <Badge bg="secondary">Notifications </Badge> : <Badge bg="secondary">Events pending for Approval </Badge>}
+
                 </h1>
 
                 {notification.map((value, index) => {
