@@ -73,7 +73,7 @@ export default class Login extends Component {
           email: "Please enter a valid email address",
         },
       });
-    } else if (password.length == 0) {
+    } else if (password.length === 0) {
       this.setState({
         formErrors: {
           ...this.state.formErrors,
