@@ -16,9 +16,12 @@ function ImageElement() {
     // console.log(event)
 
     // const eventName = event.title;
+    const eventName = localStorage.getItem("eventName")
+    const eventID = localStorage.getItem("event_id")
+    const cause = localStorage.getItem("cause")
 
-    const location = useLocation();
-    console.log(location)
+    // const location = useLocation();
+    // console.log(location)
     const navigate = useNavigate();
     const [selectedFile, setSelectedFile] = useState("");
     const [desc, setDesc] = useState("");
@@ -34,17 +37,12 @@ function ImageElement() {
             setMissingDoc('Please add content or image')
         }
         else {
+
             setUploadMsg("Story added")
             const form = new FormData()
             form.append("NGOStory", selectedFile)
             form.append("desc", desc)
-
-            console.log('=====================')
-            console.log(form)
-            console.log('=====================')
-            console.log(selectedFile)
-            console.log('=====================')
-            console.log(desc)
+            form.append("eventID", eventID)
 
             axios.post('https://gracious-givers-backend.herokuapp.com/photoGallery/addFundraiserStory', form)//backend
                 .then(function (response) {
@@ -65,14 +63,12 @@ function ImageElement() {
 
     const handleCapture = (event) => {
 
-        //var path = URL.createObjectURL(event.target.files[0]
         var path = event.target.files[0].name
         setSelectedFile(event.target.files[0])
     };
 
     return (
         <div align="center">
-            {/* <h2> {eventName}</h2> */}
             <Card sx={{ width: "60%", height: "40%" }}>
                 <CardActionArea>
                     <CardContent>
@@ -93,11 +89,6 @@ function ImageElement() {
                 <CardActions style={{ justifyContent: "center" }}>
                     <label htmlFor="contained-button-file">
                         <input accept="image/*" name="image" id="contained-button-file" multiple type="file" onChange={handleCapture} />
-
-                        {/* <FileBase type='file' ></FileBase> */}
-                        {/* <Button variant="contained" component="span" >
-          Upload
-        </Button> */}
                     </label>
                     <Button variant="contained" component="span" onClick={handleSubmit}>
                         Upload
@@ -112,7 +103,6 @@ function ImageElement() {
             </Card><br />
             <Button variant="contained" component="span" onClick={onClickHandler}>
                 Submit
-                {/* frontend */}
             </Button><br />
         </div>
     )
