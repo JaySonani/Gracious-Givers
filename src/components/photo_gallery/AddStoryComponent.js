@@ -7,7 +7,6 @@ import ImageElement from './AddStoryElement';
 
 export default function AddImage(props) {
 
-    // const event = props.event;
     const Input = styled('input')({
         display: 'none',
     });
@@ -16,14 +15,6 @@ export default function AddImage(props) {
             <Grid sx={{ m: 2, mt: 6 }}>
                 <ImageElement />
             </Grid>
-            {/* <Grid item>
-    <label htmlFor="contained-button-file">
-            <Input accept="image/*" id="contained-button-file" multiple type="file" />
-            <Button variant="contained" component="span">
-                Upload
-            </Button>
-        </label>      
-    </Grid> */}
         </div>
     )
 }

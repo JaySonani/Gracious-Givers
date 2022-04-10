@@ -4,10 +4,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react'
 import { Button, Grid, } from '@mui/material';
 import axios from 'axios';
-import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import * as StoryContant from "./StoryConstant.js"
-import { Row, Container, Col } from 'react-bootstrap';
 import './style.css';
 
 export default function ShowImage() {
@@ -41,34 +38,23 @@ export default function ShowImage() {
             });
     }
     const onAddClickHandler = () => {
-        //console.log('incdsc')
         navigate(`/addImage`);
-
-        //history.push('/addImage')
     };
     const onEditClickHandler = () => {
         navigate(`/editImage`);
-        //  history.push('/editImage')
     };
     return (
-        // <Grid container justifyContent="center" alignItems={'center'} >
-        // <Container>
-        //     <Row>  {/*className='justify-content-center' */}
         <>
-            <Grid container alignItems={'center'} justifyContent={'center'}>
-                <Grid item>
-                    {/* <Col sx={{}} md={6}> */}
+            <Grid container alignItems={'center'} justifyContent={'center'} spacing={2}>
+                <Grid item xs={10}>
                     <ul className='uuid'>
-
                         {
                             images.map((item, key) => (
                                 <li key={key} className='text-center'>
                                     <div >
                                         <Grid item>
                                             <img className='imageStyle'
-                                                // style={width = '33.33%'; height= '33.33%';}
                                                 src={item.image}
-                                                // srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
                                                 alt={item.title}
                                                 loading="lazy"
                                             /></Grid>
@@ -85,19 +71,17 @@ export default function ShowImage() {
                         <p className='text-danger' > <b>No stories added </b> </p>
                     }
                 </Grid>
-                <Button variant="contained" sx={{ color: 'white' }} onClick={onAddClickHandler}>
-                    Add Story
-                </Button>
-
-
+                <Grid item justify="center">
+                    <Button variant="contained" sx={{ align: 'center', color: 'white' }} onClick={onAddClickHandler}>
+                        Add Story
+                    </Button>
+                </Grid>
+                <Grid item justify="center">
+                    <Button align="center" variant="contained" sx={{ align: 'center', color: 'white' }} onClick={onEditClickHandler}>
+                        Edit Story
+                    </Button>
+                </Grid>
             </Grid>
-            <Grid item justify="center">
-                <Button align="center" variant="contained" sx={{ align: 'center', color: 'white' }} onClick={onEditClickHandler}>
-                    Edit Story
-                </Button>
-            </Grid>
-            {/* </Grid> */}
-
         </>
 
     )
