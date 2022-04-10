@@ -83,6 +83,5 @@ export default function ShowImage() {
                 </Grid>
             </Grid>
         </>
-
     )
 }
