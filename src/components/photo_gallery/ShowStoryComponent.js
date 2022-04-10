@@ -25,7 +25,12 @@ export default function ShowImage() {
 
     function ImageElement() {
 
-        axios.get('https://gracious-givers-backend.herokuapp.com/photoGallery/getFundraiserStory')//backend
+        console.log(localStorage.getItem("event_id"))
+        console.log(localStorage.getItem("cause"))
+
+        const eventID = localStorage.getItem("event_id")
+
+        axios.get('https://gracious-givers-backend.herokuapp.com/photoGallery/getFundraiserStory', { params: { eventID: eventID } })//backend
             .then(function (response) {
 
                 console.log(response);

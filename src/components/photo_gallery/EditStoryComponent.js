@@ -30,19 +30,8 @@ export default function ShowImage() {
             navigate(`/editImage`);
         }
 
-        //console.log(window.location)
-        //window.location.reload(true)
-        //console.log('================================================')
-        //console.log('event ========== ' + event)
         console.log('id ============' + event._id)
-        //console.log('================================================')
-        // //setID(id);
-        // const data = {
-        //     id: id
-        // }
 
-        // console.log(event)
-        // console.log(event.target)
         const form = new FormData()
         form.append("event", event)
 
@@ -60,7 +49,8 @@ export default function ShowImage() {
     }
     function editImageElement() {
 
-        axios.get('https://gracious-givers-backend.herokuapp.com/photoGallery/getFundraiserStory') //backend   http://localhost:5000/photoGallery/getFundraiserStory
+        const eventID = localStorage.getItem("event_id")
+        axios.get('https://gracious-givers-backend.herokuapp.com/photoGallery/getFundraiserStory', { params: { eventID: eventID } }) //backend   http://localhost:5000/photoGallery/getFundraiserStory
 
 
             .then(function (response) {
@@ -81,15 +71,13 @@ export default function ShowImage() {
                             images.map((item, key) => (
                                 <li key={key} className='text-center'>
                                     <img className='imageStyle'
-                                        // style={width = '33.33%'; height= '33.33%';}
                                         src={item.image}
-                                        // srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
                                         alt={item.title}
                                         loading="lazy"
                                     />
                                     <h3 className='text-center'> {item.description} </h3>
                                     <Button variant="contained" component="span" onClick={() => { handleSubmit(item._id) }}> {/*onClick={handleSubmit(item._id)} */}
-                                        Delete Story {/* <a href='http://localhost:3000/editImage'></a> */}
+                                        Delete Story
                                     </Button>
                                     <br /><br />
                                 </li>
