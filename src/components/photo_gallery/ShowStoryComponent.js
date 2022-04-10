@@ -52,6 +52,7 @@ export default function ShowImage() {
                             images.map((item, key) => (
                                 <li key={key} className='text-center'>
                                     <div >
+
                                         <Grid item>
                                             <img className='imageStyle'
                                                 src={item.image}
