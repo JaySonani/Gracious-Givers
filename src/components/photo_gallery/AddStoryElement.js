@@ -11,17 +11,11 @@ import { useNavigate, useLocation } from "react-router-dom";
 import PictureGallery from '../fundraiser/PictureGallery';
 
 function ImageElement() {
-    var target = new Array();
-    // const event = this.props.event;
-    // console.log(event)
 
-    // const eventName = event.title;
     const eventName = localStorage.getItem("eventName")
     const eventID = localStorage.getItem("event_id")
     const cause = localStorage.getItem("cause")
 
-    // const location = useLocation();
-    // console.log(location)
     const navigate = useNavigate();
     const [selectedFile, setSelectedFile] = useState("");
     const [desc, setDesc] = useState("");
@@ -29,10 +23,6 @@ function ImageElement() {
     const [uploadMsg, setUploadMsg] = useState("");
     const handleSubmit = () => {
 
-        // console.log(desc)
-        // console.log(selectedFile)
-        // console.log(desc.length)
-        // console.log(selectedFile)
         if (desc.length == 0 || selectedFile == '') {
             setMissingDoc('Please add content or image')
         }

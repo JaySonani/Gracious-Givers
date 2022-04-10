@@ -22,7 +22,6 @@ export default function ShowImage() {
     function handleSubmit(event) {
 
         var str = String(window.location.href);
-        //navigate(`/editImage`);
         if (str.includes('/editImage')) {
             window.location.reload(true)
         }
@@ -35,9 +34,6 @@ export default function ShowImage() {
         const form = new FormData()
         form.append("event", event)
 
-        // console.log(form)
-        //setImageId(id);
-        // axios.post('http://localhost:5000/deleteImages', form)
         axios.post('https://gracious-givers-backend.herokuapp.com/photoGallery/deleteFundraiserStory', form) //backend http://localhost:5000/photoGallery/deleteFundraiserStory
             .then(function (response) {
                 console.log(response);
