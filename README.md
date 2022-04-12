@@ -30,12 +30,12 @@ This is the repository for the frontend application of group project - Group 8
 * For performing NGO tasks, must have an NGO login. The email "graciousgivers123@gmail.com" and password "GraciousDon123" can be used to perform NGO login. Or perform NGO registration using User management feature.
 
 * For performing Admin tasks, plese follow below credentials:
-	username:superuser
-	password:superuser
-	Security question 1:what is your favorite color?
-	Answer 1:black
-	Security question 2:what is your favorite food item?
-	Answer 2:biryani 
+	* username:superuser
+	* password:superuser
+	* Security question 1:what is your favorite color?
+	* Answer 1:black
+	* Security question 2:what is your favorite food item?
+	* Answer 2:biryani 
 
 ## Sources Used
 
