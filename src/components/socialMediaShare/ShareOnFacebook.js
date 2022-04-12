@@ -1,3 +1,5 @@
+// Author: Akanksha Singh (B00892887)
+
 import React from "react";
 import {FacebookShareButton, FacebookIcon} from "react-share";
 
